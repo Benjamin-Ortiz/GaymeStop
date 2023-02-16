@@ -4,11 +4,11 @@ from app.models import db, User, environment, SCHEMA
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', hashed_password='password', profile_url='https://cdn.discordapp.com/attachments/950229895341031585/1073011278878097438/257-2572603_user-man-social-avatar-profile-icon-man-avatar-in-circle.png')
+        username='Demo', email='demo@aa.io', password='password')
     marnie = User(
-        username='marnie', email='marnie@aa.io', hashed_password='password', profile_url='https://media.discordapp.net/attachments/950229895341031585/1073010150849384600/profile-view-and-negative-emotion.png?width=348&height=348')
+        username='marnie', email='marnie@aa.io', password='password')
     bobbie = User(
-        username='bobbie', email='bobbie@aa.io', hashed_password='password', profile_url='https://media.discordapp.net/attachments/950229895341031585/1073010684230639636/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png')
+        username='bobbie', email='bobbie@aa.io', password='password')
 
     db.session.add(demo)
     db.session.add(marnie)
@@ -27,5 +27,5 @@ def undo_users():
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM users")
-
+        
     db.session.commit()
