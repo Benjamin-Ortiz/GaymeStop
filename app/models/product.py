@@ -20,9 +20,9 @@ class Product(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
 
 
-    #* columns with relations
+    #* related data
     # one-to-many
-    # reactions = db.relationship("Reaction", back_populates="answer", cascade="all, delete-orphan") for Answer table
+    #? ex) reactions = db.relationship("Reaction", back_populates="answer", cascade="all, delete-orphan") for Answer table
     # reviews = db.relationship("Review")
 
     # many-to-one
