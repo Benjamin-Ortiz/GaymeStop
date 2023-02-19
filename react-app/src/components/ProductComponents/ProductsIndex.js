@@ -15,13 +15,17 @@ function ProductIndex() {
   return (
     <div>
       <h1>All Games</h1>
-      {allProducts.map((product) => {
+{/* put banner here in future */}
+      <div className="mapped-games">
+      {allProducts.map((product, i) => {
         return (
-          <div>
-            {product.image_url}
+          <div key={i} className="single-game-container">
+            <img className="" src={product.product_image} alt={product.title}/>
           </div>
         )
       })}
+      {/* next line end of games-container  */}
+      </div>
     </div>
   );
 }

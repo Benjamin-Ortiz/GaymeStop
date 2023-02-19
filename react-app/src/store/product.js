@@ -52,6 +52,12 @@ export const getTheProducts = () => async (dispatch) => {
     }
 }
 
+export const getTheProduct = (id) => async (dispatch) => {
+    const response = await fetch(`api/products/${id}`);
+
+    
+}
+
 
 //* reducer
 let initialState = {};
@@ -64,7 +70,6 @@ const productsReducer = (state = initialState, action) => {
             const allProducts = [];
 
             action.payload.products.forEach( (product) => {
-                console.log(product, "REDUCERRRRRR");
                 allProducts[product.id] = product;
             });
             return { ...allProducts }
@@ -73,7 +78,7 @@ const productsReducer = (state = initialState, action) => {
 
         case GET_PRODUCT: {
             let newState = {};
-
+            newState.product = action.payload
 
         }
 
