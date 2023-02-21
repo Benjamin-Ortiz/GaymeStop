@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as productActions from "../../store/product";
-// import "./ProductIndex.css"
-function ProductIndex() {
+import { NavLink } from "react-router-dom";
+import "./ProductsIndex.css"
+
+function ProductsIndex() {
   const dispatch = useDispatch();
 
   const allProducts = useSelector((state) => Object.values(state.products))
@@ -16,11 +18,14 @@ function ProductIndex() {
     <div>
       <h1>All Games</h1>
 {/* put banner here in future */}
-      <div className="mapped-games">
+      <div className="mapped-games"> Mapped Games
       {allProducts.map((product, i) => {
         return (
           <div key={i} className="single-game-container">
-            <img className="" src={product.product_image} alt={product.title}/>
+            <NavLink className="product-nav" to={`/products/${product.id}`}>
+            <div className="product-title">{product.title}</div>
+            <img className="product-img" src={product.product_image} alt={product.title}/>
+            </NavLink>
           </div>
         )
       })}
@@ -30,4 +35,4 @@ function ProductIndex() {
   );
 }
 
-export default ProductIndex;
+export default ProductsIndex;

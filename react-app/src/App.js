@@ -5,7 +5,8 @@ import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
-import ProductIndex from "./components/ProductComponents/ProductsIndex";
+import ProductsIndex from "./components/ProductComponents/ProductsIndex";
+import SingleProduct from "./components/ProductComponents/SingleProduct/SingleProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,10 +27,17 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
+          
+          <Route path="/products/:id">
+            <SingleProduct />
+          </Route>
 
           <Route path="/products">
-            <ProductIndex />
+            <ProductsIndex />
           </Route>
+
+
+
         </Switch>
       )}
     </>

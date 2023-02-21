@@ -32,7 +32,7 @@ const putProduct = (product) => {
     }
 }
 
-const deleteQuestion = (id) => {
+const deleteProduct = (id) => {
     return {
         type: DELETE_PRODUCT,
         id: id
@@ -40,24 +40,86 @@ const deleteQuestion = (id) => {
 }
 
 //* thunks
-
+// * GET ALL
 export const getTheProducts = () => async (dispatch) => {
-    const res = await fetch('/api/products/');
+    const response = await fetch('/api/products/');
 
-    if (res.ok) {
-        const data = await res.json();
+    if (response.ok) {
+        const data = await response.json();
 
         dispatch(getProducts(data));
         return data;
     }
 }
 
-export const getTheProduct = (id) => async (dispatch) => {
-    const response = await fetch(`api/products/${id}`);
+//*GET ONE
+export const getTheProduct = (productId) => async (dispatch) => {
+    const response = await fetch(`api/products/${productId}`);
 
-    
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(getProduct(data));
+        return data;
+    }
 }
 
+// * POST
+export const postTheProduct = (productData) => async (dispatch) => {
+    // const {user,
+    //     title,
+    //     price,
+    //     rating,
+    //     description,
+    //     glitter_factor,
+    //     product_image
+    // } = productData
+
+    const response = await fetch("/api/products/new_product", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(productData)
+    })
+    if (response.ok) {
+        const newProduct = await response.json()
+        dispatch(postProduct(newProduct))
+    }
+}
+
+// * EDIT
+
+export const putTheProduct = (productData, productId) => async (dispatch) => {
+    const response = await fetch(`/api/products/${productId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify(productData),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      dispatch(putProduct(data, productId));
+
+      return data;
+    }
+  };
+
+
+// * DELETE
+export const deleteTheProduct = (productId) => async (dispatch) => {
+    const response = await fetch(`/api/products/${productId}`, {
+        method: "DELETE"
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(deleteProduct(productId));
+        return data;
+    }
+}
 
 //* reducer
 let initialState = {};
@@ -77,10 +139,27 @@ const productsReducer = (state = initialState, action) => {
 
 
         case GET_PRODUCT: {
-            let newState = {};
-            newState.product = action.payload
+            // let newState = {};
+            // newState = Object.assign({}, state);
 
+            // newState.product = action.payload
+            // return newState
+            return {"message":" yerrrr"}
         }
+
+        case PUT_PRODUCT: {
+            const newState = Object.assign({}, state);
+            newState.products = action.payload;
+
+            return newState;
+        }
+
+        case DELETE_PRODUCT:{
+
+            const newState = {...state, ...state.products}
+             delete newState[action.productId]
+             return newState
+          }
 
 
 
