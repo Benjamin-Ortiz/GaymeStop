@@ -10,12 +10,12 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-    title = db.Column(db.String(40), nullable = False)
+    title = db.Column(db.String(40), unique=True, nullable = False)
     price = db.Column(db.Float(precision=2), nullable = False)
     rating = db.Column(db.Float(precision=2))
     description = db.Column(db.String(1000), nullable = False)
     glitter_factor = db.Column(db.String(600), nullable = False)
-    product_image = db.Column(db.String(100), nullable = True)
+    product_image = db.Column(db.String(300), nullable = True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
 

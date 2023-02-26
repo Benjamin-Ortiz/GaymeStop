@@ -8,11 +8,15 @@ import Navigation from "./components/Navigation";
 import ProductsIndex from "./components/ProductComponents/ProductsIndex";
 import SingleProduct from "./components/ProductComponents/SingleProduct/SingleProduct";
 
+import * as productActions from "../src/store/product";
+
+
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(authenticate()).then(() => setIsLoaded(true));
+    // dispatch(productActions.getTheProducts())
   }, [dispatch]);
 
   return (
@@ -27,12 +31,13 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          
-          <Route path="/products/:id">
+
+          <Route exact path="/products/:id">
             <SingleProduct />
           </Route>
 
-          <Route path="/products">
+          <Route exact path="/">
+          {/* <Route path="/products"> */}
             <ProductsIndex />
           </Route>
 

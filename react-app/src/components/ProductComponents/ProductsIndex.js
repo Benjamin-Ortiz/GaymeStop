@@ -19,20 +19,23 @@ function ProductsIndex() {
       <h1>All Games</h1>
 {/* put banner here in future */}
       <div className="mapped-games"> Mapped Games
-      {allProducts.map((product, i) => {
+      {allProducts && allProducts.map((product) => {
         return (
-          <div key={i} className="single-game-container">
-            <NavLink className="product-nav" to={`/products/${product.id}`}>
-            <div className="product-title">{product.title}</div>
-            <img className="product-img" src={product.product_image} alt={product.title}/>
+          <div key={product?.id} className="single-game-container" >
+            <NavLink className="product-nav-link" to={`/products/${product?.id}`}>
+            <div className="product-title">{product?.title}</div>
+            <img className="product-img" src={product?.product_image} alt={product?.title}/>
             </NavLink>
           </div>
         )
       })}
-      {/* next line end of games-container  */}
+      {/* next line is end of games-container  */}
       </div>
     </div>
   );
+
+
+
 }
 
 export default ProductsIndex;

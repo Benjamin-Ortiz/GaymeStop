@@ -53,8 +53,8 @@ export const getTheProducts = () => async (dispatch) => {
 }
 
 //*GET ONE
-export const getTheProduct = (productId) => async (dispatch) => {
-    const response = await fetch(`api/products/${productId}`);
+export const getTheProduct = (id) => async (dispatch) => {
+    const response = await fetch(`/api/products/${id}`);
 
     if (response.ok) {
         const data = await response.json();
@@ -101,7 +101,7 @@ export const putTheProduct = (productData, productId) => async (dispatch) => {
 
     if (response.ok) {
       const data = await response.json();
-      dispatch(putProduct(data, productId));
+      dispatch(putProduct(data));
 
       return data;
     }
@@ -139,28 +139,32 @@ const productsReducer = (state = initialState, action) => {
 
 
         case GET_PRODUCT: {
-            // let newState = {};
-            // newState = Object.assign({}, state);
-
-            // newState.product = action.payload
-            // return newState
-            return {"message":" yerrrr"}
-        }
-
-        case PUT_PRODUCT: {
-            const newState = Object.assign({}, state);
-            newState.products = action.payload;
-
+            const newState = {
+                ...action.payload
+            }
             return newState;
         }
 
-        case DELETE_PRODUCT:{
+        case PUT_PRODUCT: {
+            const newState = {
+                ...state, ...action.payload
+            }
+            return newState
+        }
 
-            const newState = {...state, ...state.products}
-             delete newState[action.productId]
-             return newState
+        case DELETE_PRODUCT:{
+            const newState = { ...state }
+            delete newState[action.id];
+            return newState
           }
 
+          case POST_PRODUCT : {
+            const newState = {
+                ...state,
+                [action.payload.id]: {...action.payload}
+            }
+            return newState;
+          }
 
 
         default:

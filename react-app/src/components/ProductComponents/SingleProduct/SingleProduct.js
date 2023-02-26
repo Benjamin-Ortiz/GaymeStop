@@ -1,37 +1,68 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState , useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
+import EditProductForm from "./EditProductForm";
+import OpenModalButton from "../../OpenModalButton"
+
+//* modal skeleton
 
 import * as productActions from "../../../store/product";
-import "./SingleProduct.css"
+import "./SingleProduct.css";
 
 function SingleProduct() {
-  const {id} = useParams();
-  const dispatch = useDispatch();
-  const history = useHistory();
+    const dispatch = useDispatch();
+    const { id } = useParams();
+    const user = useSelector((state) => state.session?.user);
+    const curr_product = useSelector((state) => state.products);
 
-  const product = useSelector((state) =>state.products[id])
+    const ulRef = useRef();
 
-  const user = useSelector((state) => state.session?.user)
+    const [showMenu, setShowMenu] = useState(false);
 
-useEffect(() => {
+    const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+    const closeMenu = () => setShowMenu(false);
+
+  useEffect(() => {
     dispatch(productActions.getTheProduct(id));
     //* reviews
-  }, [dispatch, id]);
 
-  return (
+    if (!showMenu) return;
+
+    const closeMenu = (e) => {
+      if (!ulRef.current.contains(e.target)) {
+        setShowMenu(false);
+      }
+    };
+
+    document.addEventListener("click", closeMenu);
+
+    return () => document.removeEventListener("click", closeMenu);
+  }, [showMenu]);
+
+  return curr_product ? (
     <div>
-      <h1>{product.title}</h1>
+      <h1>{curr_product.title}</h1>
 
-          <div className="single-game-container">
-            <div className="product-container">
-            <div className="product-title">{product.title}</div>
-            <img className="product-img" src={product.product_image} alt={product.title}/>
-            
-            </div>
-      {/* next line end of games-container  */}
+      <div className="single-game-container">
+        <div className="product-container">
+          <div className="product-title">{curr_product.title}</div>
+          <img
+            className="product-img"
+            src={curr_product.product_image}
+            alt={curr_product.title}
+          />
+        </div>
+        <OpenModalButton
+          buttonText="Edit Product"
+          onItemClick={closeMenu}
+          modalComponent={<EditProductForm />}
+        />
+
+        {/* next line end of game-container  */}
       </div>
     </div>
+  ) : (
+    <></>
   );
 }
 
