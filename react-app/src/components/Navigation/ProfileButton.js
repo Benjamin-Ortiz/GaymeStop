@@ -4,6 +4,7 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import PostProductModal from "../ProductComponents/SingleProduct/PostProductModal";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -47,6 +48,11 @@ function ProfileButton({ user }) {
           <>
             <li>{user.username}</li>
             <li>{user.email}</li>
+            <OpenModalButton
+              buttonText="Create a new Product"
+              onItemClick={closeMenu}
+              modalComponent={<PostProductModal />}
+            />
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>

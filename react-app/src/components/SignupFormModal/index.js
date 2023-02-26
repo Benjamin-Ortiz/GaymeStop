@@ -10,6 +10,7 @@ function SignupFormModal() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+	
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 

@@ -1,8 +1,9 @@
-import React, { useEffect, useState , useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import EditProductForm from "./EditProductForm";
-import OpenModalButton from "../../OpenModalButton"
+
+import OpenModalButton from "../../OpenModalButton";
 
 //* modal skeleton
 
@@ -10,17 +11,18 @@ import * as productActions from "../../../store/product";
 import "./SingleProduct.css";
 
 function SingleProduct() {
-    const dispatch = useDispatch();
-    const { id } = useParams();
-    const user = useSelector((state) => state.session?.user);
-    const curr_product = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const { id } = useParams();
+  const user = useSelector((state) => state.session?.user);
+  const curr_product = useSelector((state) => state.products);
 
-    const ulRef = useRef();
+  const ulRef = useRef();
 
-    const [showMenu, setShowMenu] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
-    const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
-    const closeMenu = () => setShowMenu(false);
+  const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
+  const closeMenu = () => setShowMenu(false);
 
   useEffect(() => {
     dispatch(productActions.getTheProduct(id));
@@ -57,6 +59,19 @@ function SingleProduct() {
           onItemClick={closeMenu}
           modalComponent={<EditProductForm />}
         />
+
+        <button
+          className="delete-button"
+          onClick={() => {
+            dispatch(productActions.deleteTheProduct(id))
+              .then(() => {
+                history.push("/");
+              })
+              .catch(async (res) => {});
+          }}
+        >
+          Delete Product
+        </button>
 
         {/* next line end of game-container  */}
       </div>

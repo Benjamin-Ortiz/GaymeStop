@@ -1,26 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as productActions from "../../../store/product";
-import { useParams, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { useModal } from "../../../context/Modal";
+import './PostProductModal.css';
 
-// import './EditProductForm.css';
-
-
-
-function EditProductForm() {
+function PostProductModal() {
   const dispatch = useDispatch();
-  const currProductId = useParams();
-  const curr_product = useSelector((state) => state.products);
-
+  const user = useSelector((state) => state.session?.user);
   //states
-  const [title, setTitle] = useState(curr_product.title);
-  const [price, setPrice] = useState(curr_product.price);
-  const [description, setDescription] = useState(curr_product.description);
-  const [glitter_factor, setGlitterFactor] = useState(curr_product.glitter_factor);
-  const [product_image, setProductImage] = useState(curr_product.product_image);
+  const [title, setTitle] = useState("")
+  const [price, setPrice] = useState("")
+  const [description, setDescription] = useState("")
+  const [glitter_factor, setGlitterFactor] = useState("")
+  const [product_image, setProductImage] = useState("")
 
-  const [hasSubmitted, setHasSubmitted] = useState(false);
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
 
@@ -35,7 +29,7 @@ function EditProductForm() {
 
   // useEffect(() => {
 
-    dispatch(productActions.putTheProduct(currProductId));
+    // dispatch(productActions.postTheProduct());
 
 
   // }, [dispatch]);
@@ -45,6 +39,7 @@ function EditProductForm() {
     e.preventDefault();
 
     const payload = {
+      user_id : user.id,
       title,
       price,
       description,
@@ -52,14 +47,14 @@ function EditProductForm() {
       product_image,
     };
 
-    dispatch(productActions.putTheProduct(payload, currProductId));
+    dispatch(productActions.postTheProduct(payload));
 
 
   };
 
   return (
     <form className="product_form" onSubmit={handleSubmit}>
-      <h1>Update Product</h1>
+      <h1>Create a new Product</h1>
 
       <ul>
         {errors.map((error, id) => (
@@ -70,65 +65,71 @@ function EditProductForm() {
       <label>
         Title
         <input
-          className="edit-product-title"
+          className="new-product-title"
           type="text"
           value={title}
           onChange={updateTitle}
           placeholder="Title"
+					required
         />
       </label>
 
       <label>
         Description
         <input
-          className="edit-product-description"
+          className="new-product-description"
           type="text"
+          rows={5}
           value={description}
           onChange={updateDescription}
           placeholder="Description"
+          required
         />
       </label>
 
       <label>
         Price
         <input
-          className="edit-product-price"
+          className="new-product-price"
           type="text"
           value={price}
           onChange={updatePrice}
           placeholder="Price"
+          require
         />
       </label>
 
       <label>
         Glitter Factor
         <input
-          className="edit-product-glitter-factor"
+          className="new-product-glitter-factor"
           type="text"
+          rows={5}
           value={glitter_factor}
           onChange={updateGlitterFactor}
           placeholder="Glitter Factor"
+					required
         />
       </label>
 
       <label>
         New Image URL
         <input
-          className="edit-product-imageUrl"
+          className="new-product-imageUrl"
           type="text"
-          accept=".jpg, .jpeg, .png"
+        //   accept=".jpg, .jpeg, .png"
           value={product_image}
           onChange={updateProductImage}
           placeholder="Image Url"
         />
       </label>
 
-      <button type="submit">Update Product</button>
+      <button type="submit">Create</button>
     </form>
   );
 }
 
-export default EditProductForm;
+export default PostProductModal;
 
 //   return (
 //     <>
