@@ -4,7 +4,7 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import PostProductModal from "../ProductComponents/SingleProduct/PostProductModal";
+import PostProductModal from "../ProductComponents/SingleProduct/PostProductModal.js";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -40,6 +40,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
+
       <button onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
@@ -48,11 +49,13 @@ function ProfileButton({ user }) {
           <>
             <li>{user.username}</li>
             <li>{user.email}</li>
+            <li>
             <OpenModalButton
               buttonText="Create a new Product"
               onItemClick={closeMenu}
               modalComponent={<PostProductModal />}
             />
+            </li>
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>
