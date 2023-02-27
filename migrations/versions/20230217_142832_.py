@@ -41,7 +41,6 @@ def upgrade():
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=40), unique=True, nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
-    sa.Column('rating', sa.Integer(), nullable=True),
     sa.Column('description', sa.String(length=1000), nullable=False),
     sa.Column('glitter_factor', sa.String(length=600), nullable=False),
     sa.Column('product_image', sa.String(length=200), nullable=True),

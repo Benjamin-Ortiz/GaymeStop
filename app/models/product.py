@@ -11,8 +11,7 @@ class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
     title = db.Column(db.String(40), unique=True, nullable = False)
-    price = db.Column(db.Integer(), nullable = False)
-    rating = db.Column(db.Integer())
+    price = db.Column(db.Integer(), nullable=False)
     description = db.Column(db.String(1000), nullable = False)
     glitter_factor = db.Column(db.String(600), nullable = False)
     product_image = db.Column(db.String(300), nullable = True)
@@ -39,7 +38,6 @@ class Product(db.Model):
             'title':self.title,
             'price':self.price,
             # change rating key to helper in future
-            'rating': self.rating,
             'description': self.description,
             'glitter_factor': self.glitter_factor,
             'product_image':self.product_image,

@@ -12,14 +12,13 @@ def valid_picture(form, field):
         if not picture_url.lower().endswith(('.png', '.jpg', '.jpeg')):
             raise ValidationError("Not a valid image.")
 
-def num_to_currency(num):
-    return "%0.2f" % num
+# def num_to_currency(num):
+#     return "%0.2f" % num
 
 class ProductForm(FlaskForm):
     user_id = IntegerField('user')
     title = StringField('title', validators=[DataRequired(), Length(max=40)])
-    price = DecimalField('price', rounding=2, validators=[DataRequired(), NumberRange(min=0), num_to_currency])
-    rating = DecimalField('rating', rounding=2)
+    price = IntegerField('price', validators=[DataRequired()])
     description = StringField('description', validators=[DataRequired(), Length(max=1000)])
     glitter_factor = StringField('glitter_factor', validators=[DataRequired(), Length(max=600)])
     product_image = FileField('product_image', validators=[DataRequired(), Length(max=300), valid_picture])

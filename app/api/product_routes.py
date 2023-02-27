@@ -1,4 +1,4 @@
-from app.forms import ProductForm, ProductDuplicateTitleForm
+from app.forms import ProductForm
 from flask import Blueprint, request, jsonify
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -51,7 +51,6 @@ def post_product():
            description=form.data['description'],
            glitter_factor=form.data['glitter_factor'],
            product_image=form.data['product_image'],
-          #    rating=0
           )
           # check_product = Product.query.filter(Product.title == form.title)
           # print (check_product, '-=-=-=-=-=-=')
@@ -59,7 +58,7 @@ def post_product():
         db.session.add(product)
         db.session.commit()
         return product.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+    return jsonify({'errors': validation_errors_to_error_messages(form.errors)}), 400
 
 @product_routes.route('/<int:id>', methods=['PUT'])
 @login_required

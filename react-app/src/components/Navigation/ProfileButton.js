@@ -50,11 +50,11 @@ function ProfileButton({ user }) {
             <li>{user.username}</li>
             <li>{user.email}</li>
             <li>
-            <OpenModalButton
+            {/* <OpenModalButton
               buttonText="Create a new Product"
               onItemClick={closeMenu}
               modalComponent={<PostProductModal />}
-            />
+            /> */}
             </li>
             <li>
               <button onClick={handleLogout}>Log Out</button>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
-import EditProductForm from "./EditProductForm";
+import EditProductModal from "./EditProductModal";
 
 import OpenModalButton from "../../OpenModalButton";
 
@@ -57,7 +57,7 @@ function SingleProduct() {
         <OpenModalButton
           buttonText="Edit Product"
           onItemClick={closeMenu}
-          modalComponent={<EditProductForm />}
+          modalComponent={<EditProductModal />}
         />
 
         <button
