@@ -1,6 +1,7 @@
 from app.forms import ProductForm
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, redirect
 from flask_login import current_user, login_user, logout_user, login_required
+from datetime import datetime
 
 
 from app.models import Product, db
@@ -57,7 +58,7 @@ def post_product():
 
         db.session.add(product)
         db.session.commit()
-        return product.to_dict()
+        return product.to_dict(), redirect('/')
     return jsonify({'errors': validation_errors_to_error_messages(form.errors)}), 400
 
 @product_routes.route('/<int:id>', methods=['PUT'])
@@ -67,28 +68,22 @@ def edit_product(id):
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    current_product = Product.query.get(id)
-    # print(form.data['title'] * 5)
-
-#? query the title of the current game
-#? and see if it matches what the user submitted
-    # if not duplicate_title_check:
-    #     return {'error' : 'A product with this title already exists.'}
-
 
     if form.validate_on_submit():
-        if current_product.user_id == current_user.id:
-            current_product.title = form.data['title']
-            current_product.price = form.data['price']
-            current_product.description = form.data['description']
-            current_product.glitter_factor = form.data['glitter_factor']
-            current_product.product_image = form.data['product_image']
+        product = Product.query.get(id)
+        if product.user_id == current_user.id:
+            product.title = form.data['title'] or product.title
+            product.price = form.data['price'] or product.price
+            product.description = form.data['description'] or product.description
+            product.glitter_factor = form.data['glitter_factor'] or product.glitter_factor
+            product.product_image = form.data['product_image'] or product.product_image
+            product.updated_at = datetime.now()
 
+            # db.session.add(product)
             db.session.commit()
-
-            return current_product.to_dict()
+            return product.to_dict()
         else:
-            return {"message": "You are not allowed to edit this product"}
+            return {"message": "You are not authorized to edit this product"}
     return {'errors': validation_errors_to_error_messages(form.errors)}
 
 @product_routes.route('<int:id>', methods=['DELETE'])

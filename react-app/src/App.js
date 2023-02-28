@@ -7,6 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import ProductsIndex from "./components/ProductComponents/ProductsIndex";
 import SingleProduct from "./components/ProductComponents/SingleProduct/SingleProduct";
+import PostProductForm from "./components/ProductComponents/SingleProduct/PostProductForm";
 
 import * as productActions from "../src/store/product";
 
@@ -32,12 +33,15 @@ function App() {
             <SignupFormPage />
           </Route>
 
+          <Route path="/products/new_product">
+            <PostProductForm />
+          </Route>
+
           <Route exact path="/products/:id">
             <SingleProduct />
           </Route>
 
           <Route exact path="/">
-          {/* <Route path="/products"> */}
             <ProductsIndex />
           </Route>
 

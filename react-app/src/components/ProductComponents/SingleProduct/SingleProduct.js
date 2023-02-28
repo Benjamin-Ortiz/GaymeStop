@@ -14,6 +14,7 @@ function SingleProduct() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
+  
   const user = useSelector((state) => state.session?.user);
   const curr_product = useSelector((state) => state.products);
 

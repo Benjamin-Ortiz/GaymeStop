@@ -21,7 +21,7 @@ function ProductsIndex() {
       <div className="mapped-games"> Mapped Games
       {allProducts && allProducts.map((product) => {
         return (
-          <div key={product?.id} className="single-game-container" >
+          <div className="single-game-container" >
             <NavLink className="product-nav-link" to={`/products/${product?.id}`}>
             <div className="product-title">{product?.title}</div>
             <img className="product-img" src={product?.product_image} alt={product?.title}/>

@@ -43,7 +43,7 @@ def upgrade():
     sa.Column('price', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=1000), nullable=False),
     sa.Column('glitter_factor', sa.String(length=600), nullable=False),
-    sa.Column('product_image', sa.String(length=200), nullable=True),
+    sa.Column('product_image', sa.String(length=200)),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),

@@ -4,7 +4,8 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import PostProductModal from "../ProductComponents/SingleProduct/PostProductModal.js";
+import { NavLink } from "react-router-dom";
+// import PostProductModal from "../ProductComponents/SingleProduct/PostProductModal.js";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -49,16 +50,19 @@ function ProfileButton({ user }) {
           <>
             <li>{user.username}</li>
             <li>{user.email}</li>
-            <li>
-            {/* <OpenModalButton
+            {/* <li>
+            <OpenModalButton
               buttonText="Create a new Product"
               onItemClick={closeMenu}
               modalComponent={<PostProductModal />}
-            /> */}
-            </li>
+            />
+            </li> */}
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>
+            <NavLink exact to='/products/new_product'>
+              Post a New Product
+            </NavLink>
           </>
         ) : (
           <>

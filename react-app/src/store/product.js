@@ -65,45 +65,53 @@ export const getTheProduct = (id) => async (dispatch) => {
 
 // * POST
 export const postTheProduct = (productData) => async (dispatch) => {
-    // const {user,
-    //     title,
-    //     price,
-    //     rating,
-    //     description,
-    //     glitter_factor,
-    //     product_image
-    // } = productData
+    const {title, price, description, glitter_factor, product_image} = productData
 
     const response = await fetch("/api/products/new_product", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(productData)
+        body: JSON.stringify({
+            title,
+            price,
+            description,
+            glitter_factor,
+            product_image,
+        })
     })
     if (response.ok) {
         const newProduct = await response.json()
         dispatch(postProduct(newProduct))
+        return response;
     }
 }
 
 // * EDIT
 
-export const putTheProduct = (productData, productId) => async (dispatch) => {
-    const response = await fetch(`/api/products/${productId}`, {
+export const putTheProduct = (product) => async (dispatch) => {
+    const {id, title, price, description, glitter_factor, product_image} = product
+
+    const response = await fetch(`/api/products/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
 
-      body: JSON.stringify(productData),
+      body: JSON.stringify({
+        title,
+        price,
+        description,
+        glitter_factor,
+        product_image
+    }),
     });
 
     if (response.ok) {
       const data = await response.json();
       dispatch(putProduct(data));
 
-      return data;
+      return response;
     }
   };
 
@@ -145,12 +153,12 @@ const productsReducer = (state = initialState, action) => {
             return newState;
         }
 
-        case PUT_PRODUCT: {
-            const newState = {
-                ...state, ...action.payload
-            }
-            return newState
-        }
+        // case PUT_PRODUCT: {
+        //     const newState = {
+        //         ...state, ...action.payload
+        //     }
+        //     return newState
+        // }
 
         case DELETE_PRODUCT:{
             const newState = { ...state }
@@ -158,10 +166,11 @@ const productsReducer = (state = initialState, action) => {
             return newState
           }
 
+          case PUT_PRODUCT:
           case POST_PRODUCT : {
             const newState = {
                 ...state,
-                [action.payload.id]: {...action.payload}
+                [action.payload.id]: action.payload
             }
             return newState;
           }

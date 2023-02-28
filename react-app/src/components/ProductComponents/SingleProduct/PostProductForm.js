@@ -1,40 +1,64 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as productActions from "../../../store/product";
-import { Redirect } from "react-router-dom";
-import { useModal } from "../../../context/Modal";
-import "./PostProductModal.css";
+import { Redirect, useHistory } from "react-router-dom";
+import "./PostProductForm.css";
 
-function PostProductModal() {
+function PostProductForm() {
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector((state) => state.session?.user);
-  //states
+  const allProducts = useSelector((state) => Object.values(state.products));
+
+  //* states
+  const [errors, setErrors] = useState([]);
+  const [hasSubmitted, setHasSubmitted] = useState(false);
+
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [glitter_factor, setGlitterFactor] = useState("");
-  const [product_image, setProductImage] = useState("");
+  const [product_image, setProductImage] = useState("https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/bbCover.png");
+  // const [product_image, setProductImage] = useState("");
 
-  const [errors, setErrors] = useState([]);
-  const { closeModal } = useModal();
 
-  const err = [];
 
-  //updates
+
+
+  //*updates
   const updateTitle = (e) => setTitle(e.target.value);
   const updatePrice = (e) => setPrice(e.target.value);
   const updateDescription = (e) => setDescription(e.target.value);
   const updateGlitterFactor = (e) => setGlitterFactor(e.target.value);
   const updateProductImage = (e) => setProductImage(e.target.value);
 
-  // useEffect(() => {
+  // if (hasSubmitted === true) return <Redirect to="/" />;
 
-  // dispatch(productActions.postTheProduct());
+  useEffect(() => {
+    dispatch(productActions.getTheProducts());
+  }, [dispatch]);
 
-  // }, [dispatch]);
+  const noImgURL = (e) => {
+    const cover = e.target.files[0];
+    if (cover) {
+        setProductImage(cover);
+    }
+    else return updateProductImage
+};
 
-  const handleSubmit = async (e) => {
+  useEffect(() => {
+    const errors = [];
+    if (!title.length) errors.push('Please title your game');
+    if (!description.length) errors.push('Please provide a description');
+    setErrors(errors);
+  }, [title, description])
+
+  const handleSubmit = (e) => {
     e.preventDefault();
+    setHasSubmitted(true)
+
+    setErrors([]);
+
     const payload = {
       user_id: user.id,
       title,
@@ -44,23 +68,40 @@ function PostProductModal() {
       product_image,
     };
 
-    const data = dispatch(productActions.postTheProduct(payload));
-    if (data) {
-      setErrors(data);
-    } else {
-      closeModal();
-    }
+    let errs = [];
+
+    allProducts.map((product) => {
+      if (product.title === payload.title) {
+        errs.push("This Title already exists");
+        return errs;
+      }
+      if (payload.price < 0.01) {
+        errs.push("Set a price above 0");
+        return errs
+      }
+      // if (!payload.product_image) {
+      //  return payload.product_image = 'https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/Screen+Shot+2023-02-27+at+19.55.02.png'
+      // }
+      return product;
+    });
+
+   dispatch(productActions.postTheProduct(payload));
+   setErrors(errs)
+  //  console.log(errors,"errorsss");
+  //   console.log(data, 'DATAAAAAAAA');
+  history.push('/');
+    if (errs) {
+      setErrors(errs);
+    } 
   };
 
   return (
-    <>
+
       <form className="product_form" onSubmit={handleSubmit}>
         <h1>Create a new Product</h1>
 
         <ul>
-          {errors.map((error, id) => (
-            <li key={id}>{error}</li>
-          ))}
+          {errors && errors.map((error, id) => <li key={id}>{error}</li>)}
         </ul>
 
         <label>
@@ -96,7 +137,7 @@ function PostProductModal() {
             value={price}
             onChange={updatePrice}
             placeholder="Price"
-            require
+            required
           />
         </label>
 
@@ -114,24 +155,27 @@ function PostProductModal() {
         </label>
 
         <label>
-          New Image URL
+          Upload Cover Photo
           <input
             className="new-product-imageUrl"
             type="text"
-            //   accept=".jpg, .jpeg, .png"
+            size={100}
+            // type="file"
+            // multiple="false"
+            // accept="image/*"
             value={product_image}
-            onChange={updateProductImage}
+            onChange={noImgURL}
             placeholder="Image Url"
           />
         </label>
 
         <button type="submit">Create</button>
       </form>
-    </>
+
   );
 }
 
-export default PostProductModal;
+export default PostProductForm;
 
 //   return (
 //     <>

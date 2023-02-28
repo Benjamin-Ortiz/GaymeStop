@@ -115,8 +115,8 @@ function EditProductModal() {
         New Image URL
         <input
           className="edit-product-imageUrl"
-          type="text"
-          accept=".jpg, .jpeg, .png"
+          type="file"
+          accept="image/*"
           value={product_image}
           onChange={updateProductImage}
           placeholder="Image Url"
