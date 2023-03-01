@@ -14,16 +14,14 @@ function SingleProduct() {
   const user = useSelector((state) => state.session?.user);
   const product = useSelector((state) => state.products);
 
-  console.log(product);
-
   //states
   const [editProduct, setEditProduct] = useState(false);
 
-  const [title, setTitle] = useState("");
-  const [price, setPrice] = useState("");
-  const [description, setDescription] = useState("");
-  const [glitter_factor, setGlitterFactor] = useState("");
-  const [product_image, setProductImage] = useState("");
+  const [title, setTitle] = useState(product.title);
+  const [price, setPrice] = useState(product.price);
+  const [description, setDescription] = useState(product.description);
+  const [glitter_factor, setGlitterFactor] = useState(product.glitter_factor);
+  const [product_image, setProductImage] = useState(product.product_image);
 
   const [errors, setErrors] = useState([]);
   const [errors2, setErrors2] = useState([]);
@@ -32,7 +30,7 @@ function SingleProduct() {
   const updateTitle = (e) => setTitle(e.target.value);
   const updatePrice = (e) => setPrice(e.target.value);
   const updateDescription = (e) => setDescription(e.target.value);
-  const updateGlitterFactor = (e) => setGlitterFactor(e.target.value)
+  const updateGlitterFactor = (e) => setGlitterFactor(e.target.value);
   const updateProductImage = (e) => setProductImage(e.target.value);
 
   const editSubmit = (e) => {
@@ -43,15 +41,24 @@ function SingleProduct() {
     const payload = {
       id: product.id,
       user_id: user.id,
-      title,
-      price,
-      description,
-      glitter_factor,
-      product_image,
+      title: title,
+      price: price,
+      description: description,
+      glitter_factor: glitter_factor,
+      product_image: product_image
     };
 
-    let errs = [];
-    dispatch(productActions.putTheProduct(payload));
+    dispatch(productActions.putTheProduct(payload)).then(
+      async (res) => {
+        setTitle(title);
+        setDescription(description);
+        setPrice(price);
+        setGlitterFactor(glitter_factor);
+        setProductImage(product_image);
+        setEditProduct(false);
+        dispatch(productActions.getTheProduct(payload.id))
+      }
+    )
   };
 
   useEffect(() => {
@@ -66,12 +73,11 @@ function SingleProduct() {
 
       <div className="single-game-container">
         <div className="product-container">
-          {/* <div className="product-title">{product.title}</div>
           <img
             className="product-img"
             src={product.product_image}
             alt={product.title}
-          /> */}
+          />
         </div>
 
         {editProduct ? (
@@ -82,9 +88,9 @@ function SingleProduct() {
                     </div>
                   </div> */}
 
-            <div className="ques-input-con">
+            <div className="ques-product-con">
               <input
-                className="edit-ques-title"
+                className="edit-prod-title"
                 type="text"
                 placeholder="Title goes here"
                 value={title}
@@ -92,42 +98,43 @@ function SingleProduct() {
                   setTitle(e.target.value);
                 }}
               ></input>
+
+              <input
+                className="new-product-price"
+                type="number"
+                placeholder="Price"
+                value={price}
+                onChange={(e) => {
+                  setPrice(e.target.value);
+                }}
+              ></input>
+
               <textarea
-                className="edit-ques-body"
+                className="new-product-glitter-factor"
+                type="text"
+                rows={5}
+                value={glitter_factor}
+                onChange={updateGlitterFactor}
+                placeholder="Glitter Factor"
+                required
+                rows={10}
+                cols={30}
+              />
+
+              <textarea
+                className="edit-prod-desc"
                 type="text"
                 placeholder="Edit Description"
                 value={description}
                 onChange={(e) => {
                   setDescription(e.target.value);
                 }}
-                rows={3}
-                cols={5}
+                rows={10}
+                cols={30}
               />
-              <label>
-                <input
-                  className="new-product-price"
-                  type="number"
-                  placeholder="Price"
-                  value={price}
-                  onChange={updatePrice}
-                  required
-                />
-              </label>
-
-              <label>
-                <input
-                  className="new-product-glitter-factor"
-                  type="text"
-                  rows={5}
-                  value={glitter_factor}
-                  onChange={updateGlitterFactor}
-                  placeholder="Glitter Factor"
-                  required
-                />
-              </label>
 
               <input
-                className="edit-ques-url"
+                className="edit-prod-img"
                 type="text"
                 placeholder="Add Image here..."
                 value={product_image}
@@ -156,7 +163,10 @@ function SingleProduct() {
                 </span>
               </div>
               {/* the submit button has tbe outside of the div. It needs to be a direct child of form */}
-              <button className="edit-submit" type="submit">
+              <button
+                className="edit-submit"
+                type="submit"
+              >
                 Apply Changes
               </button>
             </div>
@@ -166,12 +176,6 @@ function SingleProduct() {
                 <li>{ele}</li>
               ))}
             </ul>
-
-            <div className="edit-product-image">
-              {product.product_image ? (
-                <img src={product.product_image} alt="" />
-              ) : null}
-            </div>
           </form>
         ) : (
           <>
@@ -181,12 +185,12 @@ function SingleProduct() {
                 <div className="ind-ques-body">{product.description}</div>
                 <div>{product.price}</div>
                 <div>{product.glitter_factor}</div>
-
+{/*
                 <div className="ind-ques-image">
                   {product?.product_image ? (
                     <img src={product.product_image} alt="" />
                   ) : null}
-                </div>
+                </div> */}
               </div>
               {product?.user?.username === user?.username && (
                 <>
@@ -198,11 +202,14 @@ function SingleProduct() {
 
                         setTitle(product.title);
                         setDescription(product.description);
+                        setPrice(product.price);
+                        setGlitterFactor(product.glitter_factor);
                         setProductImage(product.product_image);
                       }}
                     >
                       Edit question
                     </button>
+
                     <button
                       className="delete-button"
                       onClick={() => {

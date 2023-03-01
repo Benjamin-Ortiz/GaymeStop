@@ -86,13 +86,16 @@ function PostProductForm() {
     });
 
    dispatch(productActions.postTheProduct(payload));
+
    setErrors(errs)
   //  console.log(errors,"errorsss");
   //   console.log(data, 'DATAAAAAAAA');
   history.push('/');
     if (errs) {
       setErrors(errs);
-    } 
+    } else {
+      dispatch(productActions.getTheProducts())
+    }
   };
 
   return (
