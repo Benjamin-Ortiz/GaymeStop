@@ -94,9 +94,7 @@ function SingleProduct() {
                 type="text"
                 placeholder="Title goes here"
                 value={title}
-                onChange={(e) => {
-                  setTitle(e.target.value);
-                }}
+                onChange={updateTitle}
               ></input>
 
               <input
@@ -104,15 +102,12 @@ function SingleProduct() {
                 type="number"
                 placeholder="Price"
                 value={price}
-                onChange={(e) => {
-                  setPrice(e.target.value);
-                }}
+                onChange={updatePrice}
               ></input>
 
               <textarea
                 className="new-product-glitter-factor"
                 type="text"
-                rows={5}
                 value={glitter_factor}
                 onChange={updateGlitterFactor}
                 placeholder="Glitter Factor"
@@ -126,9 +121,7 @@ function SingleProduct() {
                 type="text"
                 placeholder="Edit Description"
                 value={description}
-                onChange={(e) => {
-                  setDescription(e.target.value);
-                }}
+                onChange={updateDescription}
                 rows={10}
                 cols={30}
               />
@@ -138,9 +131,7 @@ function SingleProduct() {
                 type="text"
                 placeholder="Add Image here..."
                 value={product_image}
-                onChange={(e) => {
-                  setProductImage(e.target.value);
-                }}
+                onChange={updateProductImage}
               ></input>
             </div>
             <div className="ques-edit-crud-buttons">
