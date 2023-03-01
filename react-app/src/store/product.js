@@ -21,14 +21,14 @@ const getProduct = (product) => {
 const postProduct = (product) => {
     return {
         type: POST_PRODUCT,
-        payload: product
+        product
     }
 }
 
 const putProduct = (product) => {
     return {
         type: PUT_PRODUCT,
-        payload: product
+        product
     }
 }
 
@@ -89,22 +89,16 @@ export const postTheProduct = (productData) => async (dispatch) => {
 
 // * EDIT
 
-export const putTheProduct = (product) => async (dispatch) => {
-    const {id, title, price, description, glitter_factor, product_image} = product
+export const putTheProduct = (product) => async dispatch => {
+    // const {id, title, price, description, glitter_factor, product_image} = product
 
-    const response = await fetch(`/api/products/${id}`, {
+    const response = await fetch(`/api/products/${product.id}`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
 
-      body: JSON.stringify({
-        title,
-        price,
-        description,
-        glitter_factor,
-        product_image
-    }),
+      body: JSON.stringify(product),
     });
 
     if (response.ok) {
@@ -166,14 +160,12 @@ const productsReducer = (state = initialState, action) => {
             return newState
           }
 
+          case POST_PRODUCT:
           case PUT_PRODUCT:
-          case POST_PRODUCT : {
-            const newState = {
+            return {
                 ...state,
-                [action.payload.id]: action.payload
+                [action.product.id] : action.product
             }
-            return newState;
-          }
 
 
         default:
