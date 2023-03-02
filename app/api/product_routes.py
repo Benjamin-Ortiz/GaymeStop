@@ -58,7 +58,7 @@ def post_product():
 
         db.session.add(product)
         db.session.commit()
-        return product.to_dict(), redirect('/')
+        return product.to_dict()
     return jsonify({'errors': validation_errors_to_error_messages(form.errors)}), 400
 
 @product_routes.route('/<int:id>', methods=['PUT'])

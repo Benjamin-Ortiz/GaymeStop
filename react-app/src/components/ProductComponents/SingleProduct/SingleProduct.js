@@ -63,7 +63,7 @@ function SingleProduct() {
 
   useEffect(() => {
     dispatch(productActions.getTheProduct(id));
-    // dispatch(sessionActions.authenticate());
+
     // }, [dispatch, title, price, product_image, description, glitter_factor, id]);
   }, [dispatch]);
 

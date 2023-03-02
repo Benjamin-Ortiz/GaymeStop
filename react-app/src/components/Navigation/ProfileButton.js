@@ -21,7 +21,7 @@ function ProfileButton({ user }) {
     if (!showMenu) return;
 
     const closeMenu = (e) => {
-      if (!ulRef.current.contains(e.target)) {
+      if (!ulRef.current?.contains(e.target)) {
         setShowMenu(false);
       }
     };
@@ -50,19 +50,16 @@ function ProfileButton({ user }) {
           <>
             <li>{user.username}</li>
             <li>{user.email}</li>
-            {/* <li>
-            <OpenModalButton
-              buttonText="Create a new Product"
-              onItemClick={closeMenu}
-              modalComponent={<PostProductModal />}
-            />
-            </li> */}
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>
-            <NavLink exact to='/products/new_product'>
+            <NavLink
+            exact to='/products/new_product'
+            // onClick={closeMenu}
+            >
               Post a New Product
             </NavLink>
+
           </>
         ) : (
           <>

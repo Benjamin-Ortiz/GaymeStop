@@ -9,6 +9,7 @@ function PostProductForm() {
   const history = useHistory();
   const user = useSelector((state) => state.session?.user);
   const allProducts = useSelector((state) => Object.values(state.products));
+  console.log(allProducts, "ALL PRODUCTS");
 
   //* states
   const [errors, setErrors] = useState([]);
@@ -32,11 +33,11 @@ function PostProductForm() {
   const updateGlitterFactor = (e) => setGlitterFactor(e.target.value);
   const updateProductImage = (e) => setProductImage(e.target.value);
 
-  // if (hasSubmitted === true) return <Redirect to="/" />;
+  // if (hasSubmitted) return <Redirect to="/" />;
 
-  useEffect(() => {
-    dispatch(productActions.getTheProducts());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(productActions.getTheProducts());
+  // }, [dispatch]);
 
   const noImgURL = (e) => {
     const cover = e.target.files[0];
@@ -46,12 +47,12 @@ function PostProductForm() {
     else return updateProductImage
 };
 
-  useEffect(() => {
-    const errors = [];
-    if (!title.length) errors.push('Please title your game');
-    if (!description.length) errors.push('Please provide a description');
-    setErrors(errors);
-  }, [title, description])
+  // useEffect(() => {
+  //   const errors = [];
+  //   if (!title.length) errors.push('Please title your game');
+  //   if (!description.length) errors.push('Please provide a description');
+  //   setErrors(errors);
+  // }, [title, description])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,9 +69,13 @@ function PostProductForm() {
       product_image,
     };
 
+    console.log(payload, "PAY LOADDDD");
+
     let errs = [];
 
     allProducts.map((product) => {
+
+      console.log(product, "PRODUCT from MAP");
       if (product.title === payload.title) {
         errs.push("This Title already exists");
         return errs;
@@ -85,16 +90,16 @@ function PostProductForm() {
       return product;
     });
 
-   dispatch(productActions.postTheProduct(payload));
 
-   setErrors(errs)
-  //  console.log(errors,"errorsss");
-  //   console.log(data, 'DATAAAAAAAA');
-  history.push('/');
-    if (errs) {
+    setErrors(errs)
+    //  console.log(errors,"errorsss");
+    //   console.log(data, 'DATAAAAAAAA');
+    dispatch(productActions.postTheProduct(payload));
+    dispatch(productActions.getTheProducts())
+    if (errs.length) {
       setErrors(errs);
-    } else {
-      dispatch(productActions.getTheProducts())
+    }else {
+      history.push('/');
     }
   };
 
@@ -157,6 +162,7 @@ function PostProductForm() {
           />
         </label>
 
+
         <label>
           Upload Cover Photo
           <input
@@ -167,7 +173,7 @@ function PostProductForm() {
             // multiple="false"
             // accept="image/*"
             value={product_image}
-            onChange={noImgURL}
+            onChange={updateProductImage}
             placeholder="Image Url"
           />
         </label>
@@ -179,36 +185,3 @@ function PostProductForm() {
 }
 
 export default PostProductForm;
-
-//   return (
-//     <>
-//       <h1>Log In</h1>
-//       <form onSubmit={handleSubmit}>
-//         <ul>
-//           {errors.map((error, idx) => (
-//             <li key={idx}>{error}</li>
-//           ))}
-//         </ul>
-//         <label>
-//           Email
-//           <input
-//             type="text"
-//             value={email}
-//             onChange={(e) => setEmail(e.target.value)}
-//             required
-//           />
-//         </label>
-//         <label>
-//           Password
-//           <input
-//             type="password"
-//             value={password}
-//             onChange={(e) => setPassword(e.target.value)}
-//             required
-//           />
-//         </label>
-//         <button type="submit">Log In</button>
-//       </form>
-//     </>
-//   );
-// }

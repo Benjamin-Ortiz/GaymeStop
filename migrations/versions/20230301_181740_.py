@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 908dac42364b
+Revision ID: 8919bc90145f
 Revises:
-Create Date: 2023-02-17 14:28:32.914298
+Create Date: 2023-03-01 18:17:40.037814
 
 """
 from alembic import op
@@ -14,7 +14,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = '908dac42364b'
+revision = '8919bc90145f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -33,25 +33,27 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-
     op.create_table('products',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('title', sa.String(length=40), unique=True, nullable=False),
+    sa.Column('title', sa.String(length=40), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=1000), nullable=False),
     sa.Column('glitter_factor', sa.String(length=600), nullable=False),
-    sa.Column('product_image', sa.String(length=200)),
+    sa.Column('product_image', sa.String(length=300), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=False),
     sa.Column('updated_at', sa.DateTime(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id')
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('title')
     )
+    # ### end Alembic commands ###
+
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-    # ### end Alembic commands ###
+
+    if environment == "production":
+        op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")
 
 
 def downgrade():

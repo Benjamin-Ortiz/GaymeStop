@@ -21,7 +21,7 @@ const getProduct = (product) => {
 const postProduct = (product) => {
     return {
         type: POST_PRODUCT,
-        product
+        payload: product
     }
 }
 
@@ -131,13 +131,10 @@ const productsReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case GET_PRODUCTS:{
-            const allProducts = [];
+            const newState = {...action.payload.products};
 
-            action.payload.products.forEach( (product) => {
-                allProducts[product.id] = product;
-            });
-            return { ...allProducts }
-        }
+            return newState;
+          }
 
 
         case GET_PRODUCT: {
@@ -160,7 +157,14 @@ const productsReducer = (state = initialState, action) => {
             return newState
           }
 
-          case POST_PRODUCT:
+          case POST_PRODUCT : {
+            const newState = {
+                ...state,
+                [action.payload.product]: action.payload
+            }
+            return newState;
+          }
+
           case PUT_PRODUCT:
             return {
                 ...state,
