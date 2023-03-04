@@ -5,7 +5,7 @@ from sqlalchemy.sql import func
 
 
 
-class Product(db.Model):
+class Cart(db.Model):
     __tablename__ = 'carts'
 
     if environment == "production":
@@ -13,7 +13,7 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-    
+
     created_at = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
 
     user = db.relationship("User", back_populates="carts")
