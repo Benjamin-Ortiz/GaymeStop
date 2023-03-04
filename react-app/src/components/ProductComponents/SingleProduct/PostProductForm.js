@@ -39,14 +39,6 @@ function PostProductForm() {
   //   dispatch(productActions.getTheProducts());
   // }, [dispatch]);
 
-  const noImgURL = (e) => {
-    const cover = e.target.files[0];
-    if (cover) {
-        setProductImage(cover);
-    }
-    else return updateProductImage
-};
-
   // useEffect(() => {
   //   const errors = [];
   //   if (!title.length) errors.push('Please title your game');
