@@ -14,10 +14,14 @@ function Navigation({ isLoaded }){
 	  }, [dispatch]);
 
 	return (
-		<div>
+		<div className='nav-bar'>
 			<div>
+				{/* left */}
 				<NavLink exact to="/">Home</NavLink>
 			</div>
+
+			{/* middle */}
+
 			{isLoaded && (
 				<div>
 					<ProfileButton user={sessionUser} />

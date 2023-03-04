@@ -170,8 +170,8 @@ function SingleProduct() {
           </form>
         ) : (
           <>
-            <div className="individual-question-container">
-              <div className="user-timestamp-question-con">
+            <div className="product-container">
+              <div className="title-descrip-con">
                 <div className="ind-ques-title">{product.title}</div>
                 <div className="ind-ques-body">{product.description}</div>
                 <div>{product.price}</div>
@@ -198,7 +198,6 @@ function SingleProduct() {
                         setProductImage(product.product_image);
                       }}
                     >
-                      Edit question
                     </button>
 
                     <button

@@ -46,10 +46,8 @@ SCHEMA = os.environ.get("SCHEMA")
     # )
 
     if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};") <------ADD THIS AT THE END OF THE UPDRAGE FUNCTION
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};") <------ADD THESE AT THE END OF THE UPDRAGE FUNCTION
 
     if environment == "production":
         op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
-
-
