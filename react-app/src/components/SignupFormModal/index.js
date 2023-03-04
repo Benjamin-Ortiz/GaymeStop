@@ -10,6 +10,7 @@ function SignupFormModal() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+
 	const [errors, setErrors] = useState([]);
 	const { closeModal } = useModal();
 
@@ -17,6 +18,7 @@ function SignupFormModal() {
 		e.preventDefault();
 		if (password === confirmPassword) {
 			const data = await dispatch(signUp(username, email, password));
+			
 			if (data) {
 				setErrors(data);
 			} else {

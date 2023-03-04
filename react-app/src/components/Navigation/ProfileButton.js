@@ -4,6 +4,8 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { NavLink } from "react-router-dom";
+// import PostProductModal from "../ProductComponents/SingleProduct/PostProductModal.js";
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
@@ -19,7 +21,7 @@ function ProfileButton({ user }) {
     if (!showMenu) return;
 
     const closeMenu = (e) => {
-      if (!ulRef.current.contains(e.target)) {
+      if (!ulRef.current?.contains(e.target)) {
         setShowMenu(false);
       }
     };
@@ -39,6 +41,7 @@ function ProfileButton({ user }) {
 
   return (
     <>
+
       <button onClick={openMenu}>
         <i className="fas fa-user-circle" />
       </button>
@@ -50,6 +53,13 @@ function ProfileButton({ user }) {
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>
+            <NavLink
+            exact to='/products/new_product'
+            // onClick={closeMenu}
+            >
+              Post a New Product
+            </NavLink>
+
           </>
         ) : (
           <>

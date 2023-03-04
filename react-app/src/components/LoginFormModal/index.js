@@ -14,6 +14,7 @@ function LoginFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(email, password));
+    
     if (data) {
       setErrors(data);
     } else {
@@ -55,3 +56,21 @@ function LoginFormModal() {
 }
 
 export default LoginFormModal;
+
+
+
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   // setSubmit(true);
+
+//   const data = await dispatch(putTheProduct(
+//       title,
+//       price,
+//       description,
+//       glitter_factor,
+//       product_image
+//       ));
+//   if (data) {
+//     setErrors(data);
+//   }else{closeModal(); window.alert('Your product has been submitted')}
+// };

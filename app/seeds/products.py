@@ -7,7 +7,6 @@ def seed_products():
         user_id=1,
         title='CyberPunk2077',
         price= 59.99,
-        rating=0,
         description='CyberPunk is an, at launch N64 game set in the future',
         glitter_factor="Character Customization goes above and beyond and doesnt force default confromity between sexes, everything is customizable, maybe too much is customizable. Nothing holds you back from playing the game your way and there's many storyline npcs you can develope relations with, as expected in the year 2077",
         product_image='https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/cyberpunk2077.jpg'
@@ -16,7 +15,6 @@ def seed_products():
         user_id=1,
         title='CyberPunk1999',
         price= 59.99,
-        rating=0,
         description='CyberPunk is a game, boom',
         glitter_factor="Character Customization goes above and beyond and doesnt force default confromity between sexes, everything is customizable, maybe too much is customizable. Nothing holds you back from playing the game your way and there's many storyline npcs you can develope relations with, as expected in the year 2077",
         product_image='https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/cyberpunk2077.jpg'
