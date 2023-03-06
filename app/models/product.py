@@ -1,6 +1,15 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 import datetime
+from .cart_products import cart_products
 
+
+# cart_items = db.Table(
+#     'cart_items',
+#     db.Model.metadata,
+#     db.Column('cart_id',db.Integer, db.ForeignKey(add_prefix_for_prod("carts.id")), primary_key=True),
+#     db.Column('product_id',db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), primary_key=True),
+
+# )
 
 class Product(db.Model):
     __tablename__ = 'products'
@@ -20,14 +29,11 @@ class Product(db.Model):
 
 
     #* related data
-    # one-to-many
-    #? ex) reactions = db.relationship("Reaction", back_populates="answer", cascade="all, delete-orphan") for Answer table
-    # reviews = db.relationship("Review")
-
-    # many-to-one
     user = db.relationship("User", back_populates="products")
 
-    # many-to-many/joins table
+    cart = db.relationship("Cart", secondary=cart_products)
+    # cart = db.relationship("CartItem", back_populates='products')
+
 
 # add logic for avg review rating
 
@@ -47,5 +53,16 @@ class Product(db.Model):
                 'id': self.user.id,
                 'username': self.user.username,
                 'email': self.user.email
-            }
+            },
+
+        }
+
+    def to_cart_dict(self):
+        return {
+            'id': self.id,
+            'user_id': self.user_id,
+            'title':self.title,
+            'price':self.price,
+            # change rating key to helper in future
+            'product_image':self.product_image,
         }

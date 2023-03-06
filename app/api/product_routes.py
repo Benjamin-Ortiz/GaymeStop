@@ -52,7 +52,7 @@ def post_product():
            description=form.data['description'],
            glitter_factor=form.data['glitter_factor'],
            product_image=form.data['product_image'],
-          )
+            )
           # check_product = Product.query.filter(Product.title == form.title)
           # print (check_product, '-=-=-=-=-=-=')
 
