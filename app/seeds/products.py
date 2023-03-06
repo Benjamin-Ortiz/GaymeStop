@@ -1,6 +1,7 @@
 from app.models import db, Product, environment, SCHEMA
 
 
+
 # Adds products seed data
 def seed_products():
     cyberpunk = Product(
@@ -36,7 +37,7 @@ def seed_products():
 # it will reset the primary keys for you as well.
 def undo_products():
     if environment == "production":
-        db.session.execute(f"TRUNCATE table {SCHEMA}.user RESTART IDENTITY CASCADE;")
+        db.session.execute(f"TRUNCATE table {SCHEMA}.products RESTART IDENTITY CASCADE;")
     else:
         db.session.execute("DELETE FROM products")
 

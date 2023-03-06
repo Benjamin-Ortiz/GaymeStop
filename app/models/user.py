@@ -2,6 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from sqlalchemy.sql import func
+from .cart_products import cart_products
 
 
 class User(db.Model, UserMixin):
@@ -17,7 +18,10 @@ class User(db.Model, UserMixin):
     profile_url = db.Column(db.String(255), nullable=True)
     dateCreated = db.Column(db.DateTime(timezone=True), server_default=func.now())
 
-    products = db.relationship("Product", back_populates='user')
+
+    products = db.relationship("Product", back_populates='user', cascade='all, delete-orphan')
+    cart = db.relationship("Cart", back_populates='user', cascade='all, delete-orphan')
+    # cart_products = db.relationship("Product")
 
     @property
     def password(self):
@@ -35,5 +39,6 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            'profile_url': self.profile_url
+            'profile_url': self.profile_url,
+            'cart': self.cart
         }
