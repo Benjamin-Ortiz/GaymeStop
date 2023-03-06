@@ -20,7 +20,6 @@ class Cart(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-    # quantity = db.Column(db.Integer(), default = 0)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
 
 
