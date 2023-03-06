@@ -20,7 +20,8 @@ class User(db.Model, UserMixin):
 
 
     products = db.relationship("Product", back_populates='user', cascade='all, delete-orphan')
-    cart = db.relationship("Cart", back_populates='user', cascade='all, delete-orphan')
+    # cart = db.relationship("Cart", back_populates='user', cascade='all, delete-orphan')
+    cart = db.relationship("Cart", uselist=False, back_populates='user', cascade='all, delete-orphan')
     # cart_products = db.relationship("Product")
 
     @property

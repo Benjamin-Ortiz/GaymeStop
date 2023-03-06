@@ -33,11 +33,10 @@ class Cart(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'user_id': self.user_id,
             'created_at': self.created_at,
             'user': {
                 'id': self.user.id,
                 'username': self.user.username,
             },
-            'products':self.products.to_cart_dict()
+            'products':self.products
         }

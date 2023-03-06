@@ -197,7 +197,7 @@ function SingleProduct() {
                         setGlitterFactor(product.glitter_factor);
                         setProductImage(product.product_image);
                       }}
-                    >
+                    > Edit Product
                     </button>
 
                     <button
