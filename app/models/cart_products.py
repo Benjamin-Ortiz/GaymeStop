@@ -4,46 +4,33 @@ import datetime
 
 
 
-cart_products = db.Table(
-    'cart_products',
-    db.Model.metadata,
-    # db.Column('user_id', db.ForeignKey(add_prefix_for_prod("users.id")), primary_key=True),
-    db.Column('cart_id', db.Integer, db.ForeignKey(add_prefix_for_prod("carts.id")), primary_key=True),
-    db.Column('product_id', db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), primary_key=True),
-)
+# cart_products = db.Table(
+#     'cart_products',
+#     db.Model.metadata,
+#     # db.Column('user_id', db.ForeignKey(add_prefix_for_prod("users.id")), primary_key=True),
+#     db.Column('cart_id', db.Integer, db.ForeignKey(add_prefix_for_prod("carts.id")), primary_key=True),
+#     db.Column('product_id', db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), primary_key=True),
+# )
 
-# ! OR THAT?
+class CartItem(db.Model):
+    __tablename__ = 'cart_items'
 
-# class CartItem(db.Model):
-#     __tablename__ = 'cart_items'
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
-#     if environment == "production":
-#         __table_args__ = {'schema': SCHEMA}
+    user_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod("users.id")), nullable=False, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey(
+        add_prefix_for_prod("products.id")), nullable=False, primary_key=True)
+    quantity = db.Column(db.Integer(), default=1)
 
-#     id = db.Column(db.Integer, primary_key=True)
-#     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-#     quantity = db.Column(db.Integer(), default=None)
-#     products_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), nullable=False)
-#     cart_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("carts.id")), nullable=False)
+    user = db.relationship("User", back_populates="cart")
+    product = db.relationship("Product", back_populates="carts")
 
-#     user = db.relationship("User", back_populates="cart_items")
-#     cart = db.relationship("Cart", back_populates="cart_items")
-#     products = db.relationship("Product", back_populates="cart_items")
-
-#     def to_dict(self):
-#         return {
-#             'id': self.id,
-#             'quantity':self.quantity,
-#             'cart_id': self.cart_id,
-#             'products_id': self.products_id,
-#             'cart': {
-#                 'id': self.cart.id,
-#                  'user': {
-#                     'id': self.cart.user.id,
-#                     'username': self.cart.user.username
-#             },
-#             },
-#             'products': {
-#             self.products.to_cart_dict()
-#           }
-#         }
+    def to_dict(self):
+        return {
+            'user_id': self.user_id,
+            'product_id': self.product_id,
+            'quantity': self.quantity,
+            'product': self.product.to_cart_dict()
+        }

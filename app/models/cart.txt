@@ -1,5 +1,4 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from .cart_products import cart_products
 import datetime
 from flask_login import UserMixin
 from sqlalchemy.sql import func
@@ -24,7 +23,7 @@ class Cart(db.Model):
 
 
     # products = db.relationship("Product", backref='cart', secondary=cart_products)
-    products = db.relationship("Product", secondary=cart_products, back_populates='cart')
+    products = db.relationship("Product", back_populates='cart')
 
     user = db.relationship("User", back_populates="cart")
     # cart_items = db.relationship("CartItem", back_populates='cart', cascade='all')
@@ -39,6 +38,6 @@ class Cart(db.Model):
                 'username': self.user.username,
             },
             # 'products':self.products.to_cart_dict() #! Does not work
-            'products':self.products
+            'products': [product.to_dict() for product in self.products]
         #  [product.to_dict() for product in products]             #* Works
         }

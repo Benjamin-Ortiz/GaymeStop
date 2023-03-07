@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, redirect
 from flask_login import current_user, login_user, logout_user, login_required
 from datetime import datetime
-from app.models import db, User, Cart, Product
+from app.models import db, User, Product, CartItem
 from sqlalchemy.orm import joinedload
 # from app.forms import CartItemForm
 
@@ -35,7 +35,7 @@ def validation_errors_to_error_messages(validation_errors):
 @cart_routes.route('/', methods=['POST'])
 @login_required
 def create_cart():
-    new_cart = Cart(
+    new_cart = CartItem(
         user_id = current_user.id,
         created_at = datetime.now()
         )
@@ -47,14 +47,14 @@ def create_cart():
 @cart_routes.route('/<int:id>', methods=['GET'])
 @login_required
 def get_cart(id):
-       cart = Cart.query.get(id)
+       cart = CartItem.query.get(id)
        return cart.to_dict()
 
 # * add product to cart.
 @cart_routes.route('/<int:cart_id>/add_product/<int:product_id>', methods=['POST'])
 @login_required
 def add_product_to_cart(cart_id, product_id):
-     cart = Cart.query.get(cart_id)
+     cart = CartItem.query.get(cart_id)
      product = Product.query.get(product_id)
 
      cart.products
