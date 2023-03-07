@@ -1,6 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 import datetime
-from .cart_products import cart_products
 
 
 # cart_items = db.Table(
@@ -31,8 +30,8 @@ class Product(db.Model):
     #* related data
     user = db.relationship("User", back_populates="products")
 
-    cart = db.relationship("Cart", secondary=cart_products, back_populates="products")
-    # cart = db.relationship("CartItem", back_populates='products')
+    # cart = db.relationship("Cart", secondary=cart_products, back_populates="products")
+    carts = db.relationship("CartItem", back_populates='product')
 
 
 # add logic for avg review rating
