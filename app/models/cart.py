@@ -20,7 +20,6 @@ class Cart(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
-    # quantity = db.Column(db.Integer(), default = 0)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
 
 
@@ -34,11 +33,12 @@ class Cart(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'user_id': self.user_id,
             'created_at': self.created_at,
             'user': {
                 'id': self.user.id,
                 'username': self.user.username,
             },
-            'products':self.products.to_cart_dict()
+            # 'products':self.products.to_cart_dict() #! Does not work
+            'products':self.products
+        #  [product.to_dict() for product in products]             #* Works
         }

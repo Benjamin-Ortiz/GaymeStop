@@ -31,7 +31,7 @@ class Product(db.Model):
     #* related data
     user = db.relationship("User", back_populates="products")
 
-    cart = db.relationship("Cart", secondary=cart_products)
+    cart = db.relationship("Cart", secondary=cart_products, back_populates="products")
     # cart = db.relationship("CartItem", back_populates='products')
 
 
