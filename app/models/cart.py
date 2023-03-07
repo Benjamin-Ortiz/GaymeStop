@@ -38,5 +38,7 @@ class Cart(db.Model):
                 'id': self.user.id,
                 'username': self.user.username,
             },
+            # 'products':self.products.to_cart_dict() #! Does not work
             'products':self.products
+        #  [product.to_dict() for product in products]             #* Works
         }

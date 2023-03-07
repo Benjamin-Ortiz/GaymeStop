@@ -42,9 +42,33 @@ def create_cart():
     db.session.add(new_cart)
     db.session.commit()
     return new_cart.to_dict()
-    # return {'message': "hey!"
 
-# * add items to cart.
+# * get cart (by cart id)
+@cart_routes.route('/<int:id>', methods=['GET'])
+@login_required
+def get_cart(id):
+       cart = Cart.query.get(id)
+       return cart.to_dict()
+
+# * add product to cart.
+@cart_routes.route('/<int:cart_id>/add_product/<int:product_id>', methods=['POST'])
+@login_required
+def add_product_to_cart(cart_id, product_id):
+     cart = Cart.query.get(cart_id)
+     product = Product.query.get(product_id)
+
+     cart.products
+
+     if(not cart) :
+          return {"message" : "cart id 404"}
+     if(not product) :
+        return {"message" : "product id 404"}
+
+     return cart.to_dict()
+
+
+
+
 #* get cart + products
 #*  edit quantity of products
 #*  delete product

@@ -41,5 +41,6 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'profile_url': self.profile_url,
-            'cart': self.cart
+            'cart': self.cart.to_dict()
         }
+# * to dict cart
