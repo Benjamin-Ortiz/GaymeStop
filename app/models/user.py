@@ -43,3 +43,9 @@ class User(db.Model, UserMixin):
             'profile_url': self.profile_url,
             'cart': [cart_item.to_dict() for cart_item in self.cart]
         }
+
+    def user_cart(self):
+        return {
+            'username': self.username,
+            'cart': [cart_item.to_dict() for cart_item in self.cart]
+        }
