@@ -34,3 +34,10 @@ class CartItem(db.Model):
             'quantity': self.quantity,
             'product': self.product.to_cart_dict()
         }
+
+    def to_edit_dict(self):
+        return {
+            'user_id': self.user_id,
+            'product_id': self.product_id,
+            'quantity': self.quantity
+        }

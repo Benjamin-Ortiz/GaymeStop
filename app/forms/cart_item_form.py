@@ -7,4 +7,4 @@ from app.models import Product, CartItem
 class CartItemForm(FlaskForm):
     user_id = IntegerField('user')
     product_id = IntegerField('product')
-    quantity = IntegerField('quantity')
+    quantity = IntegerField('quantity', validators=[DataRequired(), NumberRange(min=1)])
