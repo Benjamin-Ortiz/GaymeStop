@@ -45,11 +45,11 @@ def get_cart(user_id):
 
 
 #*  GET one Cart Item
-@cart_routes.route('/<int:user_id>/get_cart_item/<int:product_id>', methods=['GET'])
+@cart_routes.route('get_cart_item/<int:product_id>', methods=['GET'])
 @login_required
-def get_cart_item(user_id, product_id):
+def get_cart_item(product_id):
 
-     user = User.query.get(user_id)
+     user = current_user
      product = Product.query.get(product_id)
 
    #   cart_item_product = CartItem.query.filter((CartItem.product_id == product.id) & (CartItem.user_id == user.id)).all()
@@ -60,13 +60,12 @@ def get_cart_item(user_id, product_id):
 
 
 # * add product to cart.
-@cart_routes.route('/<int:cart_id>/add_product/<int:product_id>', methods=['POST'])
+@cart_routes.route('/add_product/<int:product_id>', methods=['POST'])
 @login_required
-def add_product_to_cart(cart_id, product_id):
+def add_product_to_cart(product_id):
      form = CartItemForm()
      form['csrf_token'].data = request.cookies['csrf_token']
-
-     user = User.query.get(cart_id)
+     user = current_user
      product = Product.query.get(product_id)
 
      if(not user) :
@@ -81,30 +80,31 @@ def add_product_to_cart(cart_id, product_id):
         if (i.product_id == product.id and i.user_id == user.id):
           i.quantity += 1
           db.session.commit()
-          return user.user_cart()
-
+          return {"message": f"added +1 {product.title} to cart"}
 
      if form.validate_on_submit():
-          cart_item = CartItem(
+               cart_item = CartItem(
                user_id = current_user.id,
                product_id = product.id,
-               quantity = 1
+               quantity = form.data['quantity']
           )
 
-          db.session.add(cart_item)
-          db.session.commit()
-          return user.user_cart()
-     return jsonify({'errors': validation_errors_to_error_messages(form.errors)}), 400
+               db.session.add(cart_item)
+               db.session.commit()
+               return {"message" : f"sucessfully added {cart_item}"}
+     else:
+              return jsonify({'errors': validation_errors_to_error_messages(form.errors)}), 400
+
 
 #*  edit quantity of products
-@cart_routes.route('/<int:cart_id>/edit_product/<int:product_id>', methods=['PUT'])
+@cart_routes.route('/edit_product/<int:product_id>', methods=['PUT'])
 @login_required
-def edit_cart_item_quantity(cart_id, product_id):
+def edit_cart_item_quantity( product_id):
 
      form = CartItemForm()
      form['csrf_token'].data = request.cookies['csrf_token']
 
-     user = User.query.get(cart_id)
+     user = current_user
      product = Product.query.get(product_id)
      cart_item_product = CartItem.query.filter((CartItem.product_id == product.id) & (CartItem.user_id == user.id)).one()
 
@@ -153,10 +153,10 @@ def edit_cart_item_quantity(cart_id, product_id):
 
 
 #*  delete item from cart
-@cart_routes.route('/<int:cart_id>/delete_all_items/<int:product_id>', methods=['DELETE'])
+@cart_routes.route('/delete_all_items/<int:product_id>', methods=['DELETE'])
 @login_required
-def delete_whole_cart(cart_id,product_id):
-     user = User.query.get(cart_id)
+def delete_whole_cart(product_id):
+     user = current_user
      product = Product.query.get(product_id)
      cart_item_product = CartItem.query.filter((CartItem.product_id == product.id) & (CartItem.user_id == user.id)).one()
 

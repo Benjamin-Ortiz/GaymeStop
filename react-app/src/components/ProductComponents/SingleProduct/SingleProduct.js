@@ -2,7 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory, useParams } from "react-router-dom";
 import * as productActions from "../../../store/product";
-import * as sessionActions from "../../../store/session";
+import * as cartActions from "../../../store/cart";
+import AddCartItem from "../../CartComponents/AddCartItem";
+
 //* modal skeleton
 import "./SingleProduct.css";
 
@@ -13,6 +15,7 @@ function SingleProduct() {
 
   const user = useSelector((state) => state.session?.user);
   const product = useSelector((state) => state.products);
+  //* user.cart = array
 
   //states
   const [editProduct, setEditProduct] = useState(false);
@@ -32,6 +35,19 @@ function SingleProduct() {
   const updateDescription = (e) => setDescription(e.target.value);
   const updateGlitterFactor = (e) => setGlitterFactor(e.target.value);
   const updateProductImage = (e) => setProductImage(e.target.value);
+
+  //* check for cart duplicate
+  // for (let i = 0; i < user.cart.length; i++) {
+  //   const cartItem = user.cart[i];
+
+  //   for (const i in cartItem) {
+  //     if (Object.hasOwnProperty(`${user_id}`) && Object.) {
+  //       const item = cartItem[i];
+  //       console.log(item);
+
+  //     }
+  //   }
+  // }
 
   const editSubmit = (e) => {
     e.preventDefault();
@@ -63,6 +79,7 @@ function SingleProduct() {
 
   useEffect(() => {
     dispatch(productActions.getTheProduct(id));
+    dispatch(cartActions.getTheCart(user.id))
 
     // }, [dispatch, title, price, product_image, description, glitter_factor, id]);
   }, [dispatch]);
@@ -212,6 +229,7 @@ function SingleProduct() {
                     >
                       Delete Product
                     </button>
+                    <AddCartItem />
                   </div>
                 </>
               )}

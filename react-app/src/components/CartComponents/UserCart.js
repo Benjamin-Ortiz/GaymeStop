@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import * as cartActions from "../../store/cart";
 import { NavLink } from "react-router-dom";
+import "./UserCart.css";
+
 
 function UserCart() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session?.user);
+
+  const [editProduct, setEditProduct] = useState(false);
+
 
 
   const allCartItems = useSelector((state) => Object.values(state.cart))
@@ -16,17 +21,51 @@ function UserCart() {
   }, [dispatch]);
 
   return (
-    <div>
-      <h1> UserCart </h1>
+    <div className='user-cart'>
+      <h1> Your Cart </h1>
+
       <div className="mapped-games"> Cart Items
       {allCartItems && allCartItems.map((product) => {
-        console.log(product, 'PRADUCT');
+        // console.log(product, 'PRADUCT');
         return (
-          <div className="single-game-container" >
+          <div className="single-product-container" >
+            <div className='cart-showcase'>
+
+            </div>
             <NavLink className="product-nav-link" to={`/products/${product?.product.id}`}>
             <div className="product-title">{product?.product.title}</div>
             <img className="product-img" src={product?.product.product_image} alt={product?.product.title}/>
             </NavLink>
+            <div className="ind-ques-cruds">
+                    <button
+                      className="edit-button"
+                      onClick={() => {
+                        // setEditProduct(true);
+
+                        // setTitle(product.title);
+                        // setDescription(product.description);
+                        // setPrice(product.price);
+                        // setGlitterFactor(product.glitter_factor);
+                        // setProductImage(product.product_image);
+                      }}
+                    > Edit Product
+                    </button>
+
+                    <button
+                      className="delete-button"
+                      onClick={() => {
+                        dispatch(cartActions.deleteTheCartItem(product.id))
+                          .then(() => {
+                            dispatch(cartActions.getTheCart(user.id))
+                          })
+                      }}
+                    >
+                      Delete Product
+                    </button>
+                  </div>
+            <div className='product-price'>
+              {`$${product.product.price}.99`}
+            </div>
           </div>
         )
       })}

@@ -33,19 +33,6 @@ function PostProductForm() {
   const updateGlitterFactor = (e) => setGlitterFactor(e.target.value);
   const updateProductImage = (e) => setProductImage(e.target.value);
 
-  // if (hasSubmitted) return <Redirect to="/" />;
-
-  // useEffect(() => {
-  //   dispatch(productActions.getTheProducts());
-  // }, [dispatch]);
-
-  // useEffect(() => {
-  //   const errors = [];
-  //   if (!title.length) errors.push('Please title your game');
-  //   if (!description.length) errors.push('Please provide a description');
-  //   setErrors(errors);
-  // }, [title, description])
-
   const handleSubmit = (e) => {
     e.preventDefault();
     setHasSubmitted(true)
@@ -61,13 +48,10 @@ function PostProductForm() {
       product_image,
     };
 
-    console.log(payload, "PAY LOADDDD");
-
     let errs = [];
 
     allProducts.map((product) => {
 
-      console.log(product, "PRODUCT from MAP");
       if (product.title === payload.title) {
         errs.push("This Title already exists");
         return errs;
@@ -84,8 +68,6 @@ function PostProductForm() {
 
 
     setErrors(errs)
-    //  console.log(errors,"errorsss");
-    //   console.log(data, 'DATAAAAAAAA');
     dispatch(productActions.postTheProduct(payload));
     dispatch(productActions.getTheProducts())
     if (errs.length) {

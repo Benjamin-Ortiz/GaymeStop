@@ -1,5 +1,5 @@
 const GET_CART = 'carts/GET_CART';
-const POST_CARTITEM = "carts/POST_CART";
+const POST_CARTITEM = "carts/POST_CARTITEM";
 const PUT_CARTITEM = "carts/EDIT_CART";
 const DELETE_CARTITEM = "carts/DELETE_CART";
 
@@ -10,28 +10,26 @@ const getCart = (cart) => {
     }
 }
 
-const postCartItem = (user_id, cartItemId) => {
+const postCartItem = (cartItem) => {
     return {
         type: POST_CARTITEM,
-        payload: cartItemId,
-        id: user_id
+        payload: cartItem,
     }
 }
 
-const putCartItem = (cartItemData, id, productId) => {
+const putCartItem = (cartItemData, productId) => {
     return {
         type: PUT_CARTITEM,
         cartItemData,
         productId: productId,
-        id: id,
     }
 }
 
-const deleteCartItem = (id, cartItemId) => {
+const deleteCartItem = (cartItemId) => {
     return {
         type: DELETE_CARTITEM,
         cartItemId,
-        id: id
+
     }
 }
 
@@ -48,18 +46,19 @@ export const getTheCart = (id) => async (dispatch) => {
     }
 }
 
-
 // * POST
-export const postTheCartItem = (CartItemData) => async (dispatch) => {
-    const {cart_id, product_id, quantity} = CartItemData
+export const postTheCartItem = (cartItem) => async (dispatch) => {
+    const {user_id, product_id, quantity} = cartItem
 
-    const response = await fetch(`/api/carts/${cart_id}/add_product/${product_id}`, {
+    console.log(cartItem, "CART ITEM THUNK");
+
+    const response = await fetch(`/api/carts/add_product/${product_id}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            cart_id,
+            user_id,
             product_id,
             quantity
         })
@@ -126,7 +125,7 @@ const cartReducer = (state = initialState, action) => {
           case POST_CARTITEM : {
             const newState = {
                 ...state,
-                [action.payload.product]: action.payload.cartItemId
+                [action.payload.c]: action.payload
             }
             return newState;
           }
