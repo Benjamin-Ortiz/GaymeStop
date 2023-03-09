@@ -37,7 +37,7 @@ function AddCartItem() {
     if (errs.length) {
       setErrors(errs);
     } else {
-      console.log("ADDED TO CART!");
+      return("ADDED TO CART!");
     }
   };
 

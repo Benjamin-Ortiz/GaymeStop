@@ -9,11 +9,15 @@ function UserCart() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session?.user);
 
+  const allCartItems = useSelector((state) => Object.values(state.cart))
   const [editProduct, setEditProduct] = useState(false);
 
+  // const [quantity, setQuantity] = useState(product.quantity);
+  // const updateQuantity = (e) => setQuantity(e.target.value);
 
 
-  const allCartItems = useSelector((state) => Object.values(state.cart))
+
+
   console.log(allCartItems, 'CART ITEMSS');
 
   useEffect(() => {
@@ -36,25 +40,25 @@ function UserCart() {
             <div className="product-title">{product?.product.title}</div>
             <img className="product-img" src={product?.product.product_image} alt={product?.product.title}/>
             </NavLink>
-            <div className="ind-ques-cruds">
-                    <button
+            <div className="crud-buttons">
+                    {/* <form
                       className="edit-button"
-                      onClick={() => {
-                        // setEditProduct(true);
+                       onClick={() => {
+                        setEditProduct(true);
 
-                        // setTitle(product.title);
-                        // setDescription(product.description);
-                        // setPrice(product.price);
-                        // setGlitterFactor(product.glitter_factor);
-                        // setProductImage(product.product_image);
+                        setTitle(product.title);
+                        setDescription(product.description);
+                        setPrice(product.price);
+                        setGlitterFactor(product.glitter_factor);
+                        setProductImage(product.product_image);
                       }}
-                    > Edit Product
-                    </button>
+                    > Quantity
+                    </form> */}
 
                     <button
                       className="delete-button"
-                      onClick={() => {
-                        dispatch(cartActions.deleteTheCartItem(product.id))
+                      onClick={()=> {
+                      dispatch(cartActions.deleteTheCartItem(product.id))
                           .then(() => {
                             dispatch(cartActions.getTheCart(user.id))
                           })

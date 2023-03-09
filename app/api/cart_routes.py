@@ -165,4 +165,4 @@ def delete_whole_cart(product_id):
         db.session.commit()
         return {"message": "Item successfully deleted"}
      else:
-         return {"message": "you cannot delete from this cart"}
+         return {"message": "Not authorized to delete from this cart"}

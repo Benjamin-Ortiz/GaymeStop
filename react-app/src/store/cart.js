@@ -96,14 +96,14 @@ export const putTheCartItem = (cartItemData, id, product_id) => async dispatch =
 
 
   // * DELETE
-export const deleteTheCartItem = (cart_id,product_id) => async (dispatch) => {
-    const response = await fetch(`/api/carts/${cart_id}/delete_all_items/${product_id}`, {
+export const deleteTheCartItem = (id) => async (dispatch) => {
+    const response = await fetch(`/api/carts/delete_all_items/${id}`, {
         method: "DELETE"
     });
 
     if (response.ok) {
         const data = await response.json();
-        dispatch(deleteCartItem(cart_id,product_id));
+        dispatch(deleteCartItem(id));
         return data;
     }
 }
@@ -125,7 +125,7 @@ const cartReducer = (state = initialState, action) => {
           case POST_CARTITEM : {
             const newState = {
                 ...state,
-                [action.payload.c]: action.payload
+                [action.payload.ccccccc]: action.payload
             }
             return newState;
           }
@@ -138,7 +138,7 @@ const cartReducer = (state = initialState, action) => {
         // }
 
         case DELETE_CARTITEM: {
-            const newState = { ...state }
+            const newState = { ...state, ...state.user.cart}
             delete newState[action.id];
             return newState
           }
