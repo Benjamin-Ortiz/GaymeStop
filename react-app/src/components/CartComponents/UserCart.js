@@ -13,14 +13,10 @@ function UserCart() {
   const [editProduct, setEditProduct] = useState(false);
 
   // let product_idx;
-  // const [quantity, setQuantity] = useState(product.quantity);
-  // const updateQuantity = (e) => setQuantity(e.target.value);
+  const [quantity, setQuantity] = useState("");
+  const updateQuantity = (e) => setQuantity(e.target.value);
 
-
-
-
-
-  console.log(allCartItems, 'CART ITEMSS');
+  // console.log(allCartItems, 'CART ITEMSS');
 
   useEffect(() => {
     dispatch(cartActions.getTheCart(user.id));
@@ -32,7 +28,9 @@ function UserCart() {
 
       <div className="mapped-games"> Cart Items
       {allCartItems && allCartItems.map((product) => {
-        // console.log(product, 'PRADUCT');
+        //! setQuantity(product.quantity)   Causes infinite loop
+
+
         return (
           <div className="single-product-container" >
             <div className='cart-showcase'>
@@ -49,20 +47,28 @@ function UserCart() {
                     {/* <input></input> */}
                     <input
                 className="edit-prod-title"
-                type=""
-                placeholder="Title goes here"
+                type="text"
+                rows = {40}
+                columns = {1}
+                placeholder="Enter a Quantity"
                 value={product.quantity}
-                // onChange={}
+                onChange={(e)=> setQuantity(e.target.value)}
               ></input>
+
                     </div>
 
                     <button
                       className="delete-button"
-                      onClick={()=> {
-                      dispatch(cartActions.deleteTheCartItem(product.id))
-                          .then(() => {
-                            dispatch(cartActions.getTheCart(user.id))
-                          })
+                      onClick={() => {
+                        if (product) {
+                          console.log(dispatch(cartActions.deleteTheCartItem(product.id)),'DISPATCH');
+                          dispatch(cartActions.deleteTheCartItem(product.id))
+                            .then(res => console.log(res, "RESULT LOG"))
+                          // dispatch(cartActions.deleteTheCartItem(product.id))
+                            .then(() => {
+                              dispatch(cartActions.getTheCart(user.id))
+                            })
+                        }
                       }}
                     >
                       Remove From Cart

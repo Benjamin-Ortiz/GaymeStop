@@ -101,6 +101,9 @@ export const deleteTheCartItem = (id) => async (dispatch) => {
         method: "DELETE"
     });
 
+    console.log('ID = ',id, response, 'DELETE THUNK-=-=-=-=');
+
+
     if (response.ok) {
         const data = await response.json();
         dispatch(deleteCartItem(id));
@@ -138,10 +141,10 @@ const cartReducer = (state = initialState, action) => {
         // }
 
         case DELETE_CARTITEM: {
-            const newState = { ...state, ...state.user.cart}
-            delete newState[action.id];
-            return newState
-          }
+            const newState = { ...state };
+            delete newState[action.cartItemId];
+            return newState;
+        }
 
 
           case PUT_CARTITEM:
