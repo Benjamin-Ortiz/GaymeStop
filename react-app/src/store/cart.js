@@ -125,7 +125,7 @@ const cartReducer = (state = initialState, action) => {
           case POST_CARTITEM : {
             const newState = {
                 ...state,
-                [action.payload.ccccccc]: action.payload
+                [action.payload.product_id]: action.payload
             }
             return newState;
           }

@@ -12,8 +12,10 @@ function UserCart() {
   const allCartItems = useSelector((state) => Object.values(state.cart))
   const [editProduct, setEditProduct] = useState(false);
 
+  // let product_idx;
   // const [quantity, setQuantity] = useState(product.quantity);
   // const updateQuantity = (e) => setQuantity(e.target.value);
+
 
 
 
@@ -41,19 +43,18 @@ function UserCart() {
             <img className="product-img" src={product?.product.product_image} alt={product?.product.title}/>
             </NavLink>
             <div className="crud-buttons">
-                    {/* <form
-                      className="edit-button"
-                       onClick={() => {
-                        setEditProduct(true);
-
-                        setTitle(product.title);
-                        setDescription(product.description);
-                        setPrice(product.price);
-                        setGlitterFactor(product.glitter_factor);
-                        setProductImage(product.product_image);
-                      }}
-                    > Quantity
-                    </form> */}
+              {/* edit quantity wip */}
+                    <div className="edit-qty-button" >
+                      QTY
+                    {/* <input></input> */}
+                    <input
+                className="edit-prod-title"
+                type=""
+                placeholder="Title goes here"
+                value={product.quantity}
+                // onChange={}
+              ></input>
+                    </div>
 
                     <button
                       className="delete-button"
@@ -64,7 +65,7 @@ function UserCart() {
                           })
                       }}
                     >
-                      Delete Product
+                      Remove From Cart
                     </button>
                   </div>
             <div className='product-price'>
