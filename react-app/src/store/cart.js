@@ -18,11 +18,12 @@ const postCartItem = (user_id, cartItemId) => {
     }
 }
 
-const putCartItem = (cartId, cartItemId) => {
+const putCartItem = (cartItemData, id, productId) => {
     return {
         type: PUT_CARTITEM,
-        cartItemId,
-        id: cartId,
+        cartItemData,
+        productId: productId,
+        id: id,
     }
 }
 
@@ -73,23 +74,25 @@ export const postTheCartItem = (CartItemData) => async (dispatch) => {
 
 // * EDIT
 
-export const putTheCartItem = (cart_id, product_id) => async dispatch => {
+export const putTheCartItem = (cartItemData, id, product_id) => async dispatch => {
 
-    const response = await fetch(`/api/carts/${cart_id}/edit_product/${product_id}`, {
+    const response = await fetch(`/api/carts/${id}/edit_product/${product_id}`, {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json',
       },
 
-      body: JSON.stringify(cart_id, product_id),
+      body: JSON.stringify(cartItemData),
     });
 
     if (response.ok) {
       const data = await response.json();
-      dispatch(putCartItem(data));
+      dispatch(putCartItem(data, id, product_id));
 
       return response;
     }
+
+
   };
 
 
@@ -123,7 +126,7 @@ const cartReducer = (state = initialState, action) => {
           case POST_CARTITEM : {
             const newState = {
                 ...state,
-                [action.payload.product]: action.payload
+                [action.payload.product]: action.payload.cartItemId
             }
             return newState;
           }
@@ -145,8 +148,9 @@ const cartReducer = (state = initialState, action) => {
           case PUT_CARTITEM:
             return {
                 ...state,
-                [action.product.id] : action.product
+                [action.id] : action.cartItemData
             }
+
                 //* action reference
             // const putCartItem = (cartId, cartItemId) => {
             //     return {

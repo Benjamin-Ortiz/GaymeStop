@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import ProductsIndex from "./components/ProductComponents/ProductsIndex";
 import SingleProduct from "./components/ProductComponents/SingleProduct/SingleProduct";
 import PostProductForm from "./components/ProductComponents/SingleProduct/PostProductForm";
+import UserCart from "./components/CartComponents/UserCart";
 
 import * as productActions from "../src/store/product";
 
@@ -30,6 +31,10 @@ function App() {
 
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+
+          <Route path="/carts/:id">
+            <UserCart />
           </Route>
 
           <Route path="/products/new_product">
