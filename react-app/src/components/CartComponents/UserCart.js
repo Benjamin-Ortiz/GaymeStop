@@ -8,10 +8,11 @@ import EditQuantity from "./EditQuantity";
 function UserCart() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session?.user);
+  // console.log('user : ',user);
 
-  const allCartItems = useSelector((state) => Object.values(state.cart));
-  
-  console.log(allCartItems, 'all cart items');
+  const allCartItems = useSelector((state) => Object.values(state)[0].user.cart);
+  // console.log(allCartItems);
+
   const [editQuantity, setEditQuantity] = useState(false);
 
   const [quantity, setQuantity] = useState({});
@@ -36,6 +37,7 @@ function UserCart() {
     dispatch(cartActions.getTheCart(user.id));
   }, [dispatch]);
 
+
   return user ? (
     <>
       <div className="cart-header">My Cart</div>
@@ -58,23 +60,25 @@ function UserCart() {
                 >
                   <div className="item-title">{item.product.title}</div>
                 </NavLink>
-                <div className="item-price">${item.product.price}.00</div>
+                <div className="item-price">${item.product.price}</div>
                 <div className="item-quantity">
                   <div className="quantity-label">Quantity:</div>
                   {editQuantity ? (
                     <EditQuantity
                       item={item}
-                      index={i}
-                      setQuantity={setQuantity}
+                      userId={user.id}
                     />
                   ) : (
                     <div>
                       {item.quantity}
                       <button
-                            onClick={() => {
-                              setQuantity({ ...quantity, [i]: item.quantity });
-                              setEditQuantity(true);
-                            }}> Change quantity</button>
+                        onClick={() => {
+                          setQuantity({ ...quantity, [i]: item.quantity });
+                          setEditQuantity(true);
+                        }}
+                      >
+                        Change quantity
+                      </button>
                     </div>
                   )}
                 </div>

@@ -33,7 +33,7 @@ function App() {
             <SignupFormPage />
           </Route>
 
-          <Route path="/carts/:id">
+          <Route path="/carts/:id/cart">
             <UserCart />
           </Route>
 

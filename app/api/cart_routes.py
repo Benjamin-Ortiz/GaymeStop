@@ -35,7 +35,7 @@ def validation_errors_to_error_messages(validation_errors):
 #! Already created
 
 # * get cart (by cart id)
-@cart_routes.route('/<int:user_id>', methods=['GET'])
+@cart_routes.route('/<int:user_id>/cart', methods=['GET'])
 @login_required
 def get_cart(user_id):
        user = User.query.get(user_id)
@@ -97,7 +97,7 @@ def edit_cart_item_quantity(id):
      form = CartItemForm()
      form['csrf_token'].data = request.cookies['csrf_token']
 
-     user = current_user
+     # user = current_user
      cart_item_product = CartItem.query.get(id)
 
      if (cart_item_product):

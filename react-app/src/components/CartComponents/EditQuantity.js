@@ -1,31 +1,24 @@
-import React, { useState, useSelector } from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import * as cartActions from "../../store/cart";
+import { putTheCartItem } from "../../store/cart";
 
-function EditQuantity({item, index, setQuantity}) {
+function EditQuantity({ item, userId }) {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session?.user);
-//
 
-  console.log(item, "ITEM FROM HELPER");
+  console.log("ITEM IN HELPER : ",item, "USERID: ",userId);
 
   const [tempQuantity, setTempQuantity] = useState(item.quantity);
 
-  //treat it like a reducer
   const handleSubmit = (e) => {
     e.preventDefault();
-    setQuantity((quantity) => ({
-      ...quantity,
-      [index]: tempQuantity,
-    }));
 
     const payload = {
-      quantity: tempQuantity
-    }
-
-    // if (item.)
-    dispatch(cartActions.putTheCartItem(payload, item.product.id));
-    dispatch(cartActions.getTheCart(user.id))
+      id:item.id,
+      user_id: userId,
+      quantity: tempQuantity,
+      product_id: item.product.id
+     };
+    dispatch(putTheCartItem(payload));
   };
 
   return (
