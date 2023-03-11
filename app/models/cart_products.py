@@ -8,11 +8,11 @@ class CartItem(db.Model):
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
-    # id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod("users.id")), nullable=False, primary_key=True)
+        add_prefix_for_prod("users.id")), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey(
-        add_prefix_for_prod("products.id")), nullable=False, primary_key=True)
+        add_prefix_for_prod("products.id")), nullable=False)
     quantity = db.Column(db.Integer(), default=1,)
 
     user = db.relationship("User", back_populates="cart")
@@ -20,7 +20,7 @@ class CartItem(db.Model):
 
     def to_dict(self):
         return {
-            # 'id': self.id,
+            'id': self.id,
             'user_id': self.user_id,
             'product_id': self.product_id,
             'quantity': self.quantity,
@@ -29,7 +29,7 @@ class CartItem(db.Model):
 
     def to_edit_dict(self):
         return {
-            # 'id': self.id,
+            'id': self.id,
             'user_id': self.user_id,
             'product_id': self.product_id,
             'quantity': self.quantity

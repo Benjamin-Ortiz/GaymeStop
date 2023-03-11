@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, redirect
+from flask import Blueprint, request, jsonify, redirect, abort
 from flask_login import current_user, login_user, logout_user, login_required
 from datetime import datetime
 from app.models import db, User, Product, CartItem
@@ -45,15 +45,12 @@ def get_cart(user_id):
 
 
 #*  GET one Cart Item
-@cart_routes.route('get_cart_item/<int:product_id>', methods=['GET'])
+@cart_routes.route('get_cart_item/<int:cart_item_id>', methods=['GET'])
 @login_required
-def get_cart_item(product_id):
+def get_cart_item(cart_item_id):
 
      user = current_user
-     product = Product.query.get(product_id)
-
-   #   cart_item_product = CartItem.query.filter((CartItem.product_id == product.id) & (CartItem.user_id == user.id)).all()
-     cart_item_product = CartItem.query.filter((CartItem.product_id == product.id) & (CartItem.user_id == user.id)).one()
+     cart_item_product = CartItem.query.get(cart_item_id)
 
      return cart_item_product.to_dict()
 
@@ -73,9 +70,6 @@ def add_product_to_cart(product_id):
      if(not product) :
         return {"message" : "product id 404"}
 
-     '''
-     1. check for an entry that has both the user.id AND prod.id
-        '''
      for i in user.cart:
         if (i.product_id == product.id and i.user_id == user.id):
           i.quantity += 1
@@ -97,16 +91,14 @@ def add_product_to_cart(product_id):
 
 
 #*  edit quantity of products
-@cart_routes.route('/edit_product/<int:product_id>', methods=['PUT'])
+@cart_routes.route('/edit_product/<int:id>', methods=['PUT'])
 @login_required
-def edit_cart_item_quantity( product_id):
-
+def edit_cart_item_quantity(id):
      form = CartItemForm()
      form['csrf_token'].data = request.cookies['csrf_token']
 
      user = current_user
-     product = Product.query.get(product_id)
-     cart_item_product = CartItem.query.filter((CartItem.product_id == product.id) & (CartItem.user_id == user.id)).one()
+     cart_item_product = CartItem.query.get(id)
 
      if (cart_item_product):
             if form.validate_on_submit():
@@ -153,12 +145,11 @@ def edit_cart_item_quantity( product_id):
 
 
 #*  delete item from cart
-@cart_routes.route('/delete_all_items/<int:product_id>', methods=['DELETE'])
+@cart_routes.route('/delete_all_items/<int:id>', methods=['DELETE'])
 @login_required
-def delete_whole_cart(product_id):
+def delete_whole_cart(id):
      user = current_user
-     product = Product.query.get(product_id)
-     cart_item_product = CartItem.query.filter((CartItem.product_id == product.id) & (CartItem.user_id == user.id)).one()
+     cart_item_product = CartItem.query.get(id)
 
      if (cart_item_product.user_id == user.id):
         db.session.delete(cart_item_product)

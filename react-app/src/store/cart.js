@@ -17,11 +17,11 @@ const postCartItem = (cartItem) => {
     }
 }
 
-const putCartItem = (cartItemData, productId) => {
+const putCartItem = (cartItemData, id) => {
     return {
         type: PUT_CARTITEM,
         cartItemData,
-        productId: productId,
+        id: id
     }
 }
 
@@ -36,8 +36,8 @@ const deleteCartItem = (cartItemId) => {
 //todo THUNKS
 
 //*GET ONE
-export const getTheCart = (id) => async (dispatch) => {
-    const response = await fetch(`/api/carts/${id}`);
+export const getTheCart = (userId) => async (dispatch) => {
+    const response = await fetch(`/api/carts/${userId}`);
 
     if (response.ok) {
         const data = await response.json();
@@ -49,8 +49,6 @@ export const getTheCart = (id) => async (dispatch) => {
 // * POST
 export const postTheCartItem = (cartItem) => async (dispatch) => {
     const {user_id, product_id, quantity} = cartItem
-
-    console.log(cartItem, "CART ITEM THUNK");
 
     const response = await fetch(`/api/carts/add_product/${product_id}`, {
         method: 'POST',
@@ -73,9 +71,10 @@ export const postTheCartItem = (cartItem) => async (dispatch) => {
 
 // * EDIT
 
-export const putTheCartItem = (cartItemData, id, product_id) => async dispatch => {
+export const putTheCartItem = (cartItemData, product_id) => async dispatch => {
 
-    const response = await fetch(`/api/carts/${id}/edit_product/${product_id}`, {
+    console.log(product_id, 'PROD ID EDIT THUNK!!!--> CART DATA', cartItemData);
+    const response = await fetch(`/api/carts/edit_product/${product_id}`, {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json',
@@ -84,10 +83,10 @@ export const putTheCartItem = (cartItemData, id, product_id) => async dispatch =
       body: JSON.stringify(cartItemData),
     });
 
+
     if (response.ok) {
       const data = await response.json();
-      dispatch(putCartItem(data, id, product_id));
-
+      dispatch(putCartItem(data, product_id));
       return response;
     }
 
@@ -95,13 +94,12 @@ export const putTheCartItem = (cartItemData, id, product_id) => async dispatch =
   };
 
 
-  // * DELETE
+  //* DELETE
 export const deleteTheCartItem = (id) => async (dispatch) => {
     const response = await fetch(`/api/carts/delete_all_items/${id}`, {
         method: "DELETE"
     });
 
-    console.log('ID = ',id, response, 'DELETE THUNK-=-=-=-=');
 
 
     if (response.ok) {

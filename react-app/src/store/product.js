@@ -154,8 +154,6 @@ const productsReducer = (state = initialState, action) => {
         case DELETE_PRODUCT:{
             const newState = { ...state }
 
-            console.log(newState,"newstateee");
-
             delete newState[action.id];
             return newState
           }

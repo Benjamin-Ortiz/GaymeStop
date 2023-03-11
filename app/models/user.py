@@ -49,3 +49,14 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'cart': [cart_item.to_dict() for cart_item in self.cart]
         }
+
+
+# get_cart method on the user model that
+# returns the users cart
+# That'll give us a cart we can load into its own slice of state,
+# which makes the rest of the edit a little easier
+
+# on the backend,
+#           we would find the appropriate record from the
+# cart items table where userId and productId match what we want,
+# update the quantity and save.
