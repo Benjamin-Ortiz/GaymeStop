@@ -33,6 +33,9 @@ def upgrade():
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
+
     op.create_table('products',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -47,6 +50,9 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('title')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")
+
     op.create_table('cart_items',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
@@ -56,17 +62,9 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
-    # ### end Alembic commands ###
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")
-
-
     if environment == "production":
         op.execute(f"ALTER TABLE cart_items SET SCHEMA {SCHEMA};")
-
+    # ### end Alembic commands ###
 
 
 

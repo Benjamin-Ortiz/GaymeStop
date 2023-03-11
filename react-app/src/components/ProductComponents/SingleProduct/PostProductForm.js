@@ -9,7 +9,7 @@ function PostProductForm() {
   const history = useHistory();
   const user = useSelector((state) => state.session?.user);
   const allProducts = useSelector((state) => Object.values(state.products));
-  console.log(allProducts, "ALL PRODUCTS");
+
 
   //* states
   const [errors, setErrors] = useState([]);

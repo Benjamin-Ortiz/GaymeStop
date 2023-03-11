@@ -36,19 +36,6 @@ function SingleProduct() {
   const updateGlitterFactor = (e) => setGlitterFactor(e.target.value);
   const updateProductImage = (e) => setProductImage(e.target.value);
 
-  //* check for cart duplicate
-  // for (let i = 0; i < user.cart.length; i++) {
-  //   const cartItem = user.cart[i];
-
-  //   for (const i in cartItem) {
-  //     if (Object.hasOwnProperty(`${user_id}`) && Object.) {
-  //       const item = cartItem[i];
-  //       console.log(item);
-
-  //     }
-  //   }
-  // }
-
   const editSubmit = (e) => {
     e.preventDefault();
 

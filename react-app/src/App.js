@@ -10,8 +10,6 @@ import SingleProduct from "./components/ProductComponents/SingleProduct/SinglePr
 import PostProductForm from "./components/ProductComponents/SingleProduct/PostProductForm";
 import UserCart from "./components/CartComponents/UserCart";
 
-import * as productActions from "../src/store/product";
-
 
 function App() {
   const dispatch = useDispatch();

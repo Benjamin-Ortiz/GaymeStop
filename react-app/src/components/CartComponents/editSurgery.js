@@ -10,8 +10,6 @@ function UserCart() {
   const user = useSelector((state) => state.session?.user);
 
   const allCartItems = useSelector((state) => Object.values(state.cart));
-  console.log(allCartItems, 'cart items');
-
   const [editQuantity, setEditQuantity] = useState(false);
 
   const [quantity, setQuantity] = useState({});
@@ -19,7 +17,7 @@ function UserCart() {
 
   const cartSum = (items) => {
     return items.reduce((total, item) => {
-    console.log(item, 'item');
+
       return total + item.product.price * item.quantity;
     }, 0);
   };

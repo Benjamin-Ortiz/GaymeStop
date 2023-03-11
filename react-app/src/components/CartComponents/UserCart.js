@@ -10,7 +10,7 @@ function UserCart() {
   const user = useSelector((state) => state.session?.user);
 
   const allCartItems = useSelector((state) => Object.values(state.cart));
-  console.log(allCartItems, 'cart items');
+
 
   const [editQuantity, setEditQuantity] = useState(false);
 
@@ -45,7 +45,7 @@ function UserCart() {
 
           {allCartItems.map((item, i) => (
 
-            <div className="cart-item" key={item.product.id}>
+            <div className="cart-item" key={item.product.id} >
               <div className="item-image">
                 <NavLink
                   className="product-nav-link"

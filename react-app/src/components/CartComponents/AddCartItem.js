@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, {  useState  } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useHistory, useParams } from "react-router-dom";
+
 import * as cartActions from "../../store/cart";
 
 function AddCartItem() {

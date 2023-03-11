@@ -75,7 +75,7 @@ export const postTheCartItem = (cartItem) => async (dispatch) => {
 export const putTheCartItem = (cartItemData) => async dispatch => {
    const {id, user_id, quantity, product_id} = cartItemData;
 
-    console.log(id ,' ID EDIT THUNK!!!--> CART DATA', cartItemData);
+
 
     const response = await fetch(`/api/carts/edit_product/${cartItemData.id}`, {
       method: "PUT",
@@ -91,7 +91,6 @@ export const putTheCartItem = (cartItemData) => async dispatch => {
 
     if (response.ok) {
       const data = await response.json();
-      console.log('DATA FROM REPSONSE', data);
       dispatch(putCartItem(data));
       return response;
     }
@@ -128,7 +127,7 @@ const cartReducer = (state = initialState, action) => {
              action.payload.cart.forEach(element => {
                 newState[element.id] = element
              });
-            // console.log(action.payload.cart, 'ACTION LOG');
+
             return newState;
           }
 
