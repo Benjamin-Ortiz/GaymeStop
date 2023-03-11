@@ -6,21 +6,23 @@ import * as productActions from '../../store/product'
 import * as sessionActions from '../../store/session'
 import './Navigation.css';
 
+
 function Navigation({ isLoaded }){
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const sessionUser = useSelector(state => state.session.user);
 
 	const handleDemoLogin = (e) => {
-		let email = "demo@aa.io";
-		let password = "password";
+		const id = 1;
+		const email = "demo@aa.io";
+		const password = "password";
 		e.preventDefault();
 		dispatch(sessionActions.login(email, password));
 		history.push("/");
 	  };
 
 	useEffect(() => {
-		dispatch(productActions.getTheProducts());
+		dispatch(productActions.getTheProducts())
 	  }, [dispatch]);
 
 	return sessionUser ? (
@@ -37,9 +39,11 @@ function Navigation({ isLoaded }){
 			{isLoaded && (
 				<div>
 					<ProfileButton user={sessionUser} />
-				<button >
-					
-				</button>
+					<NavLink exact to ={`/carts/${sessionUser.id}/cart`}>
+        				<button>
+           				 Your Cart
+        					</button>
+    			</NavLink>
 				</div>
 			)}
 

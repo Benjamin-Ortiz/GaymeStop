@@ -79,7 +79,7 @@ function SingleProduct() {
 
   useEffect(() => {
     dispatch(productActions.getTheProduct(id));
-    dispatch(cartActions.getTheCart(user.id))
+    // dispatch(cartActions.getTheCart(user?.id))
 
     // }, [dispatch, title, price, product_image, description, glitter_factor, id]);
   }, [dispatch]);
@@ -241,7 +241,21 @@ function SingleProduct() {
       </div>
     </div>
   ) : (
-    <></>
+    <>
+        <div>
+      <h1>{product.title}</h1>
+
+      <div className="single-game-container">
+        <div className="product-container">
+          <img
+            className="product-img"
+            src={product.product_image}
+            alt={product.title}
+          />
+        </div>
+        </div>
+        </div>
+        </>
   );
 }
 

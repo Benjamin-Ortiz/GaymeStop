@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as productActions from "../../store/product";
+import { getTheCart } from "../../store/cart";
 import { NavLink } from "react-router-dom";
 import "./ProductsIndex.css"
 
 function ProductsIndex() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session?.user);
 
   const allProducts = useSelector((state) => Object.values(state.products))
 
@@ -13,6 +15,7 @@ function ProductsIndex() {
   useEffect(() => {
     dispatch(productActions.getTheProducts());
   }, [dispatch]);
+  
 
   return (
     <div>

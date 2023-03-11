@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import * as cartActions from "../../../store/cart";
 
 
-function DeleteCartItem() {
-    
+function DeleteCartItem(cartItemId) {
+
+  
+
   return (
     <div>DeleteCartItem</div>
   )

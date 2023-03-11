@@ -8,10 +8,9 @@ import EditQuantity from "./EditQuantity";
 function UserCart() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.session?.user);
-  // console.log('user : ',user);
 
-  const allCartItems = useSelector((state) => Object.values(state)[0].user.cart);
-  // console.log(allCartItems);
+  const allCartItems = useSelector((state) => Object.values(state.cart));
+  console.log(allCartItems, 'cart items');
 
   const [editQuantity, setEditQuantity] = useState(false);
 
@@ -20,6 +19,7 @@ function UserCart() {
 
   const cartSum = (items) => {
     return items.reduce((total, item) => {
+    console.log(item, 'item');
       return total + item.product.price * item.quantity;
     }, 0);
   };
@@ -35,20 +35,22 @@ function UserCart() {
 
   useEffect(() => {
     dispatch(cartActions.getTheCart(user.id));
-  }, [dispatch]);
+  }, [dispatch, editQuantity]);
 
 
-  return user ? (
+  return user && allCartItems ? (
     <>
       <div className="cart-header">My Cart</div>
       <div className="cart-container">
         <div className="cart-items">
+
           {allCartItems.map((item, i) => (
+
             <div className="cart-item" key={item.product.id}>
               <div className="item-image">
                 <NavLink
                   className="product-nav-link"
-                  to={`/products/${item?.product.id}`}
+                  to={`/products/${item.product?.id}`}
                 >
                   <img src={item.product?.product_image} />
                 </NavLink>
@@ -87,7 +89,7 @@ function UserCart() {
                 <button
                   className="delete-button"
                   onClick={() => {
-                    dispatch(cartActions.deleteTheCartItem(item.product.id)).then(
+                    dispatch(cartActions.deleteTheCartItem(item.id)).then(
                       () => {
                         dispatch(cartActions.getTheCart(user.id));
                       }

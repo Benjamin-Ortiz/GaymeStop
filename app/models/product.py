@@ -31,7 +31,7 @@ class Product(db.Model):
     user = db.relationship("User", back_populates="products")
 
     # cart = db.relationship("Cart", secondary=cart_products, back_populates="products")
-    carts = db.relationship("CartItem", back_populates='product')
+    carts = db.relationship("CartItem", back_populates='product', cascade='all, delete-orphan')
 
 
 # add logic for avg review rating

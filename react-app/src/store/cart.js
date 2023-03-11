@@ -1,6 +1,6 @@
 const GET_CART = 'carts/GET_CART';
 const POST_CARTITEM = "carts/POST_CARTITEM";
-const PUT_CARTITEM = "carts/EDIT_CART";
+const PUT_CARTITEM_QUANTITY = "carts/EDIT_CART_QUANTITY";
 const DELETE_CARTITEM = "carts/DELETE_CART";
 
 const getCart = (cart) => {
@@ -19,8 +19,8 @@ const postCartItem = (cartItem) => {
 
 const putCartItem = (payload) => {
     return {
-        type: PUT_CARTITEM,
-        payload: payload,
+        type: PUT_CARTITEM_QUANTITY,
+        payload,
     }
 }
 
@@ -121,8 +121,8 @@ const cartReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case GET_CART:{
-            const newState = {...action.cart};
-
+            const newState = {...action.payload.cart};
+            // console.log('GET Cart',newState);
             return newState;
           }
 
@@ -148,10 +148,10 @@ const cartReducer = (state = initialState, action) => {
         }
 
 
-          case PUT_CARTITEM:
+          case PUT_CARTITEM_QUANTITY:
             return {
                 ...state,
-                [action.payload.id] : action.payload
+                [action.id] : action.payload
             }
 
                 //* action reference
