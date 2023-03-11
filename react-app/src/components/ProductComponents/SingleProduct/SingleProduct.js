@@ -71,7 +71,7 @@ function SingleProduct() {
     // }, [dispatch, title, price, product_image, description, glitter_factor, id]);
   }, [dispatch]);
 
-  return product ? (
+  return product && user ? (
     <div>
       <h1>{product.title}</h1>
 
@@ -216,10 +216,10 @@ function SingleProduct() {
                     >
                       Delete Product
                     </button>
-                    <AddCartItem />
                   </div>
                 </>
               )}
+              <AddCartItem />
             </div>
           </>
         )}
@@ -240,6 +240,14 @@ function SingleProduct() {
             alt={product.title}
           />
         </div>
+        <div className="product-container">
+              <div className="title-descrip-con">
+                <div className="ind-ques-title">{product.title}</div>
+                <div className="ind-ques-body">{product.description}</div>
+                <div>{product.price}</div>
+                <div>{product.glitter_factor}</div>
+                </div>
+              </div>
         </div>
         </div>
         </>

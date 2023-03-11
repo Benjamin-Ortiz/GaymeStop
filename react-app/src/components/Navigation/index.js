@@ -4,6 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import * as productActions from '../../store/product'
 import * as sessionActions from '../../store/session'
+import LoginFormModal from "../LoginFormModal";
+import SignupFormModal from "../SignupFormModal";
+import OpenModalButton from "../OpenModalButton";
+
 import './Navigation.css';
 
 
@@ -48,7 +52,9 @@ function Navigation({ isLoaded }){
 			)}
 
 		</div>
-	):(
+	):
+
+	(
 		<div className='nav-bar'>
 		<div>
 			{/* left */}
@@ -64,9 +70,17 @@ function Navigation({ isLoaded }){
 
 	<button className='demo_login_button'
 	onClick={handleDemoLogin}>Demo Login</button>
-			<button >
+	 <OpenModalButton
+              buttonText="Log In"
+            //   onItemClick={closeMenu}
+              modalComponent={<LoginFormModal />}
+            />
 
-			</button>
+            <OpenModalButton
+              buttonText="Sign Up"
+            //   onItemClick={closeMenu}
+              modalComponent={<SignupFormModal />}
+            />
 			</div>
 		)}
 
