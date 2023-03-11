@@ -6,7 +6,6 @@ from app.models import Product, CartItem
 
 # def validate_quantity(form, field):
 #     if not field.data.isdigit():
-#         print('Quantity must be a number')
 #         raise ValidationError('Quantity must be a number')
 
 class CartItemForm(FlaskForm):
