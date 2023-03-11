@@ -6,7 +6,8 @@ const DELETE_CARTITEM = "carts/DELETE_CART";
 const getCart = (cart) => {
     return{
         type: GET_CART,
-        payload: cart
+        payload: cart,
+        id: cart.id
     }
 }
 
@@ -21,6 +22,7 @@ const putCartItem = (payload) => {
     return {
         type: PUT_CARTITEM_QUANTITY,
         payload,
+        id:payload.id
     }
 }
 
@@ -89,6 +91,7 @@ export const putTheCartItem = (cartItemData) => async dispatch => {
 
     if (response.ok) {
       const data = await response.json();
+      console.log('DATA FROM REPSONSE', data);
       dispatch(putCartItem(data));
       return response;
     }
@@ -121,8 +124,11 @@ const cartReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case GET_CART:{
-            const newState = {...action.payload.cart};
-            // console.log('GET Cart',newState);
+            const newState = {};
+             action.payload.cart.forEach(element => {
+                newState[element.id] = element
+             });
+            // console.log(action.payload.cart, 'ACTION LOG');
             return newState;
           }
 
@@ -151,7 +157,7 @@ const cartReducer = (state = initialState, action) => {
           case PUT_CARTITEM_QUANTITY:
             return {
                 ...state,
-                [action.id] : action.payload
+                [action.payload.id] : action.payload
             }
 
                 //* action reference

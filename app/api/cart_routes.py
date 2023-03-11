@@ -96,16 +96,18 @@ def add_product_to_cart(product_id):
 def edit_cart_item_quantity(id):
      form = CartItemForm()
      form['csrf_token'].data = request.cookies['csrf_token']
-
+     print('CART ROUTE ID PARAMETER', id)
      # user = current_user
      cart_item_product = CartItem.query.get(id)
+     print('CART ITEM ROUTE BEFORE',cart_item_product)
+
 
      if (cart_item_product):
             if form.validate_on_submit():
                cart_item_product.quantity = form.data['quantity']
-
+               print('CART ITEM ROUTE AFTER',cart_item_product)
                db.session.commit()
-               return cart_item_product.to_edit_dict()
+               return cart_item_product.to_dict()
             else:
                 return jsonify({'errors': validation_errors_to_error_messages(form.errors)}), 400
 

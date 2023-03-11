@@ -19,7 +19,6 @@ function UserCart() {
 
   const cartSum = (items) => {
     return items.reduce((total, item) => {
-    console.log(item, 'item');
       return total + item.product.price * item.quantity;
     }, 0);
   };
