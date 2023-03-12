@@ -39,7 +39,7 @@ function SingleProduct() {
   const editSubmit = (e) => {
     e.preventDefault();
 
-    setErrors([]);
+    let errs = [];
 
     const payload = {
       id: product.id,
@@ -51,15 +51,34 @@ function SingleProduct() {
       product_image: product_image,
     };
 
-    dispatch(productActions.putTheProduct(payload)).then(async (res) => {
-      setTitle(title);
-      setDescription(description);
-      setPrice(price);
-      setGlitterFactor(glitter_factor);
-      setProductImage(product_image);
-      setEditProduct(false);
-      dispatch(productActions.getTheProduct(payload.id));
-    });
+    if (payload.price < 0.01) {
+      errs.push("Set a price above 0");
+    }
+
+    if (payload.description.length < 5) {
+      errs.push("Thats not description, write a little more :) ")
+    }
+
+    if (payload.glitter_factor.length < 5) {
+      errs.push("Don't skimp the glitter factor, that's illegal")
+
+    }
+
+
+    setErrors([...new Set(errs)]);
+    if (errs.length === 0) {
+      dispatch(productActions.putTheProduct(payload)).then(async (res) => {
+        setTitle(title);
+        setDescription(description);
+        setPrice(price);
+        setGlitterFactor(glitter_factor);
+        setProductImage(product_image);
+        setEditProduct(false);
+        dispatch(productActions.getTheProduct(payload.id));
+      });
+    }
+
+
   };
 
   useEffect(() => {
@@ -89,6 +108,12 @@ function SingleProduct() {
                       {product.user.username} asks
                     </div>
                   </div> */}
+
+<ul className="error">
+              {errors.map((ele) => (
+                <li>{ele}</li>
+              ))}
+            </ul>
 
             <div className="ques-product-con">
               <input
@@ -161,11 +186,7 @@ function SingleProduct() {
               </button>
             </div>
 
-            <ul className="error">
-              {errors.map((ele) => (
-                <li>{ele}</li>
-              ))}
-            </ul>
+
           </form>
         ) : (
           <>
