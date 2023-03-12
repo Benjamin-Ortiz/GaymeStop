@@ -59,10 +59,7 @@ function PostProductForm() {
       if (payload.price < 0.01) {
         errs.push("Set a price above 0");
         return errs
-      }
-      // if (!payload.product_image) {
-      //  return payload.product_image = 'https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/Screen+Shot+2023-02-27+at+19.55.02.png'
-      // }
+      } else
       return product;
     });
 
@@ -116,6 +113,8 @@ function PostProductForm() {
           <input
             className="new-product-price"
             type="number"
+            min="1"
+            max="9999"
             value={price}
             onChange={updatePrice}
             placeholder="Price"

@@ -15,14 +15,14 @@ function ProductsIndex() {
   useEffect(() => {
     dispatch(productActions.getTheProducts());
   }, [dispatch]);
-  
+
 
   return (
     <div>
       <h1>All Games</h1>
 {/* put banner here in future */}
-      <div className="mapped-games"> Mapped Games
-      {allProducts && allProducts.map((product) => {
+      <div className="mapped-games">
+      {allProducts && allProducts.reverse().map((product) => {
         return (
           <div className="single-game-container" >
             <NavLink className="product-nav-link" to={`/products/${product?.id}`}>

@@ -21,7 +21,7 @@ function EditQuantity({ item, userId }) {
     };
     dispatch(putTheCartItem(payload))
     };
-    
+
     useEffect(() => {
       dispatch(getTheCart(userId));
     }, [dispatch]);
@@ -32,11 +32,13 @@ function EditQuantity({ item, userId }) {
       <input
         type="number"
         min="1"
+        max="99"
         size={1}
         value={tempQuantity}
         onChange={(e) => setTempQuantity(e.target.value)}
       />
       <button type="submit">Save</button>
+
     </form>
   );
 }

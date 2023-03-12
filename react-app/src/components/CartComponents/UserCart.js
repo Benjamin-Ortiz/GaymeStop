@@ -33,7 +33,7 @@ function UserCart() {
   const total = subtotal + salesTax;
 
   useEffect(() => {
-    dispatch(cartActions.getTheCart(user.id));
+    dispatch(cartActions.getTheCart(user?.id));
   }, [dispatch, editQuantity]);
 
 
@@ -65,10 +65,25 @@ function UserCart() {
                 <div className="item-quantity">
                   <div className="quantity-label">Quantity:</div>
                   {editQuantity ? (
+                    <>
                     <EditQuantity
                       item={item}
                       userId={user.id}
                     />
+                    <span className="edit-cancel">
+                  <button
+                    className="cancel-button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setQuantity(item.quantity);
+                      setEditQuantity(false);
+                    }}
+                  >
+                    cancel
+                  </button>
+                </span>
+                    </>
+
                   ) : (
                     <div>
                       {item.quantity}
@@ -115,7 +130,32 @@ function UserCart() {
     </>
   ) : (
     <>
-      <h1>Log in to access cart feature</h1>
+    <div className="not-logged-in-cart">
+      <div>
+      <h1>WHAT?!</h1>
+      <h2> This isn't your cart!</h2>
+      <h2> Get out of here!</h2>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <p>you terribly silly silly goose</p>
+      </div>
+      <div className="goose">
+      <img src="https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/goose.gif"></img>
+      </div>
+    </div>
+
+
     </>
   );
 }
