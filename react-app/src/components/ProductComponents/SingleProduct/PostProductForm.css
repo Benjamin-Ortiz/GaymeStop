@@ -2,6 +2,10 @@
  color: white;
 }
 
+.line-through{
+    text-decoration: line-through black double;
+}
+
 .name-tag {
     color: #ffffff;
     display: flex;
@@ -18,7 +22,6 @@
   flex-direction: column;
 align-items: center;
 justify-content: center;
-
 
 background: linear-gradient(red 0 24%, white 24% 100%);
 border-top-right-radius: 3rem;

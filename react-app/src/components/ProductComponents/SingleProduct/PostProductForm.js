@@ -79,7 +79,7 @@ function PostProductForm() {
     <form className="product-form" onSubmit={handleSubmit}>
       <div className="name-tag">
       <h1 className="header">HELLO</h1>
-      <h2> MY NAME IS</h2>
+      <h2> MY <span className="line-through">NAME</span> PRODUCT IS</h2>
       </div>
 
 
