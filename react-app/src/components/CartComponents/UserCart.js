@@ -85,8 +85,9 @@ function UserCart() {
                     </>
 
                   ) : (
-                    <div>
+                  <>
                       {item.quantity}
+                    <div className="quantity-container">
                       <button
                         onClick={() => {
                           setQuantity({ ...quantity, [i]: item.quantity });
@@ -96,7 +97,9 @@ function UserCart() {
                         Change quantity
                       </button>
                     </div>
-                  )}
+                  </>
+                  )
+                }
                 </div>
               </div>
               <div className="item-actions">

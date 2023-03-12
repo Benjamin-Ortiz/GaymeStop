@@ -77,7 +77,7 @@
   .cart-total-container {
     flex-basis: 30%;
     border: solid red 1px;
-    position: sticky;
+    /* position: sticky; */
 
   }
 

@@ -17,7 +17,7 @@ function SingleProduct() {
   const product = useSelector((state) => state.products);
   //* user.cart = array
 
-  //states
+  //* states
   const [editProduct, setEditProduct] = useState(false);
 
   const [title, setTitle] = useState(product.title);
@@ -48,20 +48,18 @@ function SingleProduct() {
       price: price,
       description: description,
       glitter_factor: glitter_factor,
-      product_image: product_image
+      product_image: product_image,
     };
 
-    dispatch(productActions.putTheProduct(payload)).then(
-      async (res) => {
-        setTitle(title);
-        setDescription(description);
-        setPrice(price);
-        setGlitterFactor(glitter_factor);
-        setProductImage(product_image);
-        setEditProduct(false);
-        dispatch(productActions.getTheProduct(payload.id))
-      }
-    )
+    dispatch(productActions.putTheProduct(payload)).then(async (res) => {
+      setTitle(title);
+      setDescription(description);
+      setPrice(price);
+      setGlitterFactor(glitter_factor);
+      setProductImage(product_image);
+      setEditProduct(false);
+      dispatch(productActions.getTheProduct(payload.id));
+    });
   };
 
   useEffect(() => {
@@ -76,7 +74,7 @@ function SingleProduct() {
       <h1>{product.title}</h1>
 
       <div className="single-game-container">
-        <div className="product-container">
+        <div className="product-image-container">
           <img
             className="product-img"
             src={product.product_image}
@@ -147,7 +145,7 @@ function SingleProduct() {
                       e.preventDefault();
                       setTitle(product.title);
                       setDescription(product.description);
-                      setPrice(product.price);
+                      setPrice(product.price?.toFixed(2));
                       setGlitterFactor(product.glitter_factor);
                       setProductImage(product.product_image);
                       setEditProduct(false);
@@ -158,10 +156,7 @@ function SingleProduct() {
                 </span>
               </div>
               {/* the submit button has tbe outside of the div. It needs to be a direct child of form */}
-              <button
-                className="edit-submit"
-                type="submit"
-              >
+              <button className="edit-submit" type="submit">
                 Apply Changes
               </button>
             </div>
@@ -174,19 +169,18 @@ function SingleProduct() {
           </form>
         ) : (
           <>
-            <div className="product-container">
+
               <div className="title-descrip-con">
                 <div className="ind-ques-title">{product.title}</div>
                 <div className="ind-ques-body">{product.description}</div>
-                <div>{product.price}</div>
+                <div>{product.price?.toFixed(2)}</div>
                 <div>{product.glitter_factor}</div>
-{/*
+                {/*
                 <div className="ind-ques-image">
                   {product?.product_image ? (
                     <img src={product.product_image} alt="" />
                   ) : null}
                 </div> */}
-              </div>
               {product?.user?.username === user?.username && (
                 <>
                   <div className="ind-ques-cruds">
@@ -197,11 +191,13 @@ function SingleProduct() {
 
                         setTitle(product.title);
                         setDescription(product.description);
-                        setPrice(product.price);
+                        setPrice(product.price.toFixed(2));
                         setGlitterFactor(product.glitter_factor);
                         setProductImage(product.product_image);
                       }}
-                    > Edit Product
+                    >
+                      {" "}
+                      Edit Product
                     </button>
 
                     <button
@@ -229,28 +225,28 @@ function SingleProduct() {
     </div>
   ) : (
     <>
-        <div>
-      <h1>{product.title}</h1>
+      <div>
+        <h1>{product.title}</h1>
 
-      <div className="single-game-container">
-        <div className="product-container">
-          <img
-            className="product-img"
-            src={product.product_image}
-            alt={product.title}
-          />
+        <div className="single-game-container">
+          <div className="product-container">
+            <img
+              className="product-img"
+              src={product.product_image}
+              alt={product.title}
+            />
+          </div>
+          <div className="product-container">
+            <div className="title-descrip-con">
+              <div className="ind-ques-title">{product.title}</div>
+              <div className="ind-ques-body">{product.description}</div>
+              <div>{product.price?.toFixed(2)}</div>
+              <div>{product.glitter_factor}</div>
+            </div>
+          </div>
         </div>
-        <div className="product-container">
-              <div className="title-descrip-con">
-                <div className="ind-ques-title">{product.title}</div>
-                <div className="ind-ques-body">{product.description}</div>
-                <div>{product.price}</div>
-                <div>{product.glitter_factor}</div>
-                </div>
-              </div>
-        </div>
-        </div>
-        </>
+      </div>
+    </>
   );
 }
 

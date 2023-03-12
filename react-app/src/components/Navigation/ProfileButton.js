@@ -4,6 +4,7 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { getTheProducts } from "../../store/product";
 import { Link, NavLink } from "react-router-dom";
 // import PostProductModal from "../ProductComponents/SingleProduct/PostProductModal.js";
 
@@ -35,12 +36,13 @@ function ProfileButton({ user }) {
     e.preventDefault();
 
     dispatch(logout());
+    // dispatch(getTheProducts())
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
-  
+
 
   return (
     <>

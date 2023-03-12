@@ -9,7 +9,7 @@ function PostProductForm() {
   const history = useHistory();
   const user = useSelector((state) => state.session?.user);
   const allProducts = useSelector((state) => Object.values(state.products));
-  console.log(allProducts);
+
 
   //* states
   const [errors, setErrors] = useState([]);
@@ -75,7 +75,8 @@ function PostProductForm() {
     }
   };
 
-  return (
+  return user ?  (
+    <>
     <form className="product-form" onSubmit={handleSubmit}>
       <div className="name-tag">
       <h1 className="header">HELLO</h1>
@@ -158,7 +159,36 @@ function PostProductForm() {
 
       <button type="submit">Create</button>
     </form>
-  );
+    </>
+  ) : (
+    <>
+        <div className="not-logged-in-cart">
+      <div className="not-logged-in-words">
+      <h1>WHAT?!</h1>
+      <h2> YOU'RE NOT EVEN LOGGED IN!</h2>
+      <h2> heres $2, go get yourself a log in</h2>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <p>you terribly silly silly goose</p>
+      </div>
+      <div className="goose">
+      <img src="https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/goose.gif"></img>
+      </div>
+    </div>
+
+    </>
+  )
 }
 
 export default PostProductForm;
