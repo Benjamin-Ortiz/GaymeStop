@@ -19,7 +19,9 @@ function ProductsIndex() {
 
   return (
     <div>
-      <h1>All Games</h1>
+      <div className="home-banner">
+        All Games
+        </div>
 {/* put banner here in future */}
       <div className="mapped-games">
       {allProducts && allProducts.reverse().map((product) => {
