@@ -1,0 +1,106 @@
+.header {
+ color: white;
+}
+
+.name-tag {
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.product-form {
+
+  display: flex;
+  /* background: radial-gradient(red, orange, yellow, green, blue, purple); */
+  flex-direction: column;
+align-items: center;
+justify-content: center;
+
+
+background: linear-gradient(red 0 24%, white 24% 100%);
+border-top-right-radius: 3rem;
+border-top-left-radius: 3rem;
+border-bottom-left-radius: 3rem;
+border-bottom-right-radius: 3rem;
+padding: 30px;
+box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, .2);
+}
+
+.product-form label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+  color: gray;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.product-form input, textarea {
+  background-color: transparent;
+  display: flex;
+  /* border: ; */
+  align-items: center;
+  margin: 5px 0;
+  padding: 5px;
+  color: black;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  width: 100%;
+}
+
+
+.product-form ul.errors {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.product-form li {
+  color: #000000;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.product-form button[type="submit"] {
+  background-color: #740c74;
+  border: none;
+  border-radius: 5px;
+  color: #000000;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 10px 20px;
+  text-align: center;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: background-color 5s ease-out;
+}
+
+.new-product-title input{
+  background-color: #ff0000;
+  /* border-end-end-radius: 3rem;
+  border-bottom-left-radius: 3rem; */
+}
+
+.new-product-description textarea {
+  background-color: #ffa500;
+}
+
+.new-product-price input {
+  background-color: #ffff00;
+}
+
+.new-product-glitter-factor textarea {
+  background-color: #008000;
+  color: #ffffff;
+}
+
+.new-product-imageUrl input {
+  background-color: #0000ff;
+  color: #ffffff;
+}
