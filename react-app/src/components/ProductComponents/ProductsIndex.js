@@ -15,20 +15,30 @@ function ProductsIndex() {
   useEffect(() => {
     dispatch(productActions.getTheProducts());
   }, [dispatch]);
-  
+
 
   return (
     <div>
-      <h1>All Games</h1>
+      <div className="home-banner">
+        All Games
+        </div>
 {/* put banner here in future */}
-      <div className="mapped-games"> Mapped Games
-      {allProducts && allProducts.map((product) => {
+      <div className="mapped-games">
+      {allProducts && allProducts.reverse().map((product) => {
         return (
           <div className="single-game-container" >
             <NavLink className="product-nav-link" to={`/products/${product?.id}`}>
-            <div className="product-title">{product?.title}</div>
             <img className="product-img" src={product?.product_image} alt={product?.title}/>
             </NavLink>
+            <div className="title-price-container">
+
+            </div>
+            <div className="product-title">
+              {product?.title}
+              </div>
+            <div className="product-price">
+              {product?.price.toFixed(2)}
+            </div>
           </div>
         )
       })}

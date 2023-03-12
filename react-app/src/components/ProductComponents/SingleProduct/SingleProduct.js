@@ -153,7 +153,7 @@ function SingleProduct() {
                       setEditProduct(false);
                     }}
                   >
-                    cancel
+                    Cancel
                   </button>
                 </span>
               </div>

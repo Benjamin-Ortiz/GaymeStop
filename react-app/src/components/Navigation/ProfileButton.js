@@ -4,7 +4,7 @@ import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 // import PostProductModal from "../ProductComponents/SingleProduct/PostProductModal.js";
 
 function ProfileButton({ user }) {
@@ -33,11 +33,14 @@ function ProfileButton({ user }) {
 
   const handleLogout = (e) => {
     e.preventDefault();
+
     dispatch(logout());
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
+
+  
 
   return (
     <>
@@ -51,7 +54,9 @@ function ProfileButton({ user }) {
             <li>{user.username}</li>
             <li>{user.email}</li>
             <li>
+              <Link to='/'>
               <button onClick={handleLogout}>Log Out</button>
+              </Link>
             </li>
             <NavLink
             exact to='/products/new_product'

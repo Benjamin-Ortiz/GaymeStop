@@ -9,7 +9,7 @@ function PostProductForm() {
   const history = useHistory();
   const user = useSelector((state) => state.session?.user);
   const allProducts = useSelector((state) => Object.values(state.products));
-
+  console.log(allProducts);
 
   //* states
   const [errors, setErrors] = useState([]);
@@ -20,10 +20,6 @@ function PostProductForm() {
   const [description, setDescription] = useState("");
   const [glitter_factor, setGlitterFactor] = useState("");
   const [product_image, setProductImage] = useState("https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/bbCover.png");
-  // const [product_image, setProductImage] = useState("");
-
-
-
 
 
   //*updates
@@ -33,11 +29,16 @@ function PostProductForm() {
   const updateGlitterFactor = (e) => setGlitterFactor(e.target.value);
   const updateProductImage = (e) => setProductImage(e.target.value);
 
+
+  //   let isImage = [".png", ".jpg", ".jpeg", ".gif", ".bmp", ".tif", ".tiff"];
+
+  //   if (payload.product_image !== "") {
+  //     let i = 0;
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setHasSubmitted(true)
-
-    setErrors([]);
 
     const payload = {
       user_id: user.id,
@@ -50,111 +51,113 @@ function PostProductForm() {
 
     let errs = [];
 
-    allProducts.map((product) => {
+    if (allProducts.find(product => product.title === payload.title)) {
+      errs.push("This Title already exists");
+    }
 
-      if (product.title === payload.title) {
-        errs.push("This Title already exists");
-        return errs;
-      }
-      if (payload.price < 0.01) {
-        errs.push("Set a price above 0");
-        return errs
-      }
-      // if (!payload.product_image) {
-      //  return payload.product_image = 'https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/Screen+Shot+2023-02-27+at+19.55.02.png'
-      // }
-      return product;
-    });
+    if (payload.price < 0.01) {
+      errs.push("Set a price above 0");
+    }
 
+    if (payload.description.length < 5) {
+      errs.push("Thats not description, write a little more :) ")
+    }
 
-    setErrors(errs)
-    dispatch(productActions.postTheProduct(payload));
-    dispatch(productActions.getTheProducts())
-    if (errs.length) {
-      setErrors(errs);
-    }else {
+    if (payload.glitter_factor.length < 5) {
+      errs.push("Don't skimp the glitter factor, that's illegal")
+
+    }
+
+    setErrors([...new Set(errs)]);
+    if (errs.length === 0) {
+      dispatch(productActions.postTheProduct(payload));
       history.push('/');
     }
   };
 
   return (
-
-      <form className="product_form" onSubmit={handleSubmit}>
-        <h1>Create a new Product</h1>
-
-        <ul>
-          {errors && errors.map((error, id) => <li key={id}>{error}</li>)}
-        </ul>
-
-        <label>
-          Title
-          <input
-            className="new-product-title"
-            type="text"
-            value={title}
-            onChange={updateTitle}
-            placeholder="Title"
-            required
-          />
-        </label>
-
-        <label>
-          Description
-          <input
-            className="new-product-description"
-            type="text"
-            rows={5}
-            value={description}
-            onChange={updateDescription}
-            placeholder="Description"
-            required
-          />
-        </label>
-
-        <label>
-          Price
-          <input
-            className="new-product-price"
-            type="number"
-            value={price}
-            onChange={updatePrice}
-            placeholder="Price"
-            required
-          />
-        </label>
-
-        <label>
-          Glitter Factor
-          <input
-            className="new-product-glitter-factor"
-            type="text"
-            rows={5}
-            value={glitter_factor}
-            onChange={updateGlitterFactor}
-            placeholder="Glitter Factor"
-            required
-          />
-        </label>
+    <form className="product-form" onSubmit={handleSubmit}>
+      <div className="name-tag">
+      <h1 className="header">HELLO</h1>
+      <h2> MY NAME IS</h2>
+      </div>
 
 
-        <label>
-          Upload Cover Photo
-          <input
-            className="new-product-imageUrl"
-            type="text"
-            size={100}
-            // type="file"
-            // multiple="false"
-            // accept="image/*"
-            value={product_image}
-            onChange={updateProductImage}
-            placeholder="Image Url"
-          />
-        </label>
+      <ul className="errors">
+        {errors && errors.map((error, id) => <li key={id}> {error} </li>)}
+      </ul>
 
-        <button type="submit">Create</button>
-      </form>
+      <label className="new-product-title">
+        Title
+        <input
 
+          type="text"
+          value={title}
+          onChange={updateTitle}
+          placeholder="Title"
+          // required
+        />
+      </label>
+
+      <label className="new-product-description">
+        Description
+        <textarea
+
+          type="text"
+          rows={2}
+          cols={20}
+          value={description}
+          onChange={updateDescription}
+          placeholder="Description"
+          // required
+        />
+      </label>
+
+      <label className="new-product-price">
+        Price
+        <input
+
+          type="number"
+          // min="1"
+          max="9999"
+          value={price}
+          onChange={updatePrice}
+          placeholder="Price"
+          // required
+        />
+      </label>
+
+      <label className="new-product-glitter-factor">
+        Glitter Factor
+        <textarea
+
+          type="text"
+          rows={2}
+          cols={20}
+          value={glitter_factor}
+          onChange={updateGlitterFactor}
+          placeholder="LGBTQ+ p'zazz goes here"
+          // required
+        ></textarea>
+      </label>
+
+      <label className="new-product-imageUrl">
+        Upload Cover Photo
+        <input
+
+          type="text"
+          size={80}
+          // type="file"
+          // multiple="false"
+          // accept="image/*"
+          value={product_image}
+          onChange={updateProductImage}
+          placeholder="Image Url"
+        />
+      </label>
+
+      <button type="submit">Create</button>
+    </form>
   );
 }
 
