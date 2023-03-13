@@ -51,6 +51,10 @@ function SingleProduct() {
       product_image: product_image,
     };
 
+    if (payload.title === '') {
+      errs.push("So. . . . no title?");
+    }
+
     if (payload.price < 0.01) {
       errs.push("Set a price above 0");
     }
@@ -138,7 +142,7 @@ function SingleProduct() {
                 value={glitter_factor}
                 onChange={updateGlitterFactor}
                 placeholder="Glitter Factor"
-                required
+                // required
                 rows={10}
                 cols={30}
               />
@@ -173,6 +177,7 @@ function SingleProduct() {
                       setPrice(product.price?.toFixed(2));
                       setGlitterFactor(product.glitter_factor);
                       setProductImage(product.product_image);
+                      setErrors([])
                       setEditProduct(false);
                     }}
                   >

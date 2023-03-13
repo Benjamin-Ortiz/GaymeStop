@@ -31,22 +31,26 @@ function Navigation({ isLoaded }){
 
 	return sessionUser ? (
 		<div className='nav-bar'>
-			<div>
+			<div className='gaymestop-nav-button'>
 				{/* left */}
-				<NavLink exact to="/">Home</NavLink>
+				<NavLink exact to="/">
+				<span className='rainbow-text'>Gayme</span>
+				<span className='white-text'>Stop</span>
+					</NavLink>
+				<h6 className='sub-logo'>Power to the Gaymers</h6>
 			</div>
+
 
 			{/* middle */}
 
 
 			{/* right side */}
 			{isLoaded && (
-				<div>
+				<div className='profile-cart-container'>
 					<ProfileButton user={sessionUser} />
 					<NavLink exact to ={`/carts/${sessionUser.id}/cart`}>
         				<button>
-							<i className='' />
-           				 Your Cart
+							<i className="fas fa-shopping-cart" />
         					</button>
     			</NavLink>
 				</div>
@@ -56,11 +60,15 @@ function Navigation({ isLoaded }){
 	):
 
 	(
-		<div className='nav-bar'>
-		<div>
-			{/* left */}
-			<NavLink exact to="/">Home</NavLink>
-		</div>
+	<div className='nav-bar'>
+			<div className='gaymestop-nav-button'>
+				{/* left */}
+				<NavLink exact to="/">
+				<span className='rainbow-text'>Gayme</span>
+				<span className='white-text'>Stop</span>
+					</NavLink>
+				<h6 className='sub-logo'>Power to the Gaymers</h6>
+			</div>
 
 		{/* middle */}
 
