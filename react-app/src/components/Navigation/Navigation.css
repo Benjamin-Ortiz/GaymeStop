@@ -1,7 +1,8 @@
 .profile-dropdown {
   position: absolute;
   background: linear-gradient(black ,red, orange, green, blue, indigo, violet);
- border-radius: 1rem;
+  border-radius: 10px 100px / 120px;
+  /* margin-right: 50px; */
 
 }
 
@@ -17,6 +18,7 @@
   background-color: rgb(177, 154, 197);
 
 } */
+
 
 .nav-bar {
   display: flex;
@@ -51,16 +53,38 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+/*
+.rainbow-text:hover {
+  font-size: 2rem;
+  font-weight: 900;
+  color: rgb(234, 234, 234);
+} */
+
 .white-text{
   font-size: 2rem;
   font-weight: 900;
   color: rgb(234, 234, 234);
 }
 
+/* .white-text:hover{
+  font-size: 2rem;
+  font-weight: 900;
+  background: linear-gradient(to right, red, orange,yellow, green, blue, indigo, violet);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+} */
+
 .sub-logo{
   margin: 0%;
   color: rgb(234, 234, 234);
 
+}
+
+.profile-cart-container{
+  /* margin-right: 50px; */
+  display: flex;
+  justify-content: space-between;
+  width:  150px;
 }
 
 .demo_login_button {

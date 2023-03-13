@@ -19,45 +19,44 @@ function LoginFormModal() {
     if (data) {
       setErrors(data);
     } else {
-        closeModal()
-        dispatch(getTheCart);
+      closeModal();
+      dispatch(getTheCart);
     }
   };
 
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
-          {errors.map((error, idx) => (
-            <li key={idx}>{error}</li>
-          ))}
-        </ul>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        <button type="submit">Log In</button>
-      </form>
-    </>
+    <form className="login-form" onSubmit={handleSubmit}>
+      <h1 className="login-header">Log In</h1>
+      <ul className="errors">
+        {errors.map((error, idx) => (
+          <li key={idx}>{error}</li>
+        ))}
+      </ul>
+      <label className="login-email">
+        Email
+        <input
+          type="text"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+      </label>
+      <label className="login-password">
+        Password
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+      </label>
+      <button className="login-button" type="submit">Log In</button>
+    </form>
   );
 }
 
 export default LoginFormModal;
+
 
 
 
