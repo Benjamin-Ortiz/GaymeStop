@@ -39,7 +39,7 @@ function UserCart() {
 
   return user && allCartItems ? (
     <>
-      <div className="cart-header">My Cart</div>
+      <div className="cart-header">Your Shopping Cart</div>
       <div className="cart-container">
         <div className="cart-items">
 
@@ -63,13 +63,14 @@ function UserCart() {
                 </NavLink>
                 <div className="item-price">${item.product.price}</div>
                 <div className="item-quantity">
-                  <div className="quantity-label">Quantity:</div>
+                  <div className="quantity-label">Quantity:
+                  </div>
                   {editQuantity ? (
                     <>
                     <EditQuantity
                       item={item}
                       userId={user.id}
-                    />
+                      />
                     <span className="edit-cancel">
                   <button
                     className="cancel-button"
@@ -78,17 +79,17 @@ function UserCart() {
                       setQuantity(item.quantity);
                       setEditQuantity(false);
                     }}
-                  >
-                    cancel
+                    >
+                    Cancel
                   </button>
                 </span>
                     </>
 
-                  ) : (
-                  <>
+) : (
+  <>
                       {item.quantity}
                     <div className="quantity-container">
-                      <button
+                      <button className="change-quantity-button"
                         onClick={() => {
                           setQuantity({ ...quantity, [i]: item.quantity });
                           setEditQuantity(true);
@@ -100,6 +101,7 @@ function UserCart() {
                   </>
                   )
                 }
+
                 </div>
               </div>
               <div className="item-actions">

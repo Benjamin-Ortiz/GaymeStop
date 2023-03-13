@@ -167,7 +167,7 @@ function SingleProduct() {
             </div>
             <div className="ques-edit-crud-buttons">
               <div className="edit-button">
-                <span className="edit-button">
+                <span className="cancel-button-span">
                   <button
                     className="cancel-button"
                     onClick={(e) => {
@@ -186,7 +186,7 @@ function SingleProduct() {
                 </span>
               </div>
               {/* the submit button has tbe outside of the div. It needs to be a direct child of form */}
-              <button className="edit-submit" type="submit">
+              <button className="edit-submit-button" type="submit">
                 Apply Changes
               </button>
             </div>
@@ -197,8 +197,8 @@ function SingleProduct() {
           <>
 
               <div className="title-descrip-con">
-       
-                <div className="ind-ques-body">{product.description}</div>
+
+                <div className="product-description">{product.description}</div>
 
                 <div className="price-container">
                   <div className="price">Price: <span className="price-number">${product.price?.toFixed(2)}</span>
@@ -207,8 +207,8 @@ function SingleProduct() {
                   </div>
 
                 <div className="glitter-showcase">
-                  <h4 className="glitter-font"> Glitter Factor </h4>
-                  {product.glitter_factor}
+                  <h4 className="glitter-font"> *Glitter Factor*</h4>
+                  <div className="glitter-factor-text">{product.glitter_factor}</div>
                   </div>
                 {/*
                 <div className="ind-ques-image">
@@ -231,7 +231,7 @@ function SingleProduct() {
                         setProductImage(product.product_image);
                       }}
                     >
-                      {" "}
+
                       Edit Product
                     </button>
 

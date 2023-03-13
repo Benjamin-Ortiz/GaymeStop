@@ -1,7 +1,7 @@
 import React, {  useState  } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import * as cartActions from "../../store/cart";
+import "./AddCartItem.css"
 
 function AddCartItem() {
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ function AddCartItem() {
     <form className="add-to-cart-button"
     type="submit"
     onSubmit={addToCart}>
-      <button>
+      <button >
         Add to cart
         </button>
     </form>

@@ -37,8 +37,15 @@
     margin-right: 20px;
   }
 
+  .product-description{
+    font-family: Arial, Helvetica, sans-serif
+
+  }
+
   .price-container{
     display: flex;
+    border-bottom: rgb(22, 13, 22) solid;
+    margin-bottom: 0%;
   }
 
   .price{
@@ -52,19 +59,27 @@
 
   .glitter-showcase{
     display: flex;
+    background-color: black;
     flex-direction: column;
     align-items: center;
     border: royalblue solid;
     border-radius: 15px;
+    height: 300px;
+    /* width: auto; */
 
   }
 
   .glitter-font{
-    /* font-size: 2rem; */
+    font-size: 2rem;
     font-weight: 900;
     background: linear-gradient(to right, red, orange,yellow, green, blue, indigo, violet);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  .glitter-factor-text{
+    color: #fff;
+    font-size: larger;
   }
 
 
@@ -80,7 +95,7 @@
     margin-top: 1rem;
   }
 
-  /* .edit-prod-title {
+  .edit-prod-title {
     margin-bottom: 0.5rem;
     padding: 0.5rem;
     font-size: 1.2rem;
@@ -88,25 +103,25 @@
     border: none;
     border-radius: 5px;
     box-shadow: 0px 0px 5px #c9c9c9;
-  } */
+  }
 
-  /* .new-product-price {
+  .new-product-price {
     margin-bottom: 0.5rem;
     padding: 0.5rem;
     font-size: 1rem;
     border: none;
     border-radius: 5px;
     box-shadow: 0px 0px 5px #c9c9c9;
-  } */
+  }
 
-  /* .new-product-glitter-factor {
+  .new-product-glitter-factor {
     margin-bottom: 0.5rem;
     padding: 0.5rem;
     font-size: 1rem;
-    border: none;
+    /* border: none; */
     border-radius: 5px;
     box-shadow: 0px 0px 5px #c9c9c9;
-  } */
+  }
 
   .edit-prod-desc {
     margin-bottom: 0.5rem;
@@ -126,7 +141,18 @@
     box-shadow: 0px 0px 5px #c9c9c9;
   }
 
-  .edit-submit {
+  .edit-button{
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #4caf50;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .edit-submit-button{
     margin-top: 0.5rem;
     padding: 0.5rem;
     font-size: 1rem;
@@ -143,7 +169,7 @@
     font-size: 1rem;
     border: none;
     border-radius: 5px;
-    background-color: #c9c9c9;
+    background-color: #4caf50;
     color: #fff;
     cursor: pointer;
   }

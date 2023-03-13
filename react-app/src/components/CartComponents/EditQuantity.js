@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { putTheCartItem, getTheCart } from "../../store/cart";
+import "./EditQuantity.css"
 
 function EditQuantity({ item, userId }) {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ function EditQuantity({ item, userId }) {
         value={tempQuantity}
         onChange={(e) => setTempQuantity(e.target.value)}
       />
-      <button type="submit">Save</button>
+      <button className="save-button" type="submit">Save</button>
 
     </form>
   );
