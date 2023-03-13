@@ -15,6 +15,7 @@ function SingleProduct() {
 
   const user = useSelector((state) => state.session?.user);
   const product = useSelector((state) => state.products);
+  console.log(product, "Product");
   //* user.cart = array
 
   //* states
@@ -65,9 +66,7 @@ function SingleProduct() {
 
     if (payload.glitter_factor.length < 5) {
       errs.push("Don't skimp the glitter factor, that's illegal")
-
     }
-
 
     setErrors([...new Set(errs)]);
     if (errs.length === 0) {
@@ -81,8 +80,6 @@ function SingleProduct() {
         dispatch(productActions.getTheProduct(payload.id));
       });
     }
-
-
   };
 
   useEffect(() => {
@@ -106,65 +103,83 @@ function SingleProduct() {
         </div>
 
         {editProduct ? (
-          <form className="product-edit-container" onSubmit={editSubmit}>
+          <form className="product-edit-info" onSubmit={editSubmit}>
             {/* <div className="username-timestamp">
                     <div className="ind-ques-username">
                       {product.user.username} asks
                     </div>
                   </div> */}
 
-<ul className="error">
+            <ul className="error">
               {errors.map((ele) => (
                 <li>{ele}</li>
               ))}
             </ul>
 
-            <div className="ques-product-con">
-              <input
-                className="edit-prod-title"
-                type="text"
-                placeholder="Title goes here"
-                value={title}
-                onChange={updateTitle}
-              ></input>
+            <div className="edit-product-container">
+              <div className="edit-prod-title">
+                Title
+                <input
+                  type="text"
+                  placeholder="Title goes here"
+                  value={title}
+                  onChange={updateTitle}
+                ></input>
+              </div>
 
-              <input
-                className="new-product-price"
-                type="number"
-                placeholder="Price"
-                value={price}
-                onChange={updatePrice}
-              ></input>
 
-              <textarea
-                className="new-product-glitter-factor"
-                type="text"
-                value={glitter_factor}
-                onChange={updateGlitterFactor}
-                placeholder="Glitter Factor"
-                // required
-                rows={10}
-                cols={30}
-              />
+              <div className="edit-product-price">
+                Price:
+                <input
+                  type="number"
+                  placeholder="Price"
+                  value={price}
+                  onChange={updatePrice}
+                ></input>
+              </div>
 
-              <textarea
-                className="edit-prod-desc"
-                type="text"
-                placeholder="Edit Description"
-                value={description}
-                onChange={updateDescription}
-                rows={10}
-                cols={30}
-              />
+              <div className="edit-prod-desc">
+                Description
+                <textarea
+                  type="text"
+                  placeholder="Edit Description"
+                  value={description}
+                  onChange={updateDescription}
+                  rows={10}
+                  cols={30}
+                />
+              </div>
 
-              <input
-                className="edit-prod-img"
-                type="text"
-                placeholder="Add Image here..."
-                value={product_image}
-                onChange={updateProductImage}
-              ></input>
+
+              <div className="edit-glitter-showcase">
+                <h4 className="glitter-font"> *Glitter Factor*</h4>
+                <div className="glitter-factor-text">
+
+                <textarea
+                className="edit-glitter-factor-textarea"
+                  type="text"
+                  value={glitter_factor}
+                  onChange={updateGlitterFactor}
+                  placeholder="Glitter Factor"
+                  // required
+                  rows={10}
+                  cols={30}
+                />
+                </div>
+              </div>
+
+
+              <div className="edit-prod-img">
+                Enter an Image URL
+                <input
+                  type="text"
+                  placeholder="Add Image here..."
+                  value={product_image}
+                  onChange={updateProductImage}
+                ></input>
+              </div>
             </div>
+
             <div className="ques-edit-crud-buttons">
               <div className="edit-button">
                 <span className="cancel-button-span">
@@ -177,7 +192,7 @@ function SingleProduct() {
                       setPrice(product.price?.toFixed(2));
                       setGlitterFactor(product.glitter_factor);
                       setProductImage(product.product_image);
-                      setErrors([])
+                      setErrors([]);
                       setEditProduct(false);
                     }}
                   >
@@ -190,27 +205,33 @@ function SingleProduct() {
                 Apply Changes
               </button>
             </div>
-
-
           </form>
         ) : (
           <>
+            <div className="product-info-con">
+              <div className="product-description-con">
+                Whats it about?
+                <p className="product-description-span">
+                  {product.description}
+                </p>
+              </div>
 
-              <div className="title-descrip-con">
+              <div className="price-container">
+                <div className="price">
+                  Price:
+                  <span className="price-number">
+                    ${product.price?.toFixed(2)}
+                  </span>
+                </div>
+              </div>
 
-                <div className="product-description">{product.description}</div>
-
-                <div className="price-container">
-                  <div className="price">Price: <span className="price-number">${product.price?.toFixed(2)}</span>
-                  </div>
-
-                  </div>
-
-                <div className="glitter-showcase">
-                  <h4 className="glitter-font"> *Glitter Factor*</h4>
-                  <div className="glitter-factor-text">{product.glitter_factor}</div>
-                  </div>
-                {/*
+              <div className="glitter-showcase">
+                <h4 className="glitter-font"> *Glitter Factor*</h4>
+                <div className="glitter-factor-text">
+                  {product.glitter_factor}
+                </div>
+              </div>
+              {/*
                 <div className="ind-ques-image">
                   {product?.product_image ? (
                     <img src={product.product_image} alt="" />
@@ -231,7 +252,6 @@ function SingleProduct() {
                         setProductImage(product.product_image);
                       }}
                     >
-
                       Edit Product
                     </button>
 
