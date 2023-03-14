@@ -15,7 +15,7 @@ function SingleProduct() {
 
   const user = useSelector((state) => state.session?.user);
   const product = useSelector((state) => state.products);
-  console.log(product, "Product");
+  // console.log(product, "Product");
   //* user.cart = array
 
   //* states

@@ -64,19 +64,23 @@ def post_product():
 @product_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 
+
+
 def edit_product(id):
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    product = Product.query.get(id)
 
+    print(form.data, "TITLLEEEEEEEEEEEEEEEEEEEEE")
 
     if form.validate_on_submit():
         product = Product.query.get(id)
         if product.user_id == current_user.id:
-            product.title = form.data['title'] or product.title
+            product.title = form.data['title']
             product.price = form.data['price'] or product.price
-            product.description = form.data['description'] or product.description
-            product.glitter_factor = form.data['glitter_factor'] or product.glitter_factor
-            product.product_image = form.data['product_image'] or product.product_image
+            product.description = form.data['description']
+            product.glitter_factor = form.data['glitter_factor']
+            product.product_image = form.data['product_image']
             product.updated_at = datetime.now()
 
             # db.session.add(product)

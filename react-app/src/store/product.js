@@ -91,7 +91,7 @@ export const postTheProduct = (productData) => async (dispatch) => {
 
 export const putTheProduct = (product) => async dispatch => {
     // const {id, title, price, description, glitter_factor, product_image} = product
-
+    console.log(product, "THUNK");
     const response = await fetch(`/api/products/${product.id}`, {
       method: "PUT",
       headers: {
