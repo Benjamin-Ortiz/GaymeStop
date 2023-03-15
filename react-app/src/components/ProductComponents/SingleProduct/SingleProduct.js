@@ -135,6 +135,9 @@ function SingleProduct() {
                   placeholder="Price"
                   value={price}
                   onChange={updatePrice}
+                  step="0.01"
+                  // ^ force it to only be able to go up by 0.01/incrementer
+                  min = "1"
                 ></input>
               </div>
 

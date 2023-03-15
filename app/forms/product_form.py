@@ -25,7 +25,7 @@ def valid_picture(form, field):
 class ProductForm(FlaskForm):
     user_id = IntegerField('user')
     title = StringField('title', validators=[DataRequired(), Length(max=40)])
-    price = IntegerField('price', validators=[DataRequired(), NumberRange(min=1)])
+    price = DecimalField('price', validators=[DataRequired(), NumberRange(min=1)], places=2)
     description = StringField('description', validators=[DataRequired(), Length(max=1000)])
     glitter_factor = StringField('glitter_factor', validators=[DataRequired(), Length(max=600)])
     product_image = FileField('product_image', validators=[valid_picture])

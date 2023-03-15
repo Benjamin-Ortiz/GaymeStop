@@ -5,7 +5,7 @@
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 3rem ;
     padding: 5rem;
-    margin-top: 20px;
+    /* margin-top: 20px; */
     border-radius: 5px ;
   }
 
@@ -99,8 +99,9 @@
   .cart-total-container {
     flex-basis: 30%;
     border: solid red 1px;
-    /* position: sticky; */
-
+    position: sticky;
+    /* margin-right: 860px; */
+    top: 417px;
   }
 
   .cart-subtotal {
