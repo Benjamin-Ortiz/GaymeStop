@@ -287,19 +287,37 @@ function SingleProduct() {
         <h1>{product.title}</h1>
 
         <div className="single-game-container">
-          <div className="product-container">
+          <div className="product-image-container">
             <img
               className="product-img"
               src={product.product_image}
               alt={product.title}
             />
           </div>
-          <div className="product-container">
+          <div className="product-info-con">
             <div className="title-descrip-con">
-              <div className="ind-ques-title">{product.title}</div>
-              <div className="ind-ques-body">{product.description}</div>
-              <div>{product.price?.toFixed(2)}</div>
-              <div>{product.glitter_factor}</div>
+              {/* <div className="ind-ques-title">{product.title}</div> */}
+              <div className="product-description-con">
+                Whats it about?
+                <p className="product-description-span">
+                  {product.description}
+                </p>
+              </div>
+              <div className="price-container">
+                <div className="price">
+                  Price:
+                  <span className="price-number">
+                    ${product.price?.toFixed(2)}
+                  </span>
+                </div>
+              </div>
+
+              <div className="glitter-showcase">
+                <h4 className="glitter-font"> *Glitter Factor*</h4>
+                <div className="glitter-factor-text">
+                  {product.glitter_factor}
+                </div>
+              </div>
             </div>
           </div>
         </div>
