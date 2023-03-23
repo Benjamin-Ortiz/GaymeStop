@@ -22,10 +22,12 @@ SCHEMA = os.environ.get("SCHEMA")
     if environment == "production":
         op.execute(f"ALTER TABLE cart_items SET SCHEMA {SCHEMA};")
 
+    if environment == "production":
+        op.execute(f"ALTER TABLE product_categories SET SCHEMA {SCHEMA};")
 
 
-
-
+    if environment == "production":
+        op.execute(f"ALTER TABLE categories SET SCHEMA {SCHEMA};")
 
 
     if environment == "production":

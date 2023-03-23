@@ -1,14 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
+
 import datetime
 
-
-# cart_items = db.Table(
-#     'cart_items',
-#     db.Model.metadata,
-#     db.Column('cart_id',db.Integer, db.ForeignKey(add_prefix_for_prod("carts.id")), primary_key=True),
-#     db.Column('product_id',db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), primary_key=True),
-
-# )
 
 class Product(db.Model):
     __tablename__ = 'products'
@@ -30,6 +23,9 @@ class Product(db.Model):
     #* related data
     user = db.relationship("User", back_populates="products")
 
+    categories = db.relationship("Category", back_populates='product', secondary='product_categories', cascade='all, delete-orphan')
+
+
     # cart = db.relationship("Cart", secondary=cart_products, back_populates="products")
     carts = db.relationship("CartItem", back_populates='product', cascade='all, delete-orphan')
 
@@ -48,6 +44,7 @@ class Product(db.Model):
             'product_image':self.product_image,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
+            'categories': [category.to_dict() for category in self.categories],
             'user': {
                 'id': self.user.id,
                 'username': self.user.username,
@@ -62,6 +59,7 @@ class Product(db.Model):
             'user_id': self.user_id,
             'title':self.title,
             'price':self.price,
+            'categories': [category.to_dict() for category in self.categories],
             # change rating key to helper in future
             'product_image':self.product_image,
         }

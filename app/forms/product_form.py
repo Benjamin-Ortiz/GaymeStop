@@ -29,3 +29,5 @@ class ProductForm(FlaskForm):
     description = StringField('description', validators=[DataRequired(), Length(max=1000)])
     glitter_factor = StringField('glitter_factor', validators=[DataRequired(), Length(max=600)])
     product_image = FileField('product_image', validators=[valid_picture])
+    
+    #todo mapped categories buttons
