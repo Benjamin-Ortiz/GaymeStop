@@ -12,6 +12,7 @@ from .config import Config
 # ? --------------------------------------------------
 from .api.product_routes import product_routes
 from .api.cart_routes import cart_routes
+from .api.category_routes import category_routes
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
@@ -33,6 +34,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(product_routes, url_prefix='/api/products')
 app.register_blueprint(cart_routes, url_prefix='/api/carts')
+app.register_blueprint(category_routes, url_prefix='/api/category')
 
 
 db.init_app(app)

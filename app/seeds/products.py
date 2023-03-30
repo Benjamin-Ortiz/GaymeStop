@@ -5,7 +5,7 @@ from app.models import db, Product, environment, SCHEMA
 # Adds products seed data
 def seed_products():
     cyberpunk = Product(
-        user_id=1,
+        user_id=2,
         title='CyberPunk2077',
         price= 59.99,
         description='CyberPunk is an, at launch N64 game set in the future',
@@ -23,16 +23,48 @@ def seed_products():
     sims4 = Product(
         user_id=1,
         title='The Sims 4',
-        price= 19,
+        price= 19.99,
         description='DISSOCIATION TIME BAYBEEEEEE',
         glitter_factor="It's the Sims, nuff said.You could see some first hints at LGBTQ+ households in some of The Sims 3 Worlds, however they wouldn’t be added in until the game’s ending cycle. The real story begins with The Sims 4, where more and more proper LGBTQ+ representation is shown.",
         product_image='https://simscommunity.info/wp-content/uploads/2019/07/boxart.jpg'
+        )
+    dragon_age = Product(
+        user_id=2,
+        title='Dragon Age: Inquisition',
+        price= 59.99,
+        description="The latest entry into the Dragon Age saga sees the player become the Inquisitor, a ‘chosen one’ style character who must journey to settle civil unrest in the continent of Thedas and close a mysterious tear in the sky that’s unleashing demons upon the world.",
+        glitter_factor="The game features an elaborate romance system, allowing players to win over a number of potential lovers including a 10-foot bull-man voiced by Freddie Prinze Jr (you know, Fred from the live-action Scooby Doo movies). It also featured Bioware’s first trans character, Cremisius Acclasi, which received praise from the community. Dragon Age: Inquisition was honoured with a Special Recognition award from LGBTQ advocacy group GLAAD for its inclusion of queer characters.",
+        product_image="https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/dragon_age_inquisition1.jpg"
+        )
+    dad_dating = Product(
+        user_id=2,
+        title='Dream Daddy: A Dad Dating Simulator',
+        price= 14.99,
+        description="Conveniently, you’ve just moved to seaside town Maple Bay, where seemingly everyone is a single, dateable dad. The artwork is great, the dialogue is hilarious, and the dad puns just keep on coming.",
+        glitter_factor="While there aren’t many high-quality entries in the genre that cater to LGBTQ players, Dream Daddy does a very good job of filling that gap. Players take on the role of a single dad whose goal is to meet and romance other hot dads.",
+        product_image="https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/dream-daddy.jpg"
+        )
+    life_is_strange = Product(
+        user_id=2,
+        title='Life Is Strange',
+        price= 19.99,
+        description="The award-winning Life Is Strange was a standout of the episodic video game format when it launched in 2015, allowing players to ‘tune in’ to new chapters of the game every other month, with their in-game decisions effecting the direction (and ultimately the ending) of the story. The game focuses on 18-year-old photography student Max Caulfield, who discovers she has the ability to reverse time at any moment and must use her powers to save her town from being destroyed by an oncoming storm.",
+        glitter_factor="Max’s queerness was hinted at in the original game, while 2017 prequel series Before The Storm gave fans the same-sex romance they were waiting for. Both entries are worth your time.",
+        product_image="https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/life-is-strange.jpg"
+        )
+    hades = Product(
+        user_id=1,
+        title='Hades',
+        price= 19.99,
+        description="Defy the god of the dead as you hack and slash out of the Underworld in this rogue-like dungeon crawler as the immortal Prince of the Underworld, you'll wield the powers and mythic weapons of Olympus to break free from the clutches of the god of the dead himself, while growing stronger and unraveling more of the story with each unique escape attempt.",
+        glitter_factor="The protagonist of Hades, Zagreus, is able to date both a man (Thanatos) and a woman (Megara) at the same time, which will prompt other characters to acknowledge and discuss polyamory. There are also several queer NPCs in Hades, including Achilles, who is gay (as he is in Greek mythology), Chaos, who uses they/them pronouns, and Dusa, who implies when you pursue a relationship with her that she may be asexual or aromantic.",
+        product_image="https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/hades.jpg"
         )
     # title = Product(
     #     user_id=2,
     #     title='',
     #     price= 60.00,
-    #     description='',
+    #     description="",
     #     glitter_factor="",
     #     product_image=""
     #     )
@@ -40,7 +72,7 @@ def seed_products():
 
 
 
-    db.session.add_all([cyberpunk, cyberpunk2, sims4])
+    db.session.add_all([cyberpunk, cyberpunk2, sims4, dragon_age, dad_dating, life_is_strange, hades])
     db.session.commit()
 
 

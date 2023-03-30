@@ -41,6 +41,8 @@ def get_products():
 def post_product():
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    # loop thru submitted categories
+        #if true on front or backend
 
 
     if form.validate_on_submit():
@@ -52,6 +54,7 @@ def post_product():
            description=form.data['description'],
            glitter_factor=form.data['glitter_factor'],
            product_image=form.data['product_image'],
+           #todo categories
             )
           # check_product = Product.query.filter(Product.title == form.title)
           # print (check_product, '-=-=-=-=-=-=')
@@ -70,8 +73,6 @@ def edit_product(id):
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     product = Product.query.get(id)
-
-    print(form.data, "TITLLEEEEEEEEEEEEEEEEEEEEE")
 
     if form.validate_on_submit():
         product = Product.query.get(id)
@@ -104,3 +105,7 @@ def delete_product(id):
         return {"message": "Product successfully deleted"}
     else:
         return {"message": "You cant to delete other peoples products you silly silly Goose"}
+
+
+
+#todo search route, query for products .join to categories . filter(based on query parameters)

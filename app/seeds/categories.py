@@ -24,6 +24,12 @@ def seed_categories():
     platformer = Category(
         name= 'platformer'
     )
+    horror = Category(
+        name= 'horror'
+    )
+    fantasy = Category(
+        name= 'fantasy'
+    )
 
     lesbian = Category(
         name= 'lesbian')
@@ -38,7 +44,7 @@ def seed_categories():
 
 
 
-    db.session.add_all([action_adventure, simulation, rpg, shooter, dating_sim, sci_fi, fighting, puzzle, strategy, platformer, lesbian, gay, bi, trans, queer])
+    db.session.add_all([action_adventure, simulation, rpg, shooter, dating_sim, sci_fi, fighting, puzzle, strategy, platformer, horror, fantasy, lesbian, gay, bi, trans, queer])
     db.session.commit()
 
 
@@ -52,6 +58,6 @@ def undo_categories():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.categories RESTART IDENTITY CASCADE;")
     else:
-        db.session.execute("DELETE FROM users")
+        db.session.execute("DELETE FROM categories")
 
     db.session.commit()

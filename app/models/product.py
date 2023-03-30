@@ -23,7 +23,7 @@ class Product(db.Model):
     #* related data
     user = db.relationship("User", back_populates="products")
 
-    categories = db.relationship("Category", back_populates='product', secondary='product_categories', cascade='all, delete-orphan')
+    categories = db.relationship("Category", back_populates='product', secondary='product_categories', cascade='all, delete-orphan', single_parent=True)
 
 
     # cart = db.relationship("Cart", secondary=cart_products, back_populates="products")
