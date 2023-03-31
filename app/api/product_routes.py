@@ -71,8 +71,6 @@ def edit_product(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     product = Product.query.get(id)
 
-    print(form.data, "TITLLEEEEEEEEEEEEEEEEEEEEE")
-
     if form.validate_on_submit():
         product = Product.query.get(id)
         if product.user_id == current_user.id:
