@@ -9,6 +9,7 @@ import ProductsIndex from "./components/ProductComponents/ProductsIndex";
 import SingleProduct from "./components/ProductComponents/SingleProduct/SingleProduct";
 import PostProductForm from "./components/ProductComponents/SingleProduct/PostProductForm";
 import UserCart from "./components/CartComponents/UserCart";
+import SearchPage from "./components/Search/SearchPage";
 
 
 function App() {
@@ -29,6 +30,10 @@ function App() {
 
           <Route path="/signup">
             <SignupFormPage />
+          </Route>
+
+          <Route path="/searches/products/:query">
+            <SearchPage />
           </Route>
 
           <Route path="/carts/:id/cart">

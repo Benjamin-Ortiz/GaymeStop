@@ -35,7 +35,7 @@ def get_results(query):
              'Matching Descriptions' : [product.title for product in description_search],
              'Matching Glitter Factors' : [product.title for product in glitter_factor_search]
              }
-        # print(type(title_res), "TYPE" * 5)
+
         return title_res
     else : return {"message": "No results found"}
 
