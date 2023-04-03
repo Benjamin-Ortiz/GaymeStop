@@ -31,9 +31,10 @@ def get_results(query):
     #    results.append(title_search)
         #  print([product.to_dict() for product in title_search], " title searchhhhhh " *9)
         title_res = {
-             'Matching Titles' : [product.title for product in title_search],
-             'Matching Descriptions' : [product.title for product in description_search],
-             'Matching Glitter Factors' : [product.title for product in glitter_factor_search]
+             'titleRes' : [product.id for product in title_search],
+             'descriptionRes' : [product.id for product in description_search],
+             'factorRes' : [product.id for product in glitter_factor_search]
+            #  todo category results
              }
 
         return title_res

@@ -29,13 +29,11 @@ const searchReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case GET_SEARCH:{
-            const newState = {...action.payload.search};
+            const newState = {...action.payload};
 
             //  action.payload.searchResults.forEach(element => {
                 //     newState[element.id] = element
                 //  });
-
-            console.log(newState, 'SEARCH REDUCERRRRRRRRR');
             // action.payload.searchResults
             return newState;
           }
