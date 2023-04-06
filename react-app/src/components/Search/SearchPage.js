@@ -19,6 +19,11 @@ function SearchPage() {
   let resArray = [] // populate with all of the results ids
   let finalRes = []
 
+  useEffect(() => {
+    dispatch(searchActions.getTheSearch(query))
+  }, [dispatch])
+
+
   if (results) {
   results.forEach((array) => {
 
@@ -31,7 +36,6 @@ function SearchPage() {
        }
       }
     })
-
     console.log(resArray, "resArr");
   }
 
@@ -48,11 +52,11 @@ function SearchPage() {
     <div className='mapped-results'>
     {finalRes && finalRes.map((product) => {
         return (
-          <div className="mapped-game-container" >
+          <div className="mapped-results-container" >
             <NavLink className="product-nav-link" to={`/products/${product?.id}`}>
-            <img className="mapped-product-img" src={product?.product_image} alt={product?.title}/>
+            <img className="mapped-result-img" src={product?.product_image} alt={product?.title}/>
             </NavLink>
-            <div className="mapped-title-price-container">
+            <div className="mapped-result-title-price-container">
 
             </div>
             <NavLink className="mapped-product-title" to={`/products/${product?.id}`}>

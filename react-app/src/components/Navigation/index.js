@@ -74,7 +74,7 @@ function Navigation({ isLoaded }){
 			</div>
 
 		{/* middle */}
-
+		<SearchBar />
 
 		{/* right side */}
 		{isLoaded && (
