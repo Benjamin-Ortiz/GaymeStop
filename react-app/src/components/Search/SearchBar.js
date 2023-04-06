@@ -12,11 +12,16 @@ function SearchBar() {
 
     const search = (e) => {
 		e.preventDefault();
-		dispatch(searchActions.getTheSearch(searchQuery)).then(() =>
-		  history.push(`/searches/products/${searchQuery}`)
-		);
-		setSearchQuery("");
+
+    if (searchQuery.length) {
+      dispatch(searchActions.getTheSearch(searchQuery)).then(() =>
+        history.push(`/searches/products/${searchQuery}`)
+      );
+      setSearchQuery("");
+    }
 	};
+
+
 
 
   return (
@@ -30,7 +35,7 @@ function SearchBar() {
       onChange={(e) => setSearchQuery(e.target.value)}
       placeholder="Search for ..."
     />
-     <button className="header_search_button" onClick={search}>Search</button>
+    <button className="header_search_button" onClick={search}>Search</button>
   </div>
   )
 }
