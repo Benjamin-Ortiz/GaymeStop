@@ -34,9 +34,8 @@ function ProductsIndex() {
         if(product.id && product.title)
           return (
             <div className="mapped-game-container" >
-              <NavLink className="product-nav-link" to={`/products/${product?.id}`}>
+              <NavLink to={`/products/${product?.id}`}>
               <img className="mapped-product-img" src={product?.product_image} alt={product?.title}/>
-              </NavLink>
               <div className="mapped-title-price-container">
 
               </div>
@@ -46,6 +45,7 @@ function ProductsIndex() {
               <div className="mapped-product-price">
                 {product?.price?.toFixed(2)}
               </div>
+           </NavLink>
             </div>
           )
         // }
