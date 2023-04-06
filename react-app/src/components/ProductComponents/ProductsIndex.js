@@ -30,22 +30,25 @@ function ProductsIndex() {
 {/* put banner here in future */}
       <div className="mapped-games">
       {allProducts && allProducts.reverse().map((product) => {
-        return (
-          <div className="mapped-game-container" >
-            <NavLink className="product-nav-link" to={`/products/${product?.id}`}>
-            <img className="mapped-product-img" src={product?.product_image} alt={product?.title}/>
-            </NavLink>
-            <div className="mapped-title-price-container">
+        // {product
+        if(product.id && product.title)
+          return (
+            <div className="mapped-game-container" >
+              <NavLink className="product-nav-link" to={`/products/${product?.id}`}>
+              <img className="mapped-product-img" src={product?.product_image} alt={product?.title}/>
+              </NavLink>
+              <div className="mapped-title-price-container">
 
-            </div>
-            <div className="mapped-product-title">
-              {product?.title}
               </div>
-            <div className="mapped-product-price">
-              {product?.price?.toFixed(2)}
+              <div className="mapped-product-title">
+                {product?.title}
+                </div>
+              <div className="mapped-product-price">
+                {product?.price?.toFixed(2)}
+              </div>
             </div>
-          </div>
-        )
+          )
+        // }
       })}
       {/* next line is end of games-container  */}
       </div>
