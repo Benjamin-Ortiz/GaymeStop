@@ -1,6 +1,6 @@
 .search-res-title {
     /* background: radial-gradient(black ,red, orange,yellow, green, blue, purple); */
-       color: rgb(125, 14, 14);
+       color: rgb(255, 255, 255);
        /* text-align: center; */
        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
        font-size: 2rem ;
@@ -30,8 +30,15 @@
        margin-left: auto;
        box-sizing: border-box;
        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+       box-shadow: 0px 3px 8px rgb(0, 0, 0);
+       transition: all 100ms ease-in;
+   }
+
+   .mapped-results-container:hover {
+    box-shadow: 0px 10px 40px rgb(31, 43, 210);
 
    }
+
     .mapped-result-img {
      float: left;
      max-width: 100%;
