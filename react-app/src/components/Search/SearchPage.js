@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as searchActions from '../../store/search'
-import GetProductRes from './GetProductRes';
+import * as productActions from "../../store/product";
 import "./SearchPage.css"
 import { getTheProduct } from '../../store/product';
 
@@ -20,6 +20,7 @@ function SearchPage() {
   let finalRes = []
 
   useEffect(() => {
+    dispatch(productActions.getTheProducts());
     dispatch(searchActions.getTheSearch(query))
   }, [dispatch])
 
@@ -48,7 +49,10 @@ function SearchPage() {
   return resArray.length ? (
   <>
 
-    <div className='search-res-title'>{finalRes.length} Results for "{query}"</div>
+    <div className='search-res-title'>
+      {finalRes.length} Results for "{query}"
+    </div>
+
     <div className='mapped-results'>
     {finalRes && finalRes.map((product) => {
         return (

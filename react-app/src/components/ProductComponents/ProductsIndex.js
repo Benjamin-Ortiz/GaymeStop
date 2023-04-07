@@ -31,23 +31,23 @@ function ProductsIndex() {
       <div className="mapped-games">
       {allProducts && allProducts.reverse().map((product) => {
         // {product
-        if(product.id && product.title)
+        if(product.id && product.title){
           return (
             <div className="mapped-game-container" >
               <NavLink to={`/products/${product?.id}`}>
               <img className="mapped-product-img" src={product?.product_image} alt={product?.title}/>
+           </NavLink>
               <div className="mapped-title-price-container">
-
               </div>
-              <div className="mapped-product-title">
+              <NavLink className="mapped-product-title" to={`/products/${product?.id}`}>
                 {product?.title}
-                </div>
+                </NavLink>
               <div className="mapped-product-price">
                 {product?.price?.toFixed(2)}
               </div>
-           </NavLink>
             </div>
           )
+        }
         // }
       })}
       {/* next line is end of games-container  */}
