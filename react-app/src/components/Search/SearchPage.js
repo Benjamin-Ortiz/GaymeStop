@@ -11,8 +11,6 @@ function SearchPage() {
   const {query} = useParams();
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  const user = useSelector((state) => state.session?.user);
-  // const products = useSelector((state) => Object.values(state.products))
   const allProducts = useSelector((state) => state.products)
   const results = useSelector((state) => Object.values(state.searchResults)) //* array
 
@@ -37,14 +35,12 @@ function SearchPage() {
        }
       }
     })
-    console.log(resArray, "resArr");
   }
 
   resArray.forEach((id) => {
     finalRes.push(allProducts[id])
   })
 
-  console.log(finalRes, "finalres");
 
   return resArray.length ? (
   <>
@@ -58,9 +54,9 @@ function SearchPage() {
         return (
           <div className="mapped-results-container" >
             <NavLink className="product-nav-link" to={`/products/${product?.id}`}>
-            <img className="mapped-result-img" src={product?.product_image} alt={product?.title}/>
+              <img className="mapped-result-img" src={product?.product_image} alt={product?.title}/>
             </NavLink>
-            <div className="mapped-result-title-price-container">
+              <div className="mapped-result-title-price-container">
 
             </div>
             <NavLink className="mapped-product-title" to={`/products/${product?.id}`}>

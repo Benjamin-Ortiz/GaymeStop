@@ -7,10 +7,7 @@ import "./ProductsIndex.css"
 
 function ProductsIndex() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.session?.user);
-
   const allProducts = useSelector((state) => Object.values(state.products))
-
 
   useEffect(() => {
     dispatch(productActions.getTheProducts());
@@ -18,26 +15,24 @@ function ProductsIndex() {
 
 
 
-
-
-
-
   return (
-    <div>
+    <>
       <div className="home-banner">
         Check out the Latest Gaymes
         </div>
-{/* put banner here in future */}
+
       <div className="mapped-games">
       {allProducts && allProducts.reverse().map((product) => {
         // {product
         if(product.id && product.title){
           return (
             <div className="mapped-game-container" >
-              <NavLink to={`/products/${product?.id}`}>
+
+              <NavLink className="product-nav-link" to={`/products/${product?.id}`}>
               <img className="mapped-product-img" src={product?.product_image} alt={product?.title}/>
            </NavLink>
               <div className="mapped-title-price-container">
+
               </div>
               <NavLink className="mapped-product-title" to={`/products/${product?.id}`}>
                 {product?.title}
@@ -50,9 +45,8 @@ function ProductsIndex() {
         }
         // }
       })}
-      {/* next line is end of games-container  */}
       </div>
-    </div>
+    </>
   );
 
 
