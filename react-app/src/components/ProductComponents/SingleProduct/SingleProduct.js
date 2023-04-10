@@ -287,6 +287,9 @@ function SingleProduct() {
       <div>
 
         <div className="single-game-container">
+
+          {/* left half */}
+          <div className="product-left-half">
           <div className="product-image-container">
             <img
               className="product-img"
@@ -294,24 +297,10 @@ function SingleProduct() {
               alt={product.title}
             />
           </div>
-          <div className="product-info-con">
-          <h1>{product.title}</h1>
 
-          <div className="price-container">
-                <div className="price">
-                  Price:
-                  <span className="price-number">
-                    ${product.price?.toFixed(2)}
-                    <br>
-                    </br>
-                    Release Date: {product.created_at?.slice(7,11)}{product.created_at?.slice(4,7)} {product.created_at?.slice(12, 16)}
-                  </span>
-                  <div className="shipping-div">
+          <div className="desc-and-glitter-container">
 
-                  </div>
-                </div>
-              </div>
-            <div className="title-descrip-con">
+          <div className="title-descrip-con">
               {/* <div className="ind-ques-title">{product.title}</div> */}
               <div className="product-description-con">
                 Whats it about?
@@ -328,6 +317,35 @@ function SingleProduct() {
                 </div>
               </div>
             </div>
+          </div>
+
+          </div>
+
+
+          {/* right half */}
+          <div className="product-right-half">
+          <h1>{product.title}</h1>
+
+          <div className="price-container">
+                <div className="price">
+                  Price:
+                  <span className="price-number">
+                    ${product.price?.toFixed(2)}
+                    <br>
+                    </br>
+                    Release Date: {product.created_at?.slice(7,11)}{product.created_at?.slice(4,7)} {product.created_at?.slice(12, 16)}
+                  </span>
+                </div>
+              </div>
+
+              <div className="shipping-div">
+                    shipping div
+                  </div>
+
+                  <div className="prod-cart-container">
+                    add to cart etc
+                  </div>
+
           </div>
         </div>
       </div>
