@@ -90,7 +90,14 @@
   }
 
 
-  .product-info-con :first-child{
+
+  .product-info-con{
+    position: sticky;
+    /* margin-right: 860px; */
+    top: 417px;
+  }
+
+  .product-info-con:first-child{
     margin-bottom: 20px;
     margin-top: 21px;
 

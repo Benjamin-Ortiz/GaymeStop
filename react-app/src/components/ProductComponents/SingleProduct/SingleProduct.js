@@ -91,7 +91,7 @@ function SingleProduct() {
 
   return product && user ? (
     <div>
-      <h1>{product.title}</h1>
+
 
       <div className="single-game-container">
         <div className="product-image-container">
@@ -212,6 +212,7 @@ function SingleProduct() {
         ) : (
           <>
             <div className="product-info-con">
+            <h1>{product.title}</h1>
               <div className="product-description-con">
                 Whats it about?
                 <p className="product-description-span">
@@ -284,7 +285,6 @@ function SingleProduct() {
   ) : (
     <>
       <div>
-        <h1>{product.title}</h1>
 
         <div className="single-game-container">
           <div className="product-image-container">
@@ -295,6 +295,22 @@ function SingleProduct() {
             />
           </div>
           <div className="product-info-con">
+          <h1>{product.title}</h1>
+
+          <div className="price-container">
+                <div className="price">
+                  Price:
+                  <span className="price-number">
+                    ${product.price?.toFixed(2)}
+                    <br>
+                    </br>
+                    Release Date: {product.created_at?.slice(7,11)}{product.created_at?.slice(4,7)} {product.created_at?.slice(12, 16)}
+                  </span>
+                  <div className="shipping-div">
+
+                  </div>
+                </div>
+              </div>
             <div className="title-descrip-con">
               {/* <div className="ind-ques-title">{product.title}</div> */}
               <div className="product-description-con">
@@ -303,14 +319,7 @@ function SingleProduct() {
                   {product.description}
                 </p>
               </div>
-              <div className="price-container">
-                <div className="price">
-                  Price:
-                  <span className="price-number">
-                    ${product.price?.toFixed(2)}
-                  </span>
-                </div>
-              </div>
+
 
               <div className="glitter-showcase">
                 <h4 className="glitter-font"> *Glitter Factor*</h4>
