@@ -12,8 +12,10 @@
   /* justify-content: space-between; */
   /* align-items: flex-start; */
   /* margin: 30px; */
+  background-image: url("https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/backgrounds/vector-background.jpg");
+  background-size: contain;
 }
-
+/*! LEFT HALF */
 .product-left-half {
   width: 65%;
   /* display: flex; */
@@ -21,8 +23,8 @@
   /* flex-direction: column; */
   /* background-color: rgb(209, 255, 43); */
   /* background: linear-gradient(to bottom, red, orange,yellow, green, blue, indigo, violet); */
-  background-image: url("https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/backgrounds/vector-background.jpg");
-  background-size: contain;
+  /* background-image: url("https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/backgrounds/vector-background.jpg");
+  background-size: contain; */
 }
 
 .outer-img-container {
@@ -32,14 +34,6 @@
   justify-content: center;
   /* background-color: #c9c9c9; */
   width: 100%;
-}
-
-.product-right-half {
-  width: 35%;
-  /* position: sticky; */
-  /* margin-right: 860px; */
-  /* top: 417px; */
-  background-color: rgb(194, 201, 244);
 }
 
 .product-image-container {
@@ -117,7 +111,7 @@
   border-radius: 15px;
   height: auto;
   width: 85%;
-
+  /* min-width: 670px; */
   /* word-break: break-all; */
   padding: 10px;
   margin-left: 7.5%;
@@ -125,7 +119,7 @@
 }
 
 .glitter-font {
-  font-size: 35px;
+  font-size: 150%;
   font-weight: 900;
   background: linear-gradient(
     to right,
@@ -138,6 +132,7 @@
     violet
   );
   -webkit-background-clip: text;
+  word-break: normal;
   font-family: fantasy;
   -webkit-text-fill-color: transparent;
 }
@@ -150,17 +145,43 @@
 }
 
 /** glitter description end */
+/*! LEFT HALF END */
+
+/*! RIGHT HALF START */
+.product-right-half {
+  width: 35%;
+  height: 100%;
+  position: sticky;
+  padding-right: 1%;
+  padding-left: 1%;
+  top: 80px;
+  background-color: rgb(0, 0, 0);
+  border-radius: 2px;
+}
+
+.right-title {
+  background: rgb(0, 0, 0);
+  color: aliceblue;
+  font-size: 370%;
+  word-break: keep-all;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+}
 
 /*? price start */
 
 .price-container {
   display: flex;
-  border-bottom: rgb(22, 13, 22) solid;
-  margin-bottom: 0%;
+  border-bottom: aliceblue solid;
+  padding-bottom: 5px;
+  border-top: aliceblue solid;
+  padding-top: 5px;
+  margin-bottom: 5%;
 }
 
 .price {
-  font-size: 1.25rem;
+  color: aliceblue;
+  font-size: 200%;
+  font-weight: 900;
 }
 
 .price-number {
@@ -169,12 +190,61 @@
 
 /*? price end */
 
-
-.product-info-con:first-child {
-  margin-bottom: 20px;
-  width: 30%;
-  margin-top: 21px;
+/** shipping div start */
+.shipping-div {
+  display: flex;
+  border-bottom: 2px aliceblue solid;
+  height: 4rem;
+  background: rgb(0, 0, 0);
 }
+
+.icon-column {
+  padding: 1%;
+  padding-top: 5%;
+  vertical-align: middle;
+}
+
+/* .fas fa-shipping-fast {
+  padding: 20px;
+} */
+
+.shipping-details {
+  color: rgb(116, 125, 132);
+  text-align: center;
+  flex: 1;
+}
+
+.shipping-launch-day{
+  background: linear-gradient(
+    to right,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+  -webkit-background-clip: text;
+  word-break: normal;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  -webkit-text-fill-color: transparent;
+}
+
+/** shipping div end */
+
+/*? add to cart start */
+.prod-cart-container {
+  background: #000000;
+  height: 3rem;
+  padding-top: 25px;
+  text-align: center;
+  color: aliceblue;
+}
+
+/*? add to cart end */
+
+/*todo EDIT */
 
 .product-edit-info {
   display: flex;

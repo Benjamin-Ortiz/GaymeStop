@@ -93,7 +93,7 @@ function SingleProduct() {
     <div>
 
       <div className="single-game-container">
-        
+
         <div className="product-image-container">
           <img
             className="product-img"
@@ -330,7 +330,7 @@ function SingleProduct() {
 
           {/* right half */}
           <div className="product-right-half">
-          <h1>{product.title}</h1>
+          <h1 className="right-title">{product.title}</h1>
 
           <div className="price-container">
                 <div className="price">
@@ -345,11 +345,23 @@ function SingleProduct() {
               </div>
 
               <div className="shipping-div">
-                    shipping div
+                <div className="icon-column">
+							<i className="fas fa-shipping-fast" style={{color: "#ffffff"}} />
+                </div>
+
+                <div className="shipping-details">
+                <span className="shipping-launch-day">
+                *☆Happy Launch Day!☆*
+                  </span>
+                <br></br>
+                
+                Enjoy Free Shipping on all orders
+                </div>
+
                   </div>
 
                   <div className="prod-cart-container">
-                    add to cart etc
+                    Log in to add to cart
                   </div>
 
           </div>
