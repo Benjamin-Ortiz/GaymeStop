@@ -92,8 +92,8 @@ function SingleProduct() {
   return product && user ? (
     <div>
 
-
       <div className="single-game-container">
+        
         <div className="product-image-container">
           <img
             className="product-img"
@@ -290,6 +290,8 @@ function SingleProduct() {
 
           {/* left half */}
           <div className="product-left-half">
+            <div className="outer-img-container">
+
           <div className="product-image-container">
             <img
               className="product-img"
@@ -298,22 +300,26 @@ function SingleProduct() {
             />
           </div>
 
+            </div>
+
           <div className="desc-and-glitter-container">
 
           <div className="title-descrip-con">
               {/* <div className="ind-ques-title">{product.title}</div> */}
               <div className="product-description-con">
-                Whats it about?
+               <span className="product-description-header">
+               Product Description
+                </span>
                 <p className="product-description-span">
-                  {product.description}
+                 {product.description}
                 </p>
               </div>
 
 
               <div className="glitter-showcase">
-                <h4 className="glitter-font"> *Glitter Factor*</h4>
+                <h4 className="glitter-font"> ☆*:.｡.˚✧₊⁎**･゜ﾟ･*:.｡.:*･'Glitter Factor'･*:.｡.:*･゜ﾟ･**ཽ⁎⁺˳✧༚ .｡.:*☆</h4>
                 <div className="glitter-factor-text">
-                  {product.glitter_factor}
+                ✧ {product.glitter_factor} ✧
                 </div>
               </div>
             </div>
