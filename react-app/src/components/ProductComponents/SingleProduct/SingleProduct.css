@@ -266,8 +266,9 @@
 /*? add to cart start */
 .prod-cart-container {
   background: #000000;
-  height: 3rem;
+  height: auto;
   padding-top: 25px;
+  padding-bottom: 25px;
   text-align: center;
   color: aliceblue;
 }

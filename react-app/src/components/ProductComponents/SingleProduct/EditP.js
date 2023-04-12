@@ -14,7 +14,7 @@ function SingleProduct() {
   const history = useHistory();
 
   const user = useSelector((state) => state.session?.user);
-  const product = useSelector((state) => state.products['0']);
+  const product = useSelector((state) => state.products);
   // console.log(product, "Product");
   //* user.cart = array
 
@@ -91,83 +91,75 @@ function SingleProduct() {
 
   return product && user ? (
     <div>
-      {editProduct ?
-      (
-        <>
-        <form>
-        <div>
-          <div className="single-game-container">
-            {/* left half */}
-            <div className="product-left-half">
-              <div className="outer-img-container">
-                <div className="product-image-container">
-                  <img
-                    className="product-img"
-                    src={product.product_image}
-                    alt={product.title}
-                  />
-                </div>
-              </div>
-
-              <div className="desc-and-glitter-container">
-                <div className="title-descrip-con">
-                  <div className="product-description-con">
-                    <span className="product-description-header">
-                      Product Description
-                    </span>
-                    <p className="product-description-span">
-                      {product.description}
-                    </p>
-                  </div>
-
-                  <div className="glitter-showcase">
-                    <h4 className="glitter-font">
-                      ☆*:.｡.˚✧₊⁎**･゜ﾟ･*:.｡.:*･'Glitter
-                      Factor'･*:.｡.:*･゜ﾟ･**ཽ⁎⁺˳✧༚ .｡.:*☆
-                    </h4>
-                    <div className="glitter-factor-text">
-                      ✧ {product.glitter_factor} ✧
-                    </div>
-                  </div>
-                </div>
-              </div>
+      <div className="single-game-container">
+        {/* left half */}
+        <div className="product-left-half">
+          <div className="outer-img-container">
+            <div className="product-image-container">
+              <img
+                className="product-img"
+                src={product.product_image}
+                alt={product.title}
+              />
             </div>
+          </div>
+          {editProduct ? (
 
-            {/* right half */}
-            <div className="product-right-half">
-              <h1 className="right-title">{product.title}</h1>
+            <form className="product-edit-info" onSubmit={editSubmit}>
+              {/* put on top of right side title */}
+              <ul className="error">
+                {errors.map((ele) => (
+                  <li>{ele}</li>
+                ))}
+              </ul>
 
-              <div className="price-container">
-                <div className="price">
-                  Price:
-                  <span className="price-number">
-                    ${product.price?.toFixed(2)}
-                    <br></br>
-                    Release Date: {product.created_at?.slice(7, 11)}
-                    {product.created_at?.slice(4, 7)}{" "}
-                    {product.created_at?.slice(12, 16)}
-                  </span>
+              <div className="edit-product-container">
+
+                <div className="edit-prod-img">
+                  Enter an Image URL
+                  <input
+                    type="text"
+                    placeholder="Add Image here..."
+                    value={product_image}
+                    onChange={updateProductImage}
+                  ></input>
+                </div>
+
+                <div className="edit-product-description-con">
+                  <div className="edit-product-description-header">
+                    Edit DESCRIPTION
+                  </div>
+
+                  <div className="edit-product-description-span">
+                    <textarea
+                      type="text"
+                      placeholder="Edit Description"
+                      value={description}
+                      onChange={updateDescription}
+                      rows={3}
+                      cols={1}
+                    />
+                  </div>
+                </div>
+
+                <div className="edit-glitter-showcase">
+                  <h4 className="glitter-font"> *Glitter Factor*</h4>
+                  <div className="glitter-factor-text">
+                    <textarea
+                      className="edit-glitter-factor-textarea"
+                      type="text"
+                      value={glitter_factor}
+                      onChange={updateGlitterFactor}
+                      placeholder="Glitter Factor"
+                      // required
+                      rows={4}
+                      cols={30}
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div className="shipping-div">
-                <div className="icon-column">
-                  <i
-                    className="fas fa-shipping-fast"
-                    style={{ color: "#ffffff" }}
-                  />
-                </div>
-
-                <div className="shipping-details">
-                  <span className="shipping-launch-day">
-                    *☆Happy Launch Day!☆*
-                  </span>
-                  <br></br>
-                  Enjoy Free Shipping on all orders
-                </div>
-              </div>
-              <div className="prod-cart-container">
-
+              <div className="ques-edit-crud-buttons">
                 <div className="edit-button">
                   <span className="cancel-button-span">
                     <button
@@ -191,93 +183,80 @@ function SingleProduct() {
                 <button className="edit-submit-button" type="submit">
                   Apply Changes
                 </button>
-
               </div>
-            </div>
-          </div>
-        </div>
-        </form>
-        {/* ABOVE = EDIT ON */}
-      </>
-      ) : (
+
+            </form>
+          ) : (
             <>
-      <div>
-        <div className="single-game-container">
-          {/* left half */}
-          <div className="product-left-half">
-            <div className="outer-img-container">
-              <div className="product-image-container">
-                <img
-                  className="product-img"
-                  src={product.product_image}
-                  alt={product.title}
-                />
+
+          <div className="desc-and-glitter-container">
+            <div className="title-descrip-con">
+              {/* <div className="ind-ques-title">{product.title}</div> */}
+              <div className="product-description-con">
+                <span className="product-description-header">
+                  Product Description
+                </span>
+                <p className="product-description-span">
+                  {product.description}
+                </p>
               </div>
-            </div>
 
-            <div className="desc-and-glitter-container">
-              <div className="title-descrip-con">
-                <div className="product-description-con">
-                  <span className="product-description-header">
-                    Product Description
-                  </span>
-                  <p className="product-description-span">
-                    {product.description}
-                  </p>
-                </div>
-
-                <div className="glitter-showcase">
-                  <h4 className="glitter-font">
-                    ☆*:.｡.˚✧₊⁎**･゜ﾟ･*:.｡.:*･'Glitter
-                    Factor'･*:.｡.:*･゜ﾟ･**ཽ⁎⁺˳✧༚ .｡.:*☆
-                  </h4>
-                  <div className="glitter-factor-text">
-                    ✧ {product.glitter_factor} ✧
-                  </div>
+              <div className="glitter-showcase">
+                <h4 className="glitter-font">
+                  {" "}
+                  ☆*:.｡.˚✧₊⁎**･゜ﾟ･*:.｡.:*･'Glitter Factor'･*:.｡.:*･゜ﾟ･**ཽ⁎⁺˳✧༚
+                  .｡.:*☆
+                </h4>
+                <div className="glitter-factor-text">
+                  ✧ {product.glitter_factor} ✧
                 </div>
               </div>
             </div>
           </div>
+          </>
+          )}
 
-          {/* right half */}
-          <div className="product-right-half">
-            <h1 className="right-title">{product.title}</h1>
 
-            <div className="price-container">
-              <div className="price">
-                Price:
-                <span className="price-number">
-                  ${product.price?.toFixed(2)}
-                  <br></br>
-                  Release Date: {product.created_at?.slice(7, 11)}
-                  {product.created_at?.slice(4, 7)}{" "}
-                  {product.created_at?.slice(12, 16)}
-                </span>
-              </div>
-            </div>
+        </div>
 
-            <div className="shipping-div">
-              <div className="icon-column">
-                <i
-                  className="fas fa-shipping-fast"
-                  style={{ color: "#ffffff" }}
-                />
-              </div>
+        {/* right half */}
+        <div className="product-right-half">
+          <h1 className="right-title">{product.title}</h1>
 
-              <div className="shipping-details">
-                <span className="shipping-launch-day">
-                  *☆Happy Launch Day!☆*
-                </span>
+          <div className="price-container">
+            <div className="price">
+              Price:
+              <span className="price-number">
+                ${product.price?.toFixed(2)}
                 <br></br>
-                Enjoy Free Shipping on all orders
-              </div>
+                Release Date: {product.created_at?.slice(7, 11)}
+                {product.created_at?.slice(4, 7)}{" "}
+                {product.created_at?.slice(12, 16)}
+              </span>
+            </div>
+          </div>
+
+          <div className="shipping-div">
+            <div className="icon-column">
+              <i
+                className="fas fa-shipping-fast"
+                style={{ color: "#ffffff" }}
+              />
             </div>
 
-            <div className="prod-cart-container">
-              <AddCartItem />
+            <div className="shipping-details">
+              <span className="shipping-launch-day">*☆Happy Launch Day!☆*</span>
+              <br></br>
+              Enjoy Free Shipping on all orders
+            </div>
+          </div>
+
+          <div className="prod-cart-container">
+            <AddCartItem />
+            {/* if you own it */}
             {product?.user?.username === user?.username && (
               <>
-
+                <div className="ind-ques-cruds">
                   <button
                     className="edit-button"
                     onClick={() => {
@@ -305,18 +284,14 @@ function SingleProduct() {
                   >
                     Delete Product
                   </button>
-
+                </div>
               </>
             ) }
-              </div>
           </div>
         </div>
-      </div>
-    </>
-      ) } {/* end of edit block */}
-
 
         {/* below is end of game container */}
+      </div>
     </div>
   ) : (
     <>
@@ -336,6 +311,7 @@ function SingleProduct() {
 
             <div className="desc-and-glitter-container">
               <div className="title-descrip-con">
+                {/* <div className="ind-ques-title">{product.title}</div> */}
                 <div className="product-description-con">
                   <span className="product-description-header">
                     Product Description
@@ -347,6 +323,7 @@ function SingleProduct() {
 
                 <div className="glitter-showcase">
                   <h4 className="glitter-font">
+                    {" "}
                     ☆*:.｡.˚✧₊⁎**･゜ﾟ･*:.｡.:*･'Glitter
                     Factor'･*:.｡.:*･゜ﾟ･**ཽ⁎⁺˳✧༚ .｡.:*☆
                   </h4>

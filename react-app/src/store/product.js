@@ -133,7 +133,7 @@ const productsReducer = (state = initialState, action) => {
 
         case GET_PRODUCTS:{
             let newState = {...state};
-
+            // console.log(newState, 'REDUCER STATE BEFORE GETALL');
             action.payload.products.forEach((product) => { //* returns products indexed by its pk
                     newState[product.id] = product;
                   });
@@ -143,9 +143,13 @@ const productsReducer = (state = initialState, action) => {
 
 
         case GET_PRODUCT: {
-            const newState = {
-                ...action.payload
-            }
+            // const newState = {
+            //     ...action.payload
+            // }
+            let newState = {...state};
+            console.log(newState, 'REDUCER STATE BEFORE GETONE');
+            newState['0'] = action.payload
+
             return newState;
         }
 
