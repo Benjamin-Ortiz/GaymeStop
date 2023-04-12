@@ -82,7 +82,7 @@ export const postTheProduct = (productData) => async (dispatch) => {
     })
     if (response.ok) {
         const newProduct = await response.json()
-        dispatch(postProduct(newProduct))
+        // dispatch(postProduct(newProduct))
         return response;
     }
 }
@@ -153,12 +153,6 @@ const productsReducer = (state = initialState, action) => {
             return newState;
         }
 
-        // case PUT_PRODUCT: {
-        //     const newState = {
-        //         ...state, ...action.payload
-        //     }
-        //     return newState
-        // }
 
         case DELETE_PRODUCT:{
             const newState = { ...state }
@@ -170,7 +164,7 @@ const productsReducer = (state = initialState, action) => {
           case POST_PRODUCT : {
             const newState = {
                 ...state,
-                [action.payload.product]: action.payload
+                [action.payload.product]: action.payload //Get Id and get this out
             }
             return newState;
           }
