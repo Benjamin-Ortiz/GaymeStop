@@ -147,8 +147,8 @@ const productsReducer = (state = initialState, action) => {
             //     ...action.payload
             // }
             let newState = {...state};
-            console.log(newState, 'REDUCER STATE BEFORE GETONE');
-            newState['0'] = action.payload
+            // console.log(newState, 'REDUCER STATE BEFORE GETONE');
+            // newState['0'] = action.payload
 
             return newState;
         }
@@ -164,7 +164,7 @@ const productsReducer = (state = initialState, action) => {
           case POST_PRODUCT : {
             const newState = {
                 ...state,
-                [action.payload.product]: action.payload //Get Id and get this out
+                [action.payload.product.id]: action.payload //Get Id and get this out
             }
             return newState;
           }

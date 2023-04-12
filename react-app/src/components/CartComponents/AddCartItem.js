@@ -1,13 +1,16 @@
 import React, {  useState  } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import * as cartActions from "../../store/cart";
 import "./AddCartItem.css"
 
 function AddCartItem() {
   const dispatch = useDispatch();
+  const { id } = useParams();
 
   const user = useSelector((state) => state.session?.user);
-  const product = useSelector((state) => state.products);
+  const product = useSelector((state) => state.products[`${id}`]);
+
 
   const [errors, setErrors] = useState([]);
 

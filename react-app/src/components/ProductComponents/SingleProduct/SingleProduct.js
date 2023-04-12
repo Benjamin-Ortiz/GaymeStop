@@ -14,8 +14,8 @@ function SingleProduct() {
   const history = useHistory();
 
   const user = useSelector((state) => state.session?.user);
-  const product = useSelector((state) => state.products['0']);
-  // console.log(product, "Product");
+  const product = useSelector((state) => state.products[`${id}`]);
+  console.log(product, "Product");
   //* user.cart = array
 
   //* states
@@ -296,9 +296,9 @@ function SingleProduct() {
                   <button
                     className="delete-button"
                     onClick={() => {
+                      history.push("/");
                       dispatch(productActions.deleteTheProduct(id))
                         .then(() => {
-                          history.push("/");
                         })
                         .catch(async (res) => {});
                     }}
