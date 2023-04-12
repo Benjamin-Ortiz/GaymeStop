@@ -52,7 +52,7 @@ function SingleProduct() {
       product_image: product_image,
     };
 
-    if (payload.title === '') {
+    if (payload.title === "") {
       errs.push("So. . . . no title?");
     }
 
@@ -61,11 +61,11 @@ function SingleProduct() {
     }
 
     if (payload.description.length < 5) {
-      errs.push("Thats not description, write a little more :) ")
+      errs.push("Thats not description, write a little more :) ");
     }
 
     if (payload.glitter_factor.length < 5) {
-      errs.push("Don't skimp the glitter factor, that's illegal")
+      errs.push("Don't skimp the glitter factor, that's illegal");
     }
 
     setErrors([...new Set(errs)]);
@@ -91,279 +91,308 @@ function SingleProduct() {
 
   return product && user ? (
     <div>
-
       <div className="single-game-container">
+        {/* left half */}
+        <div className="product-left-half">
+          <div className="outer-img-container">
+            <div className="product-image-container">
+              <img
+                className="product-img"
+                src={product.product_image}
+                alt={product.title}
+              />
+            </div>
+          </div>
+          {editProduct ? (
 
-        <div className="product-image-container">
-          <img
-            className="product-img"
-            src={product.product_image}
-            alt={product.title}
-          />
+            <form className="product-edit-info" onSubmit={editSubmit}>
+              {/* put on top of right side title */}
+              <ul className="error">
+                {errors.map((ele) => (
+                  <li>{ele}</li>
+                ))}
+              </ul>
+
+              <div className="edit-product-container">
+                {/* <div className="edit-prod-title">
+          Title
+          <input
+            type="text"
+            placeholder="Title goes here"
+            value={title}
+            onChange={updateTitle}
+          ></input>
         </div>
 
-        {editProduct ? (
-          <form className="product-edit-info" onSubmit={editSubmit}>
-            {/* <div className="username-timestamp">
-                    <div className="ind-ques-username">
-                      {product.user.username} asks
-                    </div>
-                  </div> */}
 
-            <ul className="error">
-              {errors.map((ele) => (
-                <li>{ele}</li>
-              ))}
-            </ul>
+        <div className="edit-product-price">
+          Price:
+          <input
+            type="number"
+            placeholder="Price"
+            value={price}
+            onChange={updatePrice}
+            step="0.01"
+            // ^ force it to only be able to go up by 0.01/incrementer
+            min = "1"
+          ></input>
+        </div> */}
 
-            <div className="edit-product-container">
-              <div className="edit-prod-title">
-                Title
-                <input
-                  type="text"
-                  placeholder="Title goes here"
-                  value={title}
-                  onChange={updateTitle}
-                ></input>
-              </div>
+                <div className="edit-prod-img">
+                  Enter an Image URL
+                  <input
+                    type="text"
+                    placeholder="Add Image here..."
+                    value={product_image}
+                    onChange={updateProductImage}
+                  ></input>
+                </div>
 
+                <div className="edit-product-description-con">
+                  <div className="edit-product-description-header">
+                    Edit DESCRIPTION
+                  </div>
 
-              <div className="edit-product-price">
-                Price:
-                <input
-                  type="number"
-                  placeholder="Price"
-                  value={price}
-                  onChange={updatePrice}
-                  step="0.01"
-                  // ^ force it to only be able to go up by 0.01/incrementer
-                  min = "1"
-                ></input>
-              </div>
+                  <div className="edit-product-description-span">
+                    <textarea
+                      type="text"
+                      placeholder="Edit Description"
+                      value={description}
+                      onChange={updateDescription}
+                      rows={3}
+                      cols={1}
+                    />
+                  </div>
+                </div>
 
-              <div className="edit-prod-desc">
-                Description
-                <textarea
-                  type="text"
-                  placeholder="Edit Description"
-                  value={description}
-                  onChange={updateDescription}
-                  rows={10}
-                  cols={30}
-                />
-              </div>
-
-
-              <div className="edit-glitter-showcase">
-                <h4 className="glitter-font"> *Glitter Factor*</h4>
-                <div className="glitter-factor-text">
-
-                <textarea
-                className="edit-glitter-factor-textarea"
-                  type="text"
-                  value={glitter_factor}
-                  onChange={updateGlitterFactor}
-                  placeholder="Glitter Factor"
-                  // required
-                  rows={10}
-                  cols={30}
-                />
+                <div className="edit-glitter-showcase">
+                  <h4 className="glitter-font"> *Glitter Factor*</h4>
+                  <div className="glitter-factor-text">
+                    <textarea
+                      className="edit-glitter-factor-textarea"
+                      type="text"
+                      value={glitter_factor}
+                      onChange={updateGlitterFactor}
+                      placeholder="Glitter Factor"
+                      // required
+                      rows={4}
+                      cols={30}
+                    />
+                  </div>
                 </div>
               </div>
 
-
-              <div className="edit-prod-img">
-                Enter an Image URL
-                <input
-                  type="text"
-                  placeholder="Add Image here..."
-                  value={product_image}
-                  onChange={updateProductImage}
-                ></input>
+              <div className="ques-edit-crud-buttons">
+                <div className="edit-button">
+                  <span className="cancel-button-span">
+                    <button
+                      className="cancel-button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setTitle(product.title);
+                        setDescription(product.description);
+                        setPrice(product.price?.toFixed(2));
+                        setGlitterFactor(product.glitter_factor);
+                        setProductImage(product.product_image);
+                        setErrors([]);
+                        setEditProduct(false);
+                      }}
+                    >
+                      Cancel
+                    </button>
+                  </span>
+                </div>
+                {/* the submit button has tbe outside of the div. It needs to be a direct child of form */}
+                <button className="edit-submit-button" type="submit">
+                  Apply Changes
+                </button>
               </div>
-            </div>
 
-            <div className="ques-edit-crud-buttons">
-              <div className="edit-button">
-                <span className="cancel-button-span">
-                  <button
-                    className="cancel-button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setTitle(product.title);
-                      setDescription(product.description);
-                      setPrice(product.price?.toFixed(2));
-                      setGlitterFactor(product.glitter_factor);
-                      setProductImage(product.product_image);
-                      setErrors([]);
-                      setEditProduct(false);
-                    }}
-                  >
-                    Cancel
-                  </button>
-                </span>
-              </div>
-              {/* the submit button has tbe outside of the div. It needs to be a direct child of form */}
-              <button className="edit-submit-button" type="submit">
-                Apply Changes
-              </button>
-            </div>
-          </form>
-        ) : (
-          <>
-            <div className="product-info-con">
-            <h1>{product.title}</h1>
+            </form>
+          ) : (
+            <>
+
+          <div className="desc-and-glitter-container">
+            <div className="title-descrip-con">
+              {/* <div className="ind-ques-title">{product.title}</div> */}
               <div className="product-description-con">
-                Whats it about?
+                <span className="product-description-header">
+                  Product Description
+                </span>
                 <p className="product-description-span">
                   {product.description}
                 </p>
               </div>
 
-              <div className="price-container">
-                <div className="price">
-                  Price:
-                  <span className="price-number">
-                    ${product.price?.toFixed(2)}
-                  </span>
-                </div>
-              </div>
-
               <div className="glitter-showcase">
-                <h4 className="glitter-font"> *Glitter Factor*</h4>
+                <h4 className="glitter-font">
+                  {" "}
+                  ☆*:.｡.˚✧₊⁎**･゜ﾟ･*:.｡.:*･'Glitter Factor'･*:.｡.:*･゜ﾟ･**ཽ⁎⁺˳✧༚
+                  .｡.:*☆
+                </h4>
                 <div className="glitter-factor-text">
-                  {product.glitter_factor}
+                  ✧ {product.glitter_factor} ✧
                 </div>
               </div>
-              {/*
-                <div className="ind-ques-image">
-                  {product?.product_image ? (
-                    <img src={product.product_image} alt="" />
-                  ) : null}
-                </div> */}
-              {product?.user?.username === user?.username && (
-                <>
-                  <div className="ind-ques-cruds">
-                    <button
-                      className="edit-button"
-                      onClick={() => {
-                        setEditProduct(true);
-
-                        setTitle(product.title);
-                        setDescription(product.description);
-                        setPrice(product.price.toFixed(2));
-                        setGlitterFactor(product.glitter_factor);
-                        setProductImage(product.product_image);
-                      }}
-                    >
-                      Edit Product
-                    </button>
-
-                    <button
-                      className="delete-button"
-                      onClick={() => {
-                        dispatch(productActions.deleteTheProduct(id))
-                          .then(() => {
-                            history.push("/");
-                          })
-                          .catch(async (res) => {});
-                      }}
-                    >
-                      Delete Product
-                    </button>
-                  </div>
-                </>
-              )}
-              <AddCartItem />
             </div>
+          </div>
           </>
-        )}
+          )}
 
-        {/* end of form switch  */}
+
+        </div>
+
+        {/* right half */}
+        <div className="product-right-half">
+          <h1 className="right-title">{product.title}</h1>
+
+          <div className="price-container">
+            <div className="price">
+              Price:
+              <span className="price-number">
+                ${product.price?.toFixed(2)}
+                <br></br>
+                Release Date: {product.created_at?.slice(7, 11)}
+                {product.created_at?.slice(4, 7)}{" "}
+                {product.created_at?.slice(12, 16)}
+              </span>
+            </div>
+          </div>
+
+          <div className="shipping-div">
+            <div className="icon-column">
+              <i
+                className="fas fa-shipping-fast"
+                style={{ color: "#ffffff" }}
+              />
+            </div>
+
+            <div className="shipping-details">
+              <span className="shipping-launch-day">*☆Happy Launch Day!☆*</span>
+              <br></br>
+              Enjoy Free Shipping on all orders
+            </div>
+          </div>
+
+          <div className="prod-cart-container">
+            <AddCartItem />
+            {/* if you own it */}
+            {product?.user?.username === user?.username && (
+              <>
+                <div className="ind-ques-cruds">
+                  <button
+                    className="edit-button"
+                    onClick={() => {
+                      setEditProduct(true);
+
+                      setTitle(product.title);
+                      setDescription(product.description);
+                      setPrice(product.price.toFixed(2));
+                      setGlitterFactor(product.glitter_factor);
+                      setProductImage(product.product_image);
+                    }}
+                  >
+                    Edit Product
+                  </button>
+
+                  <button
+                    className="delete-button"
+                    onClick={() => {
+                      dispatch(productActions.deleteTheProduct(id))
+                        .then(() => {
+                          history.push("/");
+                        })
+                        .catch(async (res) => {});
+                    }}
+                  >
+                    Delete Product
+                  </button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+
+        {/* below is end of game container */}
       </div>
     </div>
   ) : (
     <>
       <div>
-
         <div className="single-game-container">
-
           {/* left half */}
           <div className="product-left-half">
             <div className="outer-img-container">
-
-          <div className="product-image-container">
-            <img
-              className="product-img"
-              src={product.product_image}
-              alt={product.title}
-            />
-          </div>
-
+              <div className="product-image-container">
+                <img
+                  className="product-img"
+                  src={product.product_image}
+                  alt={product.title}
+                />
+              </div>
             </div>
 
-          <div className="desc-and-glitter-container">
+            <div className="desc-and-glitter-container">
+              <div className="title-descrip-con">
+                {/* <div className="ind-ques-title">{product.title}</div> */}
+                <div className="product-description-con">
+                  <span className="product-description-header">
+                    Product Description
+                  </span>
+                  <p className="product-description-span">
+                    {product.description}
+                  </p>
+                </div>
 
-          <div className="title-descrip-con">
-              {/* <div className="ind-ques-title">{product.title}</div> */}
-              <div className="product-description-con">
-               <span className="product-description-header">
-               Product Description
-                </span>
-                <p className="product-description-span">
-                 {product.description}
-                </p>
-              </div>
-
-
-              <div className="glitter-showcase">
-                <h4 className="glitter-font"> ☆*:.｡.˚✧₊⁎**･゜ﾟ･*:.｡.:*･'Glitter Factor'･*:.｡.:*･゜ﾟ･**ཽ⁎⁺˳✧༚ .｡.:*☆</h4>
-                <div className="glitter-factor-text">
-                ✧ {product.glitter_factor} ✧
+                <div className="glitter-showcase">
+                  <h4 className="glitter-font">
+                    {" "}
+                    ☆*:.｡.˚✧₊⁎**･゜ﾟ･*:.｡.:*･'Glitter
+                    Factor'･*:.｡.:*･゜ﾟ･**ཽ⁎⁺˳✧༚ .｡.:*☆
+                  </h4>
+                  <div className="glitter-factor-text">
+                    ✧ {product.glitter_factor} ✧
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          </div>
-
 
           {/* right half */}
           <div className="product-right-half">
-          <h1 className="right-title">{product.title}</h1>
+            <h1 className="right-title">{product.title}</h1>
 
-          <div className="price-container">
-                <div className="price">
-                  Price:
-                  <span className="price-number">
-                    ${product.price?.toFixed(2)}
-                    <br>
-                    </br>
-                    Release Date: {product.created_at?.slice(7,11)}{product.created_at?.slice(4,7)} {product.created_at?.slice(12, 16)}
-                  </span>
-                </div>
+            <div className="price-container">
+              <div className="price">
+                Price:
+                <span className="price-number">
+                  ${product.price?.toFixed(2)}
+                  <br></br>
+                  Release Date: {product.created_at?.slice(7, 11)}
+                  {product.created_at?.slice(4, 7)}{" "}
+                  {product.created_at?.slice(12, 16)}
+                </span>
+              </div>
+            </div>
+
+            <div className="shipping-div">
+              <div className="icon-column">
+                <i
+                  className="fas fa-shipping-fast"
+                  style={{ color: "#ffffff" }}
+                />
               </div>
 
-              <div className="shipping-div">
-                <div className="icon-column">
-							<i className="fas fa-shipping-fast" style={{color: "#ffffff"}} />
-                </div>
-
-                <div className="shipping-details">
+              <div className="shipping-details">
                 <span className="shipping-launch-day">
-                *☆Happy Launch Day!☆*
-                  </span>
+                  *☆Happy Launch Day!☆*
+                </span>
                 <br></br>
-                
                 Enjoy Free Shipping on all orders
-                </div>
+              </div>
+            </div>
 
-                  </div>
-
-                  <div className="prod-cart-container">
-                    Log in to add to cart
-                  </div>
-
+            <div className="prod-cart-container">Log in to add to cart</div>
           </div>
         </div>
       </div>
