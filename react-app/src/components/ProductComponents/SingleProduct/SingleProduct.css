@@ -218,6 +218,12 @@
   font-size: smaller;
 }
 
+.price-number input {
+  display: flex;
+  font-size: smaller;
+  background: #4caf50;
+}
+
 /*? price end */
 
 /** shipping div start */
@@ -371,6 +377,18 @@
   font-size: 1rem;
   border: none;
   border-radius: 5px;
+  background: rgb(6, 6, 6);
+  color: aliceblue;
+  box-shadow: 0px 0px 5px #c9c9c9;
+}
+
+.edit-prod-img input {
+  /* margin-bottom: 0.5rem; */
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  /* background: burlywood; */
   box-shadow: 0px 0px 5px #c9c9c9;
 }
 

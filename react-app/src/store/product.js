@@ -14,7 +14,8 @@ const getProducts = (products) => {
 const getProduct = (product) => {
     return{
         type: GET_PRODUCT,
-        payload: product
+        payload: product,
+        // id : product.id
     }
 }
 
@@ -143,13 +144,7 @@ const productsReducer = (state = initialState, action) => {
 
 
         case GET_PRODUCT: {
-            // const newState = {
-            //     ...action.payload
-            // }
             let newState = {...state};
-            // console.log(newState, 'REDUCER STATE BEFORE GETONE');
-            // newState['0'] = action.payload
-
             return newState;
         }
 

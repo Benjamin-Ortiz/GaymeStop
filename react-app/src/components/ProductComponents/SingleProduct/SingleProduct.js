@@ -15,7 +15,7 @@ function SingleProduct() {
 
   const user = useSelector((state) => state.session?.user);
   const product = useSelector((state) => state.products[`${id}`]);
-  console.log(product, "Product");
+  // console.log(product, "Product");
   //* user.cart = array
 
   //* states
@@ -99,6 +99,9 @@ function SingleProduct() {
           <div className="single-game-container">
             {/* left half */}
             <div className="product-left-half">
+
+
+
               <div className="outer-img-container">
                 <div className="product-image-container">
                   <img
@@ -106,19 +109,45 @@ function SingleProduct() {
                     src={product.product_image}
                     alt={product.title}
                   />
+                <div className="edit-prod-img">
+                  Image URL:
+                  <input
+                    type="text"
+                    placeholder="Add Image here..."
+                    value={product_image}
+                    onChange={updateProductImage}
+                  ></input>
+                </div>
                 </div>
               </div>
 
               <div className="desc-and-glitter-container">
                 <div className="title-descrip-con">
+
+
+
+
+
                   <div className="product-description-con">
                     <span className="product-description-header">
                       Product Description
                     </span>
-                    <p className="product-description-span">
-                      {product.description}
-                    </p>
+                    <div className="edit-product-description-span">
+                    <textarea
+                      type="text"
+                      placeholder="Edit Description"
+                      value={description}
+                      onChange={updateDescription}
+                      rows={3}
+                      cols={1}
+                    />
                   </div>
+
+                  </div>
+
+
+
+
 
                   <div className="glitter-showcase">
                     <h4 className="glitter-font">
@@ -126,29 +155,80 @@ function SingleProduct() {
                       Factor'･*:.｡.:*･゜ﾟ･**ཽ⁎⁺˳✧༚ .｡.:*☆
                     </h4>
                     <div className="glitter-factor-text">
-                      ✧ {product.glitter_factor} ✧
+                       <textarea
+                      className="edit-glitter-factor-textarea"
+                      type="text"
+                      value={glitter_factor}
+                      onChange={updateGlitterFactor}
+                      placeholder="Glitter Factor"
+                      rows={4}
+                      cols={30}
+                    />
+
+
+
                     </div>
                   </div>
+
+
+
+
+
                 </div>
               </div>
             </div>
 
             {/* right half */}
             <div className="product-right-half">
-              <h1 className="right-title">{product.title}</h1>
+
+
+
+
+              {/* <h1 className="right-title"> */}
+                {/* {product.title} */}
+                <input
+                    className= "right-title"
+                    type="text"
+                    placeholder="Add Image here..."
+                    value={title}
+                    onChange={updateTitle}
+                  ></input>
+                {/* </h1> */}
+
+
+
+
 
               <div className="price-container">
                 <div className="price">
-                  Price:
+                 Old Price:{" "}
                   <span className="price-number">
                     ${product.price?.toFixed(2)}
+                    <input
+                  type="number"
+                  placeholder="Price"
+                  value={price}
+                  onChange={updatePrice}
+                  step="0.01"
+                  cols={1}
+                  min = "1"
+                ></input>
+                  {/* ${product.price?.toFixed(2)} */}
+                  </span>
+
                     <br></br>
+                    <div className="release-date">
                     Release Date: {product.created_at?.slice(7, 11)}
                     {product.created_at?.slice(4, 7)}{" "}
                     {product.created_at?.slice(12, 16)}
-                  </span>
+                    </div>
                 </div>
               </div>
+
+
+
+
+
 
               <div className="shipping-div">
                 <div className="icon-column">
@@ -191,6 +271,12 @@ function SingleProduct() {
                 <button className="edit-submit-button" type="submit">
                   Apply Changes
                 </button>
+
+                <ul className="error">
+                {errors.map((ele) => (
+                  <li>{ele}</li>
+                ))}
+              </ul>
 
               </div>
             </div>
