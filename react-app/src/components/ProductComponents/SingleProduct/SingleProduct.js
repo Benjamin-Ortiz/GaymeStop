@@ -77,7 +77,7 @@ function SingleProduct() {
         setGlitterFactor(glitter_factor);
         setProductImage(product_image);
         setEditProduct(false);
-        dispatch(productActions.getTheProduct(payload.id));
+        // dispatch(productActions.getTheProduct(payload.id));
       });
     }
   };
@@ -93,9 +93,9 @@ function SingleProduct() {
     <div>
       {editProduct ?
       (
-        <>
-        <form>
-        <div>
+
+        <form onSubmit={editSubmit}>
+
           <div className="single-game-container">
             {/* left half */}
             <div className="product-left-half">
@@ -189,7 +189,7 @@ function SingleProduct() {
                 <input
                     className= "right-title"
                     type="text"
-                    placeholder="Add Image here..."
+                    placeholder="Add Title here..."
                     value={title}
                     onChange={updateTitle}
                   ></input>
@@ -281,10 +281,9 @@ function SingleProduct() {
               </div>
             </div>
           </div>
-        </div>
         </form>
-        {/* ABOVE = EDIT ON */}
-      </>
+
+
       ) : (
             <>
       <div>
