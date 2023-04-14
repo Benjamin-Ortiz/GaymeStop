@@ -225,11 +225,6 @@ function SingleProduct() {
                 </div>
               </div>
 
-
-
-
-
-
               <div className="shipping-div">
                 <div className="icon-column">
                   <i

@@ -65,12 +65,16 @@ function UserCart() {
                 <div className="item-quantity">
                   <div className="quantity-label">Quantity:
                   </div>
+
+
                   {editQuantity ? (
                     <>
                     <EditQuantity
                       item={item}
                       userId={user.id}
                       />
+
+
                     <span className="edit-cancel">
                   <button
                     className="cancel-button"
@@ -122,15 +126,49 @@ function UserCart() {
           ))}
         </div>
 
-        <div className="cart-total-container">
-          <div className="cart-subtotal">
-            Subtotal: ${subtotal.toFixed(2)}
+                  {/* right half */}
+                  <div className="cart-right-half">
+            <h1 className="cart-title">Order Summary</h1>
+
+            <div className="cart-price-container">
+              <div className="cart-price">
+              <div className="cart-shipping-details">
+                <br></br>
+              </div>
+                Subtotal: ${subtotal.toFixed(2)}
+                <br></br>
+                Estimated Tax: ${salesTax.toFixed(2)}
+                <br></br>
+
+              </div>
+            </div>
+
+            <div className="cart-shipping-div">
+              <div className="icon-column">
+                <i
+                  className="fas fa-shipping-fast"
+                  style={{ color: "#ffffff" }}
+                  />
+              </div>
+
+              <div className="shipping-details">
+                <span className="shipping-launch-day">
+                  *☆Happy Launch Day!☆*
+                </span>
+                <br></br>
+
+                Enjoy Free Shipping on all orders
+              </div>
+            </div>
+            <div className="cart-checkout-container">
+
+                <span className="cart-shipping-launch-day">
+                  *☆Total☆*
+                </span>
+               : ${total.toFixed(2)}
+
+               </div>
           </div>
-          <div className="cart-sales-tax">
-            Sales Tax (7%): ${salesTax.toFixed(2)}
-          </div>
-          <div className="cart-total">Total: ${total.toFixed(2)}</div>
-        </div>
       </div>
     </>
   ) : (
