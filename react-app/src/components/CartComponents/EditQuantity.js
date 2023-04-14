@@ -29,7 +29,7 @@ function EditQuantity({ item, userId }) {
 
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="edit-input-save" onSubmit={handleSubmit}>
       <input
         type="number"
         min="1"
@@ -38,7 +38,7 @@ function EditQuantity({ item, userId }) {
         value={tempQuantity}
         onChange={(e) => setTempQuantity(e.target.value)}
       />
-      <button className="save-button" type="submit">Save</button>
+      <button className="save-button" type="submit">Update</button>
 
     </form>
   );

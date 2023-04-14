@@ -12,8 +12,8 @@
 
   }
 
-  .search-bar > input {
-    color: rgb(255, 255, 255);
+  .search-bar input {
+    color: rgb(255, 0, 0);
     border: none;
     padding: 10px;
     outline-width: 0;

@@ -26,7 +26,7 @@ function SearchBar() {
 
   return (
     <div className="search-bar">
-    <i className="fa-solid fa-magnifying-glass"></i>
+<i className="fas fa-binoculars" style={{color: "#ffffff"}}/>
     <input
       className="search_input"
       type="search"

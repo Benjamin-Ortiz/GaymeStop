@@ -11,7 +11,6 @@ function UserCart() {
 
   const allCartItems = useSelector((state) => Object.values(state.cart));
 
-
   const [editQuantity, setEditQuantity] = useState(false);
 
   const [quantity, setQuantity] = useState({});
@@ -23,6 +22,13 @@ function UserCart() {
     }, 0);
   };
 
+  const quantitySum = (items) => {
+    return items.reduce((total, item) => {
+      console.log(total, "TOTAL QUANTITY", item.quantity );
+      return total + item.quantity
+    }, 0)
+  }
+
   const calculateSalesTax = (subtotal) => {
     const taxRate = 0.07;
     return subtotal * taxRate;
@@ -31,21 +37,24 @@ function UserCart() {
   const subtotal = cartSum(allCartItems);
   const salesTax = calculateSalesTax(subtotal);
   const total = subtotal + salesTax;
+  const totalCartQuantity = quantitySum(allCartItems)
+
 
   useEffect(() => {
     dispatch(cartActions.getTheCart(user?.id));
   }, [dispatch, editQuantity]);
 
-
   return user && allCartItems ? (
     <>
-      <div className="cart-header">Your Shopping Cart</div>
+      <div className="cart-header">
+        {/* <i className="fas fa-binoculars" style={{ color: "#ffffff" }} /> */}
+
+        ☆*:.｡.˚✧₊⁎{totalCartQuantity} Items**ཽ⁎⁺˳✧༚ .｡.:*☆
+      </div>
       <div className="cart-container">
         <div className="cart-items">
-
           {allCartItems.map((item, i) => (
-
-            <div className="cart-item" key={item.product.id} >
+            <div className="cart-item" key={item.product.id}>
               <div className="item-image">
                 <NavLink
                   className="product-nav-link"
@@ -63,142 +72,135 @@ function UserCart() {
                 </NavLink>
                 <div className="item-price">${item.product.price}</div>
                 <div className="item-quantity">
-                  <div className="quantity-label">Quantity:
-                  </div>
-
+                  <div className="quantity-label">✧Quantity:</div>
 
                   {editQuantity ? (
                     <>
-                    <EditQuantity
-                      item={item}
-                      userId={user.id}
-                      />
-
-
-                    <span className="edit-cancel">
-                  <button
-                    className="cancel-button"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setQuantity(item.quantity);
-                      setEditQuantity(false);
-                    }}
-                    >
-                    Cancel
-                  </button>
-                </span>
+                      <EditQuantity item={item} userId={user.id} />
+                      <span className="edit-cancel">
+                        <button
+                          className="cancel-button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setQuantity(item.quantity);
+                            setEditQuantity(false);
+                          }}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          className="delete-button"
+                          onClick={() => {
+                            dispatch(
+                              cartActions.deleteTheCartItem(item.id)
+                            ).then(() => {
+                              dispatch(cartActions.getTheCart(user.id));
+                            });
+                          }}
+                        >
+                          Remove
+                        </button>
+                      </span>
                     </>
+                  ) : (
+                    <>
+                      {`${item.quantity}✧`}
+                      <div className="quantity-container">
+                        <button
+                          className="change-quantity-button"
+                          onClick={() => {
+                            setQuantity({ ...quantity, [i]: item.quantity });
+                            setEditQuantity(true);
+                          }}
+                        >
+                          Change quantity
+                        </button>
+                      </div>
 
-) : (
-  <>
-                      {item.quantity}
-                    <div className="quantity-container">
-                      <button className="change-quantity-button"
+                      <button
+                        className="delete-button"
                         onClick={() => {
-                          setQuantity({ ...quantity, [i]: item.quantity });
-                          setEditQuantity(true);
+                          dispatch(cartActions.deleteTheCartItem(item.id)).then(
+                            () => {
+                              dispatch(cartActions.getTheCart(user.id));
+                            }
+                          );
                         }}
                       >
-                        Change quantity
+                        Remove
                       </button>
-                    </div>
-                  </>
-                  )
-                }
-
+                    </>
+                  )}
                 </div>
-              </div>
-              <div className="item-actions">
-                <button
-                  className="delete-button"
-                  onClick={() => {
-                    dispatch(cartActions.deleteTheCartItem(item.id)).then(
-                      () => {
-                        dispatch(cartActions.getTheCart(user.id));
-                      }
-                    );
-                  }}
-                >
-                  Remove
-                </button>
               </div>
             </div>
           ))}
         </div>
 
-                  {/* right half */}
-                  <div className="cart-right-half">
-            <h1 className="cart-title">Order Summary</h1>
+        {/* right half */}
+        <div className="cart-right-half">
+          <h1 className="cart-title">Order Summary</h1>
 
-            <div className="cart-price-container">
-              <div className="cart-price">
+          <div className="cart-price-container">
+            <div className="cart-price">
               <div className="cart-shipping-details">
                 <br></br>
               </div>
-                Subtotal: ${subtotal.toFixed(2)}
-                <br></br>
-                Estimated Tax: ${salesTax.toFixed(2)}
-                <br></br>
-
-              </div>
+              Subtotal: ${subtotal.toFixed(2)}
+              <br></br>
+              Estimated Tax: ${salesTax.toFixed(2)}
+              <br></br>
             </div>
-
-            <div className="cart-shipping-div">
-              <div className="icon-column">
-                <i
-                  className="fas fa-shipping-fast"
-                  style={{ color: "#ffffff" }}
-                  />
-              </div>
-
-              <div className="shipping-details">
-                <span className="shipping-launch-day">
-                  *☆Happy Launch Day!☆*
-                </span>
-                <br></br>
-
-                Enjoy Free Shipping on all orders
-              </div>
-            </div>
-            <div className="cart-checkout-container">
-
-                <span className="cart-shipping-launch-day">
-                  *☆Total☆*
-                </span>
-               : ${total.toFixed(2)}
-
-               </div>
           </div>
+
+          <div className="cart-shipping-div">
+            <div className="icon-column">
+              <i
+                className="fas fa-shipping-fast"
+                style={{ color: "#ffffff" }}
+              />
+            </div>
+
+            <div className="shipping-details">
+              <span className="shipping-launch-day">*☆Happy Launch Day!☆*</span>
+              <br></br>
+              Enjoy Free Shipping on all orders
+            </div>
+          </div>
+          <div className="cart-checkout-container">
+            <span className="cart-shipping-launch-day">*☆Total☆*</span>: $
+            {total.toFixed(2)}
+          </div>
+        </div>
       </div>
     </>
   ) : (
     <>
-    <div className="not-logged-in-cart">
-      <div>
-      <h1>WHAT?!</h1>
-      <h2> This isn't your cart!</h2>
-      <h2> Get out of here!</h2>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <br></br>
-      <p>you terribly silly silly goose</p>
+      <div className="cart-header">Totally not your Cart</div>
+      <div className="not-logged-in-cart">
+        <div>
+          <h1>WHAT?!</h1>
+          <h2> This isn't your cart!</h2>
+          <h2> Get out of here!</h2>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <p>you terribly silly silly goose</p>
+        </div>
+        <div className="goose">
+          <img src="https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/goose.gif"></img>
+        </div>
       </div>
-      <div className="goose">
-      <img src="https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/goose.gif"></img>
-      </div>
-    </div>
-
-
     </>
   );
 }

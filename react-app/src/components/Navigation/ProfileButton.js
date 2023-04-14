@@ -60,6 +60,8 @@ function ProfileButton({ user }) {
             <li>
               <Link to='/'>
               <button onClick={handleLogout}>Log Out</button>
+              <i className="fas fa-portal-exit" style={{color: "#ffffff"}}/>
+
               </Link>
             </li>
             <NavLink
@@ -85,7 +87,7 @@ function ProfileButton({ user }) {
             />
           </>
         )}
-        
+
       </ul>
     </>
   );
