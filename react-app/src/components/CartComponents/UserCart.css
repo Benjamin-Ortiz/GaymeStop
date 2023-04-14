@@ -179,9 +179,12 @@
 }
 
 .price-number input {
+  background-color: #000000;
+  border: 2px aliceblue solid;
+  border-radius: 5px;
+  text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+  color: #fff;
   display: flex;
-  font-size: smaller;
-  background: #4caf50;
 }
 
 /*? price end */

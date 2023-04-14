@@ -1,7 +1,7 @@
 .search-res-title {
     /* background: radial-gradient(black ,red, orange,yellow, green, blue, purple); */
-       color: rgb(255, 255, 255);
-       /* text-align: center; */
+       color: rgb(135, 15, 109);
+       text-shadow: 1px 1px 2px rgb(255, 255, 255), 0 0 1em rgb(253, 253, 253), 0 0 0.2em rgb(245, 245, 245);
        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
        font-size: 2rem ;
        padding: 1rem;
@@ -36,6 +36,8 @@
 
    .mapped-results-container:hover {
     box-shadow: 0px 10px 40px rgb(31, 43, 210);
+    text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+    color: aliceblue;
 
    }
 

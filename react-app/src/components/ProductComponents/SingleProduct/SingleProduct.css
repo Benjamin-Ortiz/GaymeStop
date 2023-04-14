@@ -227,7 +227,7 @@
 .price-number input {
   display: flex;
   font-size: smaller;
-  background: #4caf50;
+  background-color: #606060;
 }
 
 /*? price end */
@@ -401,37 +401,42 @@
 }
 
 .edit-button {
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  background-color: #4caf50;
-  color: #fff;
-  cursor: pointer;
-}
-
-.edit-submit-button {
-  margin-top: 0.5rem;
-  padding: 0.5rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 5px;
-  background-color: #4caf50;
-  color: #fff;
-  cursor: pointer;
-}
-
-.cancel-button {
-  margin-right: 0.5rem;
-  padding: 0.5rem;
-  font-size: 1rem;
+  margin-right: 0.5em;
+  padding: 0.5em;
+  font-size: 1em;
   border: 2px aliceblue solid;
   border-radius: 5px;
-  background-color: #4caf50;
+  background-color: #000000;
   text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
   color: #fff;
   cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.edit-submit-button {
+  margin-right: 0.5em;
+  padding: 0.5em;
+  font-size: 1em;
+  border: 2px aliceblue solid;
+  border-radius: 5px;
+  background-color: #000000;
+  text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.cancel-button {
+  margin-right: 0.5em;
+  padding: 0.5em;
+  font-size: 1em;
+  border: 2px aliceblue solid;
+  border-radius: 5px;
+  background-color: #000000;
+  text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
+  color: #fff;
+  cursor: pointer;
+  margin-bottom: 5px;
 }
 
 .ques-edit-crud-buttons {

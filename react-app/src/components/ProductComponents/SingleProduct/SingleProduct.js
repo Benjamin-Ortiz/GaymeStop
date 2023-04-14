@@ -243,7 +243,8 @@ function SingleProduct() {
               </div>
               <div className="prod-cart-container">
 
-                <div className="edit-button">
+                {/* <div className="edit-button"> */}
+
                   <span className="cancel-button-span">
                     <button
                       className="cancel-button"
@@ -261,7 +262,7 @@ function SingleProduct() {
                       Cancel
                     </button>
                   </span>
-                </div>
+                {/* </div> */}
                 {/* the submit button has tbe outside of the div. It needs to be a direct child of form */}
                 <button className="edit-submit-button" type="submit">
                   Apply Changes
