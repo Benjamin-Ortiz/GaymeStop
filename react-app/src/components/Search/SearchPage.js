@@ -28,7 +28,6 @@ function SearchPage() {
 
        for (let i = 0; i < array.length; i++) {
         const id = array[i];
-        console.log(id, 'id');
 
         if (!resArray.includes(id)){
           resArray.push(id)
