@@ -22,7 +22,7 @@ function ProductsIndex() {
         </div>
 
       <div className="mapped-games">
-      {allProducts && allProducts.reverse().map((product) => {
+      {allProducts && allProducts?.reverse().map((product) => {
         // {product
         if(product.id && product.title){
           return (

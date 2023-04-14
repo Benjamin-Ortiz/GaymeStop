@@ -198,8 +198,11 @@
   background: rgb(0, 0, 0);
   color: aliceblue;
   text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
-  font-size: 370%;
-  word-break: keep-all;
+  /* font-size: 370%; */
+  /* font-size: auto; */
+/* word-break: break-all; */
+  /* overflow:hidden; */
+  /* overflow-x: ; */
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
 }
 
