@@ -18,6 +18,7 @@
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(2, 1fr);
     margin-top: 20px;
+    margin-left: 5px;
 }
 
 .mapped-game-container {
@@ -25,14 +26,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgb(151, 99, 155);
+
+    background-color: rgb(0, 0, 0);
+    border: 2px rgb(91, 91, 91) solid;
     border-top: 50px red;
     border-radius: 5px;
+
     padding-right: 12px;
     padding-left: 12px;
+    padding-top: 12px;
+
     margin-bottom: 50px;
-    margin: 20px;;
-    margin-left: auto;
+    margin: 20px;
+    /* margin-left: auto; */
     box-sizing: border-box;
     box-shadow: 0px 3px 8px rgb(0, 0, 0);
     transition: all 100ms ease-in;
@@ -43,13 +49,13 @@
 
 
   .mapped-game-container:hover {
-
-
     background:  linear-gradient(to right, rgb(213, 44, 0), rgb(226, 150, 136), rgb(255, 255, 255) 45%, rgb(255, 255, 255), rgb(255, 255, 255) 55%, rgb(210, 127, 164), rgb(162, 2, 98));
     background-color: rgb(255, 255, 255);
     box-shadow: -15px -1px 15px rgb(195, 78, 0), 15px 1px 15px rgb(162, 2, 98),  0px 10px 10px rgb(233, 233, 234), 0px -10px 10px rgb(255, 255, 255);
+    text-shadow: 1px 1px 2px rgb(255, 0, 128), 0 0 1em rgb(195, 78, 0), 0 0 0.2em blue;
+    transition: all 100ms ease-in;
 
-
+    border: none;
   }
 
 
@@ -58,6 +64,8 @@
     box-shadow: -15px -1px 15px rgb(8, 161, 128), 15px 1px 15px rgb(102, 43, 196),  0px 10px 10px rgb(233, 233, 234), 0px -10px 10px rgb(255, 255, 255);
     text-shadow: 1px 1px 2px rgb(255, 0, 128), 0 0 1em blue, 0 0 0.2em blue;
     color: aliceblue;
+
+    border: none;
   }
 
 
