@@ -16,7 +16,18 @@ function Navigation({ isLoaded }){
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const sessionUser = useSelector(state => state.session.user);
+	const allCartItems = useSelector((state) => Object.values(state.cart));
 
+	console.log(allCartItems, 'CART');
+
+
+	const quantitySum = (items) => {
+		return items.reduce((total, item) => {
+		  return total + item.quantity
+		}, 0)
+	  }
+
+  const totalCartQuantity = quantitySum(allCartItems)
 
 
 	const handleDemoLogin = (e) => {
@@ -49,14 +60,31 @@ function Navigation({ isLoaded }){
 
 			{/* right side */}
 			{isLoaded && (
+				<>
 				<div className='profile-cart-container'>
 					<ProfileButton user={sessionUser} />
-					<NavLink exact to ={`/carts/${sessionUser.id}/cart`}>
+
+					{/* <div > */}
+					<NavLink className='cart-and-ping'
+					 exact to ={`/carts/${sessionUser.id}/cart`}>
+
+
         				<button>
-							<i className="fas fa-shopping-cart" />
+
+						<i className="fas fa-shopping-cart" >
+
+							</i>
+
+
+						<span className='cart-ping'>
+						{totalCartQuantity}
+							</span>
+
         					</button>
     			</NavLink>
+					{/* </div> */}
 				</div>
+			</>
 			)}
 
 		</div>

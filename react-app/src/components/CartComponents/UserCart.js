@@ -24,7 +24,7 @@ function UserCart() {
 
   const quantitySum = (items) => {
     return items.reduce((total, item) => {
-      console.log(total, "TOTAL QUANTITY", item.quantity );
+
       return total + item.quantity
     }, 0)
   }
