@@ -59,26 +59,13 @@ ul {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-/*
-.rainbow-text:hover {
-  font-size: 2rem;
-  font-weight: 900;
-  color: rgb(234, 234, 234);
-} */
+
 
 .white-text{
   font-size: 2rem;
   font-weight: 900;
   color: rgb(234, 234, 234);
 }
-
-/* .white-text:hover{
-  font-size: 2rem;
-  font-weight: 900;
-  background: linear-gradient(to right, red, orange,yellow, green, blue, indigo, violet);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-} */
 
 .sub-logo{
   margin: 0%;
@@ -103,10 +90,13 @@ ul {
 .fa-shopping-cart{
   /* background-color: aqua; */
   position: absolute ;
+  margin-top: 5px;
+
 }
 
 .cart-and-ping button{
   position: relative;
+  /* object-position: 50%; */
 
 }
 
@@ -115,7 +105,7 @@ ul {
   font-size: 9px;
   color: rgb(255, 255, 255);
   margin-left: 9px;
-  margin-top: -5px;
+  margin-top: -2px;
   border: 1px red solid;
   border-radius: 50px;
   background: red;

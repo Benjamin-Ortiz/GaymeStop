@@ -1,132 +1,122 @@
-import React, { useEffect, useState } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import ProfileButton from './ProfileButton';
-import * as productActions from '../../store/product'
-import * as sessionActions from '../../store/session'
+import React, { useEffect, useState } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import ProfileButton from "./ProfileButton";
+import * as productActions from "../../store/product";
+import * as sessionActions from "../../store/session";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import OpenModalButton from "../OpenModalButton";
-import SearchBar from '../Search/SearchBar';
+import SearchBar from "../Search/SearchBar";
 
-import './Navigation.css';
+import "./Navigation.css";
 
+function Navigation({ isLoaded }) {
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const sessionUser = useSelector((state) => state.session.user);
+  const allCartItems = useSelector((state) => Object.values(state.cart));
 
-function Navigation({ isLoaded }){
-	const dispatch = useDispatch();
-	const history = useHistory();
-	const sessionUser = useSelector(state => state.session.user);
-	const allCartItems = useSelector((state) => Object.values(state.cart));
+  console.log(allCartItems, "CART");
 
-	console.log(allCartItems, 'CART');
+  const quantitySum = (items) => {
+    return items?.reduce((total, item) => {
+      return total + item?.quantity;
+    }, 0);
+  };
 
+  const totalCartQuantity = quantitySum(allCartItems);
 
-	const quantitySum = (items) => {
-		return items.reduce((total, item) => {
-		  return total + item.quantity
-		}, 0)
-	  }
+  const handleDemoLogin = (e) => {
+    const id = 1;
+    const email = "demo@aa.io";
+    const password = "password";
+    e.preventDefault();
+    dispatch(sessionActions.login(email, password));
+    history.push("/");
+  };
 
-  const totalCartQuantity = quantitySum(allCartItems)
+  useEffect(() => {
+    dispatch(productActions.getTheProducts());
+  }, [dispatch]);
 
+  return sessionUser ? (
+    <div className="nav-bar">
+      <div className="gaymestop-nav-button">
+        {/* left */}
+        <NavLink exact to="/">
+          <span className="rainbow-text">Gayme</span>
+          <span className="white-text">Stop</span>
+        </NavLink>
+        <h6 className="sub-logo">Power to the Gaymers</h6>
+      </div>
 
-	const handleDemoLogin = (e) => {
-		const id = 1;
-		const email = "demo@aa.io";
-		const password = "password";
-		e.preventDefault();
-		dispatch(sessionActions.login(email, password));
-		history.push("/");
-	};
+      <SearchBar />
 
-	useEffect(() => {
-		dispatch(productActions.getTheProducts())
-	  }, [dispatch]);
+      {/* right side */}
+      {isLoaded && (
+        <>
+          <div className="profile-cart-container">
+            <ProfileButton user={sessionUser} />
 
-	return sessionUser ? (
-		<div className='nav-bar'>
-			<div className='gaymestop-nav-button'>
-				{/* left */}
-				<NavLink exact to="/">
-				<span className='rainbow-text'>Gayme</span>
-				<span className='white-text'>Stop</span>
-					</NavLink>
-				<h6 className='sub-logo'>Power to the Gaymers</h6>
-			</div>
+            <NavLink
+              className="cart-and-ping"
+              exact
+              to={`/carts/${sessionUser.id}/cart`}
+            >
+              <button>
+                <i className="fas fa-shopping-cart"></i>
 
+                {totalCartQuantity ? (
+                  <>
+                    <span className="cart-ping">{totalCartQuantity}</span>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </button>
+            </NavLink>
 
-			<SearchBar />
+            {/* </div> */}
+          </div>
+        </>
+      )}
+    </div>
+  ) : (
+    <div className="nav-bar">
+      <div className="gaymestop-nav-button">
+        {/* left */}
+        <NavLink exact to="/">
+          <span className="rainbow-text">Gayme</span>
+          <span className="white-text">Stop</span>
+        </NavLink>
+        <h6 className="sub-logo">Power to the Gaymers</h6>
+      </div>
 
+      {/* middle */}
+      <SearchBar />
 
-			{/* right side */}
-			{isLoaded && (
-				<>
-				<div className='profile-cart-container'>
-					<ProfileButton user={sessionUser} />
-
-					{/* <div > */}
-					<NavLink className='cart-and-ping'
-					 exact to ={`/carts/${sessionUser.id}/cart`}>
-
-
-        				<button>
-
-						<i className="fas fa-shopping-cart" >
-
-							</i>
-
-
-						<span className='cart-ping'>
-						{totalCartQuantity}
-							</span>
-
-        					</button>
-    			</NavLink>
-					{/* </div> */}
-				</div>
-			</>
-			)}
-
-		</div>
-	):
-
-	(
-	<div className='nav-bar'>
-			<div className='gaymestop-nav-button'>
-				{/* left */}
-				<NavLink exact to="/">
-				<span className='rainbow-text'>Gayme</span>
-				<span className='white-text'>Stop</span>
-					</NavLink>
-				<h6 className='sub-logo'>Power to the Gaymers</h6>
-			</div>
-
-		{/* middle */}
-		<SearchBar />
-
-		{/* right side */}
-		{isLoaded && (
-			<div>
-
-	<button className='demo_login_button'
-	onClick={handleDemoLogin}>Demo Login</button>
-	 <OpenModalButton
-              buttonText="Log In"
+      {/* right side */}
+      {isLoaded && (
+        <div>
+          <button className="demo_login_button" onClick={handleDemoLogin}>
+            Demo Login
+          </button>
+          <OpenModalButton
+            buttonText="Log In"
             //   onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
+            modalComponent={<LoginFormModal />}
+          />
 
-            <OpenModalButton
-              buttonText="Sign Up"
+          <OpenModalButton
+            buttonText="Sign Up"
             //   onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
-			</div>
-		)}
-
-	</div>
-	)
+            modalComponent={<SignupFormModal />}
+          />
+        </div>
+      )}
+    </div>
+  );
 }
-
 
 export default Navigation;
