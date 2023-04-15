@@ -41,17 +41,35 @@
     color: aliceblue; */
   }
 
-  .mapped-product-title {
-    /* text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue; */
+
+  .mapped-game-container:hover {
+
+
+    background:  linear-gradient(to right, rgb(213, 44, 0), rgb(226, 150, 136), rgb(255, 255, 255) 45%, rgb(255, 255, 255), rgb(255, 255, 255) 55%, rgb(210, 127, 164), rgb(162, 2, 98));
+    background-color: rgb(255, 255, 255);
+    box-shadow: -15px -1px 15px rgb(195, 78, 0), 15px 1px 15px rgb(162, 2, 98),  0px 10px 10px rgb(233, 233, 234), 0px -10px 10px rgb(255, 255, 255);
+
+
+  }
+
+
+  .mapped-game-container:active {
+    background: linear-gradient(to right, rgb(7, 141, 111), rgb(152, 202, 153), rgb(255, 255, 255) 45%, rgb(255, 255, 255), rgb(255, 255, 255) 55%, rgb(205, 208, 234), rgb(123, 173, 226) 70%, rgb(69, 76, 189), rgb(63, 26, 121));
+    box-shadow: -15px -1px 15px rgb(8, 161, 128), 15px 1px 15px rgb(102, 43, 196),  0px 10px 10px rgb(233, 233, 234), 0px -10px 10px rgb(255, 255, 255);
+    text-shadow: 1px 1px 2px rgb(255, 0, 128), 0 0 1em blue, 0 0 0.2em blue;
     color: aliceblue;
   }
 
-.mapped-game-container:hover {
-  box-shadow: 0px 10px 40px rgb(178, 56, 189);
-  text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
-  color: aliceblue;
 
-}
+  .mapped-product-title {
+    /* text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue; */
+    color: aliceblue;
+    text-align: center;
+  }
+
+  .mapped-product-price {
+    color: rgb(255, 255, 255);
+   }
 
  .mapped-product-img {
   float: left;
