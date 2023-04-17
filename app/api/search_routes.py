@@ -28,8 +28,6 @@ def get_results(query):
     glitter_factor_search = Product.query.filter(Product.glitter_factor.contains(query))
 
     if title_search:
-    #    results.append(title_search)
-        #  print([product.to_dict() for product in title_search], " title searchhhhhh " *9)
         title_res = {
              'titleRes' : [product.id for product in title_search],
              'descriptionRes' : [product.id for product in description_search],

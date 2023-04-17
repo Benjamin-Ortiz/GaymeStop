@@ -47,7 +47,6 @@ function UserCart() {
   return user && allCartItems ? (
     <>
       <div className="cart-header">
-        {/* <i className="fas fa-binoculars" style={{ color: "#ffffff" }} /> */}
 
         ☆*:.｡.˚✧₊⁎{totalCartQuantity} Items**ཽ⁎⁺˳✧༚ .｡.:*☆
       </div>

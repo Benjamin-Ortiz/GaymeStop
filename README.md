@@ -132,13 +132,54 @@ A logged in user can:
 
 ## This clone is a work in progress, these features will be available in the future...
 - ## Ratings
-    -Users will be able to write reviews for products and rate them out of 5 stars
+    -Users will be able to:
+     - write reviews for products and rate them out of 5 stars
 
+- ## Amazon Web Services Simple Storage Service (AWS S3)
+   -Users will upgrade from providing URL links for Product Images to:
+   - Uploading an image file from their local device
+   - Storing image data to the Amazon cloud
+
+- ## User Public Page/Private Settings
+   -Users will be able to view/edit their private information, and choose to have an optional public page and what information to display
+
+   -A User can chose to display this data on their Public Profile:
+
+      - Username (mandatory with Public Profile option)
+      - Profile Picture
+      - "Member Since" Date
+      - Products
+      - Category Preferences
+      - Wishlist
+      - Reviews
+
+
+   -Private Settings will house a users public/private information with the option to edit:
+
+      - Username, Email, Password
+      - Phone Number
+      - Shipping Address
+      - Saved Credit/Debit Cards
+      - Public Profile option
+
+
+- ## WishList
+   -Users will have a Wishlist they can:
+
+      - View from their cart
+      - Post on their Public Page
+      - Add/Remove from either the Product Page or in Private settings
 - ## Most Popular Products Page
    -Dedicated to the Products with the highest ratings
 
 - ## Newest Products Page
    -See the latest posted Products
 
-- ## Multidimensional Search
-   -Products will be organized by tags which all users can use to explore categories
+- ## Multidimensional Search/Filter
+   -Products will be organized by tags which all users can use to filter categories in their search
+
+   - Tags to be included:
+
+         - Product Genre
+         - Price Range
+         - Sexuality Featured in Product

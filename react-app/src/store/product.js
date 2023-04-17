@@ -91,8 +91,7 @@ export const postTheProduct = (productData) => async (dispatch) => {
 // * EDIT
 
 export const putTheProduct = (product) => async dispatch => {
-    // const {id, title, price, description, glitter_factor, product_image} = product
-    // console.log(product, "THUNKK");
+
 
     const response = await fetch(`/api/products/${product.id}`, {
       method: "PUT",
@@ -134,7 +133,7 @@ const productsReducer = (state = initialState, action) => {
 
         case GET_PRODUCTS:{
             let newState = {...state};
-            // console.log(newState, 'REDUCER STATE BEFORE GETALL');
+
             action.payload.products.forEach((product) => { //* returns products indexed by its pk
                     newState[product.id] = product;
                   });

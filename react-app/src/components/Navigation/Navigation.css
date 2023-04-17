@@ -1,27 +1,19 @@
 .profile-dropdown {
   position: absolute;
   background: linear-gradient(red, orange, green, blue, indigo, violet);
-  border-radius: 10px 100px / 120px;
+  border-radius: 100px 10px / 120px;
   margin-top: 52px;
   z-index: 10;
 }
 
-ul {
+.profile-dropdown li {
+  color: white;
   position: relative;
 }
 
 .hidden {
   display: none;
 }
-
-/* .nav-bar {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  background-color: rgb(177, 154, 197);
-
-} */
 
 
 .nav-bar {
@@ -74,9 +66,8 @@ ul {
 }
 
 .profile-cart-container{
-  /* margin-right: 50px; */
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
   width:  150px;
   height: 60px;
   z-index: index 10;;
@@ -88,7 +79,6 @@ ul {
 }
 
 .fa-shopping-cart{
-  /* background-color: aqua; */
   position: absolute ;
   margin-top: 5px;
 
@@ -96,15 +86,13 @@ ul {
 
 .cart-and-ping button{
   position: relative;
-  /* object-position: 50%; */
+
 
 }
 
 .cart-ping{
   position: absolute ;
   font-size: 12px;
-  /* font-weight: bolder; */
-  /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
   color: rgb(255, 255, 255);
   margin-left: 10px;
   margin-top: -7px;

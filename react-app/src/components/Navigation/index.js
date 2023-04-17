@@ -18,7 +18,6 @@ function Navigation({ isLoaded }) {
   const sessionUser = useSelector((state) => state.session.user);
   const allCartItems = useSelector((state) => Object.values(state.cart));
 
-  console.log(allCartItems, "CART");
 
   const quantitySum = (items) => {
     return items?.reduce((total, item) => {
