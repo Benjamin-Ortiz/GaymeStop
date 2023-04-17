@@ -1,7 +1,10 @@
-# Flask React Project
+# GaymeStop
 
-This is the starter for the Flask React project.
+## Power to the Gaymers!
 
+GaymeStop, a GameStop clone, where users can browse, search, and (mock) purchase LGBTQ+ curated video games with their own representational emphasis known as "Glitter Factor".
+
+#Images
 ## Getting started
 1. Clone this repository (only this branch)
 
@@ -146,7 +149,3 @@ your site just below the name of the Web Service at the top of the page.
 
 [Render.com]: https://render.com/
 [Dashboard]: https://dashboard.render.com/
-
-
-
-

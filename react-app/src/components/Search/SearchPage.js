@@ -3,6 +3,7 @@ import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as searchActions from '../../store/search'
 import * as productActions from "../../store/product";
+import { getTheCart } from '../../store/cart';
 import "./SearchPage.css"
 import { getTheProduct } from '../../store/product';
 
@@ -10,6 +11,7 @@ import { getTheProduct } from '../../store/product';
 function SearchPage() {
   const {query} = useParams();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.session?.user);
   const [isLoaded, setIsLoaded] = useState(false);
   const allProducts = useSelector((state) => state.products)
   const results = useSelector((state) => Object.values(state.searchResults)) //* array
@@ -19,6 +21,7 @@ function SearchPage() {
 
   useEffect(() => {
     dispatch(productActions.getTheProducts());
+    dispatch(getTheCart(user?.id))
     dispatch(searchActions.getTheSearch(query))
   }, [dispatch])
 
@@ -75,8 +78,8 @@ function SearchPage() {
    :  (
   <>
 
-    <h1>NO WAY!</h1>
-    <div>No results Matched your Search </div>
+    <h1 className='no-res'>NO WAY!</h1>
+    <div className='no-res'>No results Matched your Search </div>
       <img src="https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/goose.gif"></img>
     <div>
       {/* <h2>This isn't your cart!</h2>

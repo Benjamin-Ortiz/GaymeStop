@@ -54,3 +54,14 @@
      display: flex;
      justify-content: space-between;
    }
+
+   .no-res{
+    /* text-align: center; */
+    padding-left: 50px;
+    color: antiquewhite;
+   }
+
+   .silly-goose{
+    color: antiquewhite;
+    text-align: center;
+   }
