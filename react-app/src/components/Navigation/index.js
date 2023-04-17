@@ -8,6 +8,7 @@ import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 import OpenModalButton from "../OpenModalButton";
 import SearchBar from "../Search/SearchBar";
+import AboutLinks from "./AboutLinks";
 
 import "./Navigation.css";
 
@@ -51,6 +52,8 @@ function Navigation({ isLoaded }) {
         <h6 className="sub-logo">Power to the Gaymers</h6>
       </div>
 
+      <AboutLinks />
+
       <SearchBar />
 
       {/* right side */}
@@ -65,7 +68,7 @@ function Navigation({ isLoaded }) {
               to={`/carts/${sessionUser.id}/cart`}
             >
               <button>
-                <i className="fas fa-shopping-cart"></i>
+                <i className="fas fa-shopping-cart  fa-lg"></i>
 
                 {totalCartQuantity ? (
                   <>
@@ -94,6 +97,7 @@ function Navigation({ isLoaded }) {
       </div>
 
       {/* middle */}
+      <AboutLinks />
       <SearchBar />
 
       {/* right side */}

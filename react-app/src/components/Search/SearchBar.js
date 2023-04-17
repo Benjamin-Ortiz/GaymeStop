@@ -8,7 +8,7 @@ import "./SearchBar.css"
 function SearchBar() {
     const dispatch = useDispatch();
 	  const history = useHistory();
-    
+
     const [searchQuery, setSearchQuery] = useState("");
 
     const search = (e) => {
@@ -27,7 +27,7 @@ function SearchBar() {
 
   return (
     <div className="search-bar">
-<i className="fas fa-binoculars" style={{color: "#ffffff"}}/>
+<i className="fas fa-binoculars fa-lg" style={{color: "#ffffff"}}/>
     <input
       className="search_input"
       type="search"
