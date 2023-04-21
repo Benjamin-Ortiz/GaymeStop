@@ -118,7 +118,9 @@
 .product-description-span {
   font-size: 23px;
   font-family: monospace;
-  /* padding-left: 2%; */
+  padding-left: 2%;
+  padding-right: 2%;
+
 }
 
 .edit-product-description-span textarea {

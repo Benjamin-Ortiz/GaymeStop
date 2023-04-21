@@ -21,6 +21,10 @@ function ProductsIndex() {
         Check out the Latest Gaymes
         </div>
 
+        <div className="showcase-container">
+
+        </div>
+
       <div className="mapped-games">
       {allProducts && allProducts?.reverse().map((product) => {
         // {product
