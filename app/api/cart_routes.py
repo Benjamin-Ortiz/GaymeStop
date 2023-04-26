@@ -99,13 +99,13 @@ def edit_cart_item_quantity(id):
 
      # user = current_user
      cart_item_product = CartItem.query.get(id)
-   
+
 
 
      if (cart_item_product):
             if form.validate_on_submit():
                cart_item_product.quantity = form.data['quantity']
-             
+
                db.session.commit()
                return cart_item_product.to_dict()
             else:

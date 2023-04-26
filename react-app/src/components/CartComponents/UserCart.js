@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { useDispatch, useSelector } from "react-redux";
-import * as cartActions from "../../store/cart";
 import { NavLink } from "react-router-dom";
-import "./UserCart.css";
+import CheckoutForm from "../CheckoutComponents/CheckoutForm";
+import * as cartActions from "../../store/cart";
 import EditQuantity from "./EditQuantity";
+import "./UserCart.css";
 
 function UserCart() {
   const dispatch = useDispatch();
+  const history = useHistory()
   const user = useSelector((state) => state.session?.user);
 
   const allCartItems = useSelector((state) => Object.values(state.cart));
@@ -15,6 +18,13 @@ function UserCart() {
 
   const [quantity, setQuantity] = useState({});
   const [errors, setErrors] = useState([]);
+
+  const goToCheckout = (userId) => {
+
+    if (user?.id)
+      history.push(`/carts/${user.id}/cart/checkout`)
+
+  }
 
   const cartSum = (items) => {
     return items.reduce((total, item) => {
@@ -169,6 +179,10 @@ function UserCart() {
           <div className="cart-checkout-container">
             <span className="cart-shipping-launch-day">*☆Total☆*</span>: $
             {total.toFixed(2)}
+            <button className="checkout-button"
+            onClick={()=> { goToCheckout(user?.id) }}
+            >PROCEED TO CHECKOUT
+            </button>
           </div>
         </div>
       </div>

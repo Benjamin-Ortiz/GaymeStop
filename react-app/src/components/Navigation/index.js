@@ -63,8 +63,7 @@ function Navigation({ isLoaded }) {
 
             <NavLink
               className="cart-and-ping"
-              exact
-              to={`/carts/${sessionUser.id}/cart`}
+              exact to={`/carts/${sessionUser.id}/cart`}
             >
               <button>
                 <i className="fas fa-shopping-cart  fa-lg"></i>

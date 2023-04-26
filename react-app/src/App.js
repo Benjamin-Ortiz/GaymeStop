@@ -10,6 +10,7 @@ import SingleProduct from "./components/ProductComponents/SingleProduct/SinglePr
 import PostProductForm from "./components/ProductComponents/SingleProduct/PostProductForm";
 import UserCart from "./components/CartComponents/UserCart";
 import SearchPage from "./components/Search/SearchPage";
+import CheckoutForm from "./components/CheckoutComponents/CheckoutForm";
 
 
 function App() {
@@ -36,8 +37,12 @@ function App() {
             <SearchPage />
           </Route>
 
-          <Route path="/carts/:id/cart">
+          <Route exact path="/carts/:id/cart">
             <UserCart />
+          </Route>
+
+          <Route exact path="/carts/:id/cart/checkout">
+            <CheckoutForm />
           </Route>
 
           <Route path="/products/new_product">
@@ -51,8 +56,6 @@ function App() {
           <Route exact path="/">
             <ProductsIndex />
           </Route>
-
-
 
         </Switch>
       )}
