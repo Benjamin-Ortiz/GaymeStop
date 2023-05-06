@@ -162,10 +162,10 @@
     indigo,
     violet
   );
-  -webkit-background-clip: text;
+ background-clip: text;
   word-break: normal;
   font-family: fantasy;
-  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .glitter-factor-text {
@@ -273,10 +273,10 @@
     indigo,
     violet
   );
-  -webkit-background-clip: text;
+  background-clip: text;
   word-break: normal;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 /** shipping div end */

@@ -48,8 +48,8 @@
   font-size: 2rem;
   font-weight: 900;
   background: linear-gradient(to right, red, orange,yellow, green, blue, indigo, violet);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+background-clip: text;
+  color: transparent;
 }
 
 
@@ -70,8 +70,7 @@
   justify-content: end;
   width:  150px;
   height: 60px;
-  z-index: index 10;;
-
+  z-index: index 10;
 }
 
 .cart-and-ping{
