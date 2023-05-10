@@ -4,6 +4,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from datetime import datetime
 
 
+
 from app.models import Product, db
 
 product_routes = Blueprint('products', __name__)
