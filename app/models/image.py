@@ -5,18 +5,19 @@ class Image(db.Model):
     __tablename__ = 'images'
 
     if environment == 'production':
-        __table_args__ == {'schema' : SCHEMA}
+        __table_args__ = {'schema': SCHEMA}
+
 
     id = db.Column(db.Integer, primary_key = True)
-    product_id = db.Column(db.Integer, db.ForeignKey('products.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     url = db.Column(db.String, nullable = False)
 
-    product = db.relationship("Product", back_populates='image')
+    user = db.relationship("User", back_populates='images')
 
 
     def to_dict(self):
         return {
             'id': self.id,
-            'product_id': self.product_id,
+            'user_id': self.user_id,
             'url': self.url
         }
