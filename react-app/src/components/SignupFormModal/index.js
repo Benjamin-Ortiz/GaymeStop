@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { signUp } from "../../store/session";
+import UploadPicture from "../AwsComponents/UploadImamge";
 import "./SignupForm.css";
 
 function SignupFormModal() {
@@ -60,6 +61,9 @@ function SignupFormModal() {
               required
             />
           </label>
+
+              <UploadPicture />
+
           <label className='signup-password'>
             Password
             <input
