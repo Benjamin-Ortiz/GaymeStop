@@ -5,8 +5,9 @@ from app.aws_helpers import ( upload_file_to_s3, allowed_file, get_unique_filena
 
 image_routes = Blueprint("images", __name__)
 
-@image_routes.route("", methods=["POST"])
+@image_routes.route("/post", methods=["POST"])
 @login_required
+
 def upload_image():
     if 'image' not in request.files:
         return {'errors': 'image required'}, 400
@@ -24,13 +25,15 @@ def upload_image():
 
     url = upload['url']
     final_image = Image(user = current_user, url=url)
+
+    
     db.session.add(final_image)
     db.session.commit()
 
     return {'url': url}
 
 
-@image_routes.route("")
+@image_routes.route("/get",  methods=["GET"])
 def get_all_images():
     images = Image.query.order_by(Image.id.desc()).all()
     return {"images": [image.to_dict() for image in images]}

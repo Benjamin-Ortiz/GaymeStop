@@ -2,7 +2,7 @@ from app.forms import ProductForm
 from flask import Blueprint, request, jsonify, redirect
 from flask_login import current_user, login_user, logout_user, login_required
 from datetime import datetime
-
+from app.aws_helpers import ( upload_file_to_s3, allowed_file, get_unique_filename)
 
 
 from app.models import Product, db
@@ -43,6 +43,8 @@ def post_product():
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
+    if 'image' not in request.files:
+        return {'errors': 'image required'}, 400
 
     if form.validate_on_submit():
 
@@ -54,11 +56,13 @@ def post_product():
            glitter_factor=form.data['glitter_factor'],
            product_image=form.data['product_image'],
             )
+
           # check_product = Product.query.filter(Product.title == form.title)
           # print (check_product, '-=-=-=-=-=-=')
 
         db.session.add(product)
         db.session.commit()
+
         return product.to_dict()
     return jsonify({'errors': validation_errors_to_error_messages(form.errors)}), 400
 

@@ -22,7 +22,7 @@ class Product(db.Model):
     price = db.Column(db.Float(), nullable=False)
     description = db.Column(db.String(1000), nullable = False)
     glitter_factor = db.Column(db.String(600), nullable = False)
-    product_image = db.Column(db.String(300), nullable = True)
+    product_image = db.Column(db.String, nullable = True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
 

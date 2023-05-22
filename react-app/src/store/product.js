@@ -55,10 +55,10 @@ export const getTheProducts = () => async (dispatch) => {
 
 //*GET ONE
 export const getTheProduct = (id) => async (dispatch) => {
-    const response = await fetch(`/api/products/${id}`);
+    const res = await fetch(`/api/products/${id}`);
 
-    if (response.ok) {
-        const data = await response.json();
+    if (res.ok) {
+        const data = await res.json();
         dispatch(getProduct(data));
         return data;
     }

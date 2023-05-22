@@ -4,5 +4,5 @@ from .product import Product
 # from .cart import Cart
 from .cart_products import CartItem
 from .search import Search
-from .image import Image
+# from .image import Image
 from .db import environment, SCHEMA

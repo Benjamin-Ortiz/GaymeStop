@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as productActions from "../../../store/product";
 import { Redirect, useHistory } from "react-router-dom";
 import "./PostProductForm.css";
+import UploadPicture from "../../AwsComponents/UploadImamge";
 
 function PostProductForm() {
   const dispatch = useDispatch();
@@ -144,7 +145,8 @@ function PostProductForm() {
 
       <label className="new-product-imageUrl">
         Upload Cover Photo
-        <input
+        <UploadPicture />
+        {/* <input
 
           type="text"
           size={80}
@@ -154,7 +156,7 @@ function PostProductForm() {
           value={product_image}
           onChange={updateProductImage}
           placeholder="Image Url"
-        />
+        /> */}
       </label>
 
       <button type="submit">Create</button>
