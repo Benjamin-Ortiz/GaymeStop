@@ -149,7 +149,7 @@ const productsReducer = (state = initialState, action) => {
 
 
         case DELETE_PRODUCT:{
-            const newState = { ...state }
+            const newState = { ...state};
 
             delete newState[action.id];
             return newState

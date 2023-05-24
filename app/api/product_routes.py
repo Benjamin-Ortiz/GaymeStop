@@ -38,22 +38,29 @@ def get_products():
 @login_required
 
 def post_product():
+    #! TOTALLY A FormData Obj
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     # form.append('product_image', form.data[['product_image']])
 
-    print({request.files}, "REQUEST REQUEST REQUEST REQUEST")
+    # print({request.files}, "REQUEST REQUEST REQUEST REQUEST")
 
     if 'product_image' not in request.files:
         return {'errors': 'image required'}, 400
 
     product_image = request.files['product_image']
 
+    # print({product_image}, "PROOODUCT IMAAAAGE", type(product_image))
+
+
 
     if not allowed_file(product_image.filename):
         return {'errors': 'file type not permitted'}, 400
 
+
+
     product_image.filename = get_unique_filename(product_image.filename)
+
     upload = upload_file_to_s3(product_image)
 
     if 'url' not in upload:
@@ -91,6 +98,25 @@ def edit_product(id):
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     product = Product.query.get(id)
+
+    #todo modify for edit
+    # if 'product_image' not in request.files:
+    #     return {'errors': 'image required'}, 400
+
+    # product_image = request.files['product_image']
+
+
+    # if not allowed_file(product_image.filename):
+    #     return {'errors': 'file type not permitted'}, 400
+
+    # product_image.filename = get_unique_filename(product_image.filename)
+
+    # upload = upload_file_to_s3(product_image)
+
+    # if 'url' not in upload:
+    #     return upload, 400
+
+    # url = upload['url']
 
     if form.validate_on_submit():
         product = Product.query.get(id)

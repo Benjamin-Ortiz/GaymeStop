@@ -21,11 +21,11 @@ function SingleProduct() {
   //* states
   const [editProduct, setEditProduct] = useState(false);
 
-  const [title, setTitle] = useState(product.title);
-  const [price, setPrice] = useState(product.price);
-  const [description, setDescription] = useState(product.description);
-  const [glitter_factor, setGlitterFactor] = useState(product.glitter_factor);
-  const [product_image, setProductImage] = useState(product.product_image);
+  const [title, setTitle] = useState(product?.title);
+  const [price, setPrice] = useState(product?.price);
+  const [description, setDescription] = useState(product?.description);
+  const [glitter_factor, setGlitterFactor] = useState(product?.glitter_factor);
+  const [product_image, setProductImage] = useState(product?.product_image);
 
   const [errors, setErrors] = useState([]);
   const [errors2, setErrors2] = useState([]);
@@ -409,8 +409,8 @@ function SingleProduct() {
               <div className="product-image-container">
                 <img
                   className="product-img"
-                  src={product.product_image}
-                  alt={product.title}
+                  src={product?.product_image}
+                  alt={product?.title}
                 />
               </div>
             </div>
@@ -422,7 +422,7 @@ function SingleProduct() {
                     Product Description
                   </span>
                   <p className="product-description-span">
-                    {product.description}
+                    {product?.description}
                   </p>
                 </div>
 
@@ -432,7 +432,7 @@ function SingleProduct() {
                     Factor'･*:.｡.:*･゜ﾟ･**ཽ⁎⁺˳✧༚ .｡.:*☆
                   </h4>
                   <div className="glitter-factor-text">
-                    ✧ {product.glitter_factor} ✧
+                    ✧ {product?.glitter_factor} ✧
                   </div>
                 </div>
               </div>
@@ -441,17 +441,17 @@ function SingleProduct() {
 
           {/* right half */}
           <div className="product-right-half">
-            <h1 className="right-title">{product.title}</h1>
+            <h1 className="right-title">{product?.title}</h1>
 
             <div className="price-container">
               <div className="price">
                 Price:
                 <span className="price-number">
-                  ${product.price?.toFixed(2)}
+                  ${product?.price?.toFixed(2)}
                   <br></br>
-                  Release Date: {product.created_at?.slice(7, 11)}
-                  {product.created_at?.slice(4, 7)}{" "}
-                  {product.created_at?.slice(12, 16)}
+                  Release Date: {product?.created_at?.slice(7, 11)}
+                  {product?.created_at?.slice(4, 7)}{" "}
+                  {product?.created_at?.slice(12, 16)}
                 </span>
               </div>
             </div>
