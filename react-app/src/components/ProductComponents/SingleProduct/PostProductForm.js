@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import * as productActions from "../../../store/product";
 import { Redirect, useHistory } from "react-router-dom";
 import "./PostProductForm.css";
-import UploadPicture from "../../AwsComponents/UploadImage";
+// import UploadPicture from "../../AwsComponents/UploadImage";
 
 function PostProductForm() {
   const dispatch = useDispatch();
   const history = useHistory();
-  
+
   const user = useSelector((state) => state.session?.user);
   const allProducts = useSelector((state) => Object.values(state.products));
 

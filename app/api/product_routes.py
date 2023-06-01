@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify, redirect
 from app.models import Product, db
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms import ProductForm
-from app.aws_helpers import ( upload_file_to_s3, allowed_file, get_unique_filename)
+from app.aws_helpers import ( upload_file_to_s3, get_unique_filename)
 from datetime import datetime
 
 product_routes = Blueprint('products', __name__)

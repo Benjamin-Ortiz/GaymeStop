@@ -38,13 +38,6 @@ def upload_file_to_s3(file, acl="public-read"):
     return {"url": f"{S3_LOCATION}{file.filename}"}
 
 
-def allowed_file(filename):
-    print(filename)
-    print("." in filename)
-    return "." in filename and \
-           filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
 def remove_file_from_s3(image_url):
     # AWS needs the image file name, not the URL,
     # so we split that out of the URL

@@ -10,6 +10,7 @@ import SingleProduct from "./components/ProductComponents/SingleProduct/SinglePr
 import PostProductForm from "./components/ProductComponents/SingleProduct/PostProductForm";
 import UserCart from "./components/CartComponents/UserCart";
 import SearchPage from "./components/Search/SearchPage";
+import UploadPicture from "./components/AwsComponents/UploadPicture";
 
 
 function App() {
@@ -38,6 +39,10 @@ function App() {
 
           <Route path="/carts/:id/cart">
             <UserCart />
+          </Route>
+
+          <Route path="/images">
+            <UploadPicture />
           </Route>
 
           <Route path="/products/new_product">
