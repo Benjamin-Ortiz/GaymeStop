@@ -1,5 +1,6 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, render_template, redirect
 from app.models import db, Image
+from app.forms import ImageForm
 from flask_login import current_user, login_required
 from app.aws_helpers import (upload_file_to_s3, get_unique_filename)
 
@@ -8,6 +9,7 @@ image_routes = Blueprint("images", __name__)
 @image_routes.route("", methods=["POST"])
 @login_required
 def upload_image():
+
     form = ImageForm()
 
     if form.validate_on_submit():
@@ -26,7 +28,7 @@ def upload_image():
         new_image = Post(image= url)
         db.session.add(new_image)
         db.session.commit()
-        return redirect("/posts/all")
+        return redirect("/")
 
     if form.errors:
         print(form.errors)
