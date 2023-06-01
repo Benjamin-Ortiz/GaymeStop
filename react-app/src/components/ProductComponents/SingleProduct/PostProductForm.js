@@ -8,6 +8,7 @@ import UploadPicture from "../../AwsComponents/UploadImage";
 function PostProductForm() {
   const dispatch = useDispatch();
   const history = useHistory();
+  
   const user = useSelector((state) => state.session?.user);
   const allProducts = useSelector((state) => Object.values(state.products));
 

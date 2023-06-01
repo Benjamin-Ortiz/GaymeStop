@@ -66,7 +66,7 @@ def post_product():
     if 'url' not in upload:
         return upload, 400
 
-    url = upload['url']
+    url = f"{upload['url']}"
     # final_image = Image(user = current_user, url=url)
 
     if form.validate_on_submit():

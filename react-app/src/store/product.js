@@ -64,29 +64,48 @@ export const getTheProduct = (id) => async (dispatch) => {
     }
 }
 
-// * POST
-export const postTheProduct = (productData) => async (dispatch) => {
-    const {title, price, description, glitter_factor, product_image} = productData
+//* NEW POST THUNK
+export const postTheProduct = (formData) => async (dispatch) => {
+    const res = await fetch("/api/products/new_product", {
+      method: "POST",
+      body: formData,
+    });
+    console.log(formData, 'FORMDATAAAAAAAA');
+    if (res.ok) {
+      const newProduct = await res.json();
+      dispatch(postProduct(newProduct));
+      console.log(newProduct, "NEW PRODUCT THUNKKKKKK");
 
-    const response = await fetch("/api/products/new_product", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            title,
-            price,
-            description,
-            glitter_factor,
-            product_image,
-        })
-    })
-    if (response.ok) {
-        const newProduct = await response.json()
-        // dispatch(postProduct(newProduct))
-        return response;
+      return { ok: true, id: newProduct.id };
+    } else {
+      const response = await res.json();
+      return { ok: false, errors: response.errors };
     }
-}
+  };
+
+// // * OLD POST
+// export const postTheProduct = (productData) => async (dispatch) => {
+//     const {title, price, description, glitter_factor, product_image} = productData
+
+//     const response = await fetch("/api/products/new_product", {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+//             title,
+//             price,
+//             description,
+//             glitter_factor,
+//             product_image,
+//         })
+//     })
+//     if (response.ok) {
+//         const newProduct = await response.json()
+//         // dispatch(postProduct(newProduct))
+//         return response;
+//     }
+// }
 
 // * EDIT
 
