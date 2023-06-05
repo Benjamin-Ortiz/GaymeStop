@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, DateField, DecimalField,FileField
 from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.validators import DataRequired, Length, NumberRange,  ValidationError
-from app.aws_helpers import ALLOWED_EXTENSIONS
+# from app.aws_helpers import ALLOWED_EXTENSIONS
 
 
 #? default image logic here?
@@ -30,4 +30,4 @@ class ProductForm(FlaskForm):
     price = DecimalField('price', validators=[DataRequired(), NumberRange(min=1)], places=2)
     description = StringField('description', validators=[DataRequired(), Length(max=1000)])
     glitter_factor = StringField('glitter_factor', validators=[DataRequired(), Length(max=600)])
-    product_image = FileField("product_image", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
+    product_image = FileField("product_image", validators=[FileRequired()])

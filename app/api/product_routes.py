@@ -45,28 +45,21 @@ def post_product():
 
     # print({request.files}, "REQUEST REQUEST REQUEST REQUEST")
 
-    if 'product_image' not in request.files:
-        return {'errors': 'image required'}, 400
+    # if 'product_image' not in request.files:
+    #     return {'errors': 'image required'}, 400
 
-    product_image = request.files['product_image']
+    # product_image = request.files['product_image']
 
-    # print({product_image}, "PROOODUCT IMAAAAGE", type(product_image))
+    # # print({product_image}, "PROOODUCT IMAAAAGE", type(product_image))
 
+    # product_image.filename = get_unique_filename(product_image.filename)
 
+    # upload = upload_file_to_s3(product_image)
 
-    if not allowed_file(product_image.filename):
-        return {'errors': 'file type not permitted'}, 400
+    # if 'url' not in upload:
+    #     return upload, 400
 
-
-
-    product_image.filename = get_unique_filename(product_image.filename)
-
-    upload = upload_file_to_s3(product_image)
-
-    if 'url' not in upload:
-        return upload, 400
-
-    url = f"{upload['url']}"
+    # url = f"{upload['url']}"
     # final_image = Image(user = current_user, url=url)
 
     if form.validate_on_submit():
@@ -77,7 +70,7 @@ def post_product():
            price=form.data['price'],
            description=form.data['description'],
            glitter_factor=form.data['glitter_factor'],
-           product_image=url,
+           product_image=form.data['product_image'],
         )
 
           # check_product = Product.query.filter(Product.title == form.title)

@@ -1,37 +1,43 @@
-from flask import Blueprint, request, render_template, redirect
+from flask import Blueprint, request, render_template, redirect, jsonify
 from app.models import db, Image
 from app.forms import ImageForm
 from flask_login import current_user, login_required
-from app.aws_helpers import (upload_file_to_s3, get_unique_filename)
+from app.aws_helpers import (upload_file_to_s3, get_unique_filename, ALLOWED_EXTENSIONS)
 
-image_routes = Blueprint("images", __name__)
+image_routes = Blueprint('images', __name__)
 
-@image_routes.route("", methods=["POST"])
+
+@image_routes.route('/upload', methods=['POST'])
 @login_required
-def upload_image():
-
+def post_image():
+    '''
+    Image post route. Check the image filenames, and upload to AWS.
+    If succeed, return a url to render the picture.
+    '''
     form = ImageForm()
-
+    form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        if 'image' not in request.files:
+            return {'errors': 'Please upload an image.'}, 400
 
-        image = form.data["image"]
+        image = request.files['image']
+        print(image," IMAGE FILE" * 10)
+        if (image.filename) not in ALLOWED_EXTENSIONS:
+            return {'errors': 'File type is not supported. Please upload a file of one of these file types: PDF, PNG, JPG, JPEG, GIF'}
+
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
+        print(upload)
 
-        if "url" not in upload:
-        # if the dictionary doesn't have a url key
-        # it means that there was an error when we tried to upload
-        # so we send back that error message
-            return render_template("post_form.html", form=form, errors=[upload])
+        if 'url' not in upload:
+            return upload, 400
 
-        url = upload["url"]
-        new_image = Post(image= url)
+        url = upload['url']
+        new_image = Image(user_id=current_user.id,
+                          url=url,
+                          )
         db.session.add(new_image)
         db.session.commit()
-        return redirect("/")
-
-    if form.errors:
-        print(form.errors)
-        return render_template("post_form.html", form=form, errors=form.errors)
-
-    return render_template("post_form.html", form=form, errors=None)
+        return new_image.to_dict()
+    else:
+        return {'errors': 'missing data'}

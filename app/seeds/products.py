@@ -26,7 +26,7 @@ def seed_products():
         price= 19.99,
         description='DISSOCIATION TIME BAYBEEEEEE',
         glitter_factor="It's the Sims, nuff said.You could see some first hints at LGBTQ+ households in some of The Sims 3 Worlds, however they wouldn’t be added in until the game’s ending cycle. The real story begins with The Sims 4, where more and more proper LGBTQ+ representation is shown.",
-        product_image='https://simscommunity.info/wp-content/uploads/2019/07/boxart.jpg'
+        product_image='https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/sims4.png'
         )
     dragon_age = Product(
         user_id=2,

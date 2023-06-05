@@ -41,12 +41,12 @@ function App() {
             <UserCart />
           </Route>
 
-          <Route path="/images">
-            <UploadPicture />
-          </Route>
-
           <Route path="/products/new_product">
             <PostProductForm />
+          </Route>
+
+          <Route path="/images/upload">
+            <UploadPicture />
           </Route>
 
           <Route exact path="/products/:id">
