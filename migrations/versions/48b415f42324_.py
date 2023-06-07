@@ -1,21 +1,16 @@
 """empty message
 
-Revision ID: 9c3e4233e822
-Revises:
-Create Date: 2023-06-01 18:05:48.273734
+Revision ID: 48b415f42324
+Revises: 
+Create Date: 2023-06-07 17:20:57.436615
 
 """
 from alembic import op
 import sqlalchemy as sa
 
-import os
-environment = os.getenv("FLASK_ENV")
-SCHEMA = os.environ.get("SCHEMA")
-
-
 
 # revision identifiers, used by Alembic.
-revision = '9c3e4233e822'
+revision = '48b415f42324'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -42,7 +37,7 @@ def upgrade():
     op.create_table('images',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('url', sa.String(), nullable=False),
+    sa.Column('image', sa.String(), nullable=False),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -70,19 +65,6 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE images SET SCHEMA {SCHEMA};")
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")
-
-    if environment == "production":
-        op.execute(f"ALTER TABLE cart_items SET SCHEMA {SCHEMA};")
-
 
 
 def downgrade():

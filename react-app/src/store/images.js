@@ -22,7 +22,7 @@ const postImage = (url) => {
 
 
 export const getTheImages = () => async (dispatch) => {
-  const res = await fetch('/api/images/');
+  const res = await fetch('/api/images/upload');
 
   if (res.ok) {
     const data = await res.json();
@@ -58,9 +58,12 @@ const imagesReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case POST_IMAGE: {
+      
       const newState = {
-        [action.payload.image]: action.payload, //Get Id and get this out
-      };
+
+        [action.payload]: action.payload.url //Get Id and get this out
+      }
+      console.log(action.payload, "REDUCER PAYLOAD")
       return newState;
     }
 

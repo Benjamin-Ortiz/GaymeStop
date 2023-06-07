@@ -29,12 +29,13 @@ def post_image():
         upload = upload_file_to_s3(image)
         print(upload)
 
-        if 'url' not in upload:
+        if 'image' not in upload:
             return upload, 400
 
-        url = upload['url']
+        image = upload['image']
+        print(image, "image" * 8, current_user.id)
         new_image = Image(user_id=current_user.id,
-                          url=url,
+                          image=image,
                           )
         db.session.add(new_image)
         db.session.commit()

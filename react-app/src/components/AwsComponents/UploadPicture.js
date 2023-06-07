@@ -45,19 +45,14 @@ function UploadPicture() {
     const file = e.target.files[0];
     setImage(file);
     const path = e.target.value.split("\\");
-    console.log(path, 'PATH', typeof(path));
+
     const fileName = path[path.length - 1];
-    console.log(fileName, 'FILENAME', typeof(fileName));
+
 
     setImageFile("Current Image: " + fileName);
   };
 
-  useEffect(() => {
-    dispatch(getTheImages());
-    // dispatch(cartActions.getTheCart(user?.id))
 
-    // }, [dispatch, title, price, product_image, description, glitter_factor, id]);
-  }, [dispatch]);
 
   return (
     <div className="form_page_body">
