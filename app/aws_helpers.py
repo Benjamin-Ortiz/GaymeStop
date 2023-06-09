@@ -16,13 +16,15 @@ s3 = boto3.client(
 
 def get_unique_filename(filename):
     ext = filename.rsplit(".", 1)[1].lower()
-    print(ext, "EXT" * 10)
+    # print(ext, "EXT" * 10)
     unique_filename = uuid.uuid4().hex
-    print(unique_filename, "HEXNAME")
+    # print(unique_filename, "HEXNAME")
     return f"{unique_filename}.{ext}"
 
 
+
 def upload_file_to_s3(file, acl="public-read"):
+    # print(BUCKET_NAME, "BUCKETNAME", os.environ.get("S3_KEY"), "S3 KEYYYY", os.environ.get("S3_SECRET"), "S3 SECRET" *10)
     try:
         s3.upload_fileobj(
             file,
