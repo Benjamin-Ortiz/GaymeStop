@@ -16,7 +16,9 @@ s3 = boto3.client(
 
 def get_unique_filename(filename):
     ext = filename.rsplit(".", 1)[1].lower()
+    print(ext, "EXT" * 10)
     unique_filename = uuid.uuid4().hex
+    print(unique_filename, "HEXNAME")
     return f"{unique_filename}.{ext}"
 
 
@@ -50,5 +52,5 @@ def remove_file_from_s3(image_url):
         )
     except Exception as e:
         return {"errors": str(e)}
-    
+
     return True

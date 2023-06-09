@@ -21,13 +21,12 @@ def post_image():
             return {'errors': 'Please upload an image.'}, 400
 
         image = request.files['image']
-        print(image," IMAGE FILE" * 10)
-        if (image.filename) not in ALLOWED_EXTENSIONS:
+        # print(image.filename," IMAGE FILE" * 10, type(image.filename))
+        if (image.filename.rsplit(".", 1)[1].lower()) not in ALLOWED_EXTENSIONS:
             return {'errors': 'File type is not supported. Please upload a file of one of these file types: PDF, PNG, JPG, JPEG, GIF'}
 
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
-        print(upload)
 
         if 'url' not in upload:
             return upload, 400
