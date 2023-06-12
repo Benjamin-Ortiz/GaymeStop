@@ -56,3 +56,25 @@ def remove_file_from_s3(image_url):
         return {"errors": str(e)}
 
     return True
+
+
+def route_image_helper(route_request):
+    if 'image' not in route_request.files:
+            return {'errors': 'Please upload an image.'}, 400
+
+    image = route_request.files['image']
+        # print(image.filename," IMAGE FILE" * 10, type(image.filename))
+    if (image.filename.rsplit(".", 1)[1].lower()) not in ALLOWED_EXTENSIONS:
+        return {'errors': 'File type is not supported. Please upload a file of one of these file types: PDF, PNG, JPG, JPEG, GIF'}
+
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+
+    if 'url' not in upload:
+        return upload, 400
+
+    url = upload['url']
+    # new_image = Image(user_id=current_user.id,
+    #                       image=url,
+    #                       )
+    return url

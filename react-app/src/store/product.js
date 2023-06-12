@@ -85,7 +85,7 @@ export const getTheProduct = (id) => async (dispatch) => {
 
 // * OLD POST
 export const postTheProduct = (productData) => async (dispatch) => {
-    const {title, price, description, glitter_factor, product_image} = productData
+    const {title, price, description, glitter_factor, image} = productData
 
     const response = await fetch("/api/products/new_product", {
         method: 'POST',
@@ -97,7 +97,7 @@ export const postTheProduct = (productData) => async (dispatch) => {
             price,
             description,
             glitter_factor,
-            product_image,
+            image,
         })
     })
     if (response.ok) {

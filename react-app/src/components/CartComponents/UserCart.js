@@ -59,7 +59,7 @@ function UserCart() {
                   className="product-nav-link"
                   to={`/products/${item.product?.id}`}
                 >
-                  <img src={item.product?.product_image} />
+                  <img src={item.product?.image} />
                 </NavLink>
               </div>
               <div className="item-details">

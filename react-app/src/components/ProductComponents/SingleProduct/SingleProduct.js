@@ -25,7 +25,7 @@ function SingleProduct() {
   const [price, setPrice] = useState(product?.price);
   const [description, setDescription] = useState(product?.description);
   const [glitter_factor, setGlitterFactor] = useState(product?.glitter_factor);
-  const [product_image, setProductImage] = useState(product?.product_image);
+  const [image, setProductImage] = useState(product?.image);
 
   const [errors, setErrors] = useState([]);
   const [errors2, setErrors2] = useState([]);
@@ -49,7 +49,7 @@ function SingleProduct() {
       price: price,
       description: description,
       glitter_factor: glitter_factor,
-      product_image: product_image,
+      image: image,
     };
 
     if (payload.title === "") {
@@ -75,7 +75,7 @@ function SingleProduct() {
         setDescription(description);
         setPrice(price);
         setGlitterFactor(glitter_factor);
-        setProductImage(product_image);
+        setProductImage(image);
         setEditProduct(false);
         // dispatch(productActions.getTheProduct(payload.id));
       });
@@ -86,7 +86,7 @@ function SingleProduct() {
     dispatch(productActions.getTheProduct(id));
     // dispatch(cartActions.getTheCart(user?.id))
 
-    // }, [dispatch, title, price, product_image, description, glitter_factor, id]);
+    // }, [dispatch, title, price, image, description, glitter_factor, id]);
   }, [dispatch]);
 
   return product && user ? (
@@ -106,7 +106,7 @@ function SingleProduct() {
                 <div className="product-image-container">
                   <img
                     className="product-img"
-                    src={product.product_image}
+                    src={product.image}
                     alt={product.title}
                   />
                 <div className="edit-prod-img">
@@ -114,7 +114,7 @@ function SingleProduct() {
                   <input
                     type="text"
                     placeholder="Add Image here..."
-                    value={product_image}
+                    value={image}
                     onChange={updateProductImage}
                   ></input>
                 </div>
@@ -254,7 +254,7 @@ function SingleProduct() {
                         setDescription(product.description);
                         setPrice(product.price?.toFixed(2));
                         setGlitterFactor(product.glitter_factor);
-                        setProductImage(product.product_image);
+                        setProductImage(product.image);
                         setErrors([]);
                         setEditProduct(false);
                       }}
@@ -290,7 +290,7 @@ function SingleProduct() {
               <div className="product-image-container">
                 <img
                   className="product-img"
-                  src={product.product_image}
+                  src={product.image}
                   alt={product.title}
                 />
               </div>
@@ -368,7 +368,7 @@ function SingleProduct() {
                       setDescription(product.description);
                       setPrice(product.price.toFixed(2));
                       setGlitterFactor(product.glitter_factor);
-                      setProductImage(product.product_image);
+                      setProductImage(product.image);
                     }}
                   >
                     Edit Product
@@ -409,7 +409,7 @@ function SingleProduct() {
               <div className="product-image-container">
                 <img
                   className="product-img"
-                  src={product?.product_image}
+                  src={product?.image}
                   alt={product?.title}
                 />
               </div>

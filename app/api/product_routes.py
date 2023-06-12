@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify, redirect
 from app.models import Product, db
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms import ProductForm
-from app.aws_helpers import ( upload_file_to_s3, get_unique_filename)
+from app.aws_helpers import (upload_file_to_s3, get_unique_filename, route_image_helper, remove_file_from_s3)
 from datetime import datetime
 
 product_routes = Blueprint('products', __name__)
@@ -38,31 +38,14 @@ def get_products():
 @login_required
 
 def post_product():
-    #! TOTALLY A FormData Obj
     form = ProductForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    # form.append('product_image', form.data[['product_image']])
-
-    # print({request.files}, "REQUEST REQUEST REQUEST REQUEST")
-
-    # if 'product_image' not in request.files:
-    #     return {'errors': 'image required'}, 400
-
-    # product_image = request.files['product_image']
-
-    # # print({product_image}, "PROOODUCT IMAAAAGE", type(product_image))
-
-    # product_image.filename = get_unique_filename(product_image.filename)
-
-    # upload = upload_file_to_s3(product_image)
-
-    # if 'url' not in upload:
-    #     return upload, 400
-
-    # url = f"{upload['url']}"
-    # final_image = Image(user = current_user, url=url)
 
     if form.validate_on_submit():
+
+    #todo add aws code, turn image part into helper func
+        url = route_image_helper(request)
+        # print(url, 'URL!!!' * 10)
 
         product = Product(
            user_id=current_user.id,
@@ -70,11 +53,8 @@ def post_product():
            price=form.data['price'],
            description=form.data['description'],
            glitter_factor=form.data['glitter_factor'],
-           product_image=form.data['product_image'],
+           image=url,
         )
-
-          # check_product = Product.query.filter(Product.title == form.title)
-          # print (check_product, '-=-=-=-=-=-=')
 
         db.session.add(product)
         db.session.commit()
@@ -93,32 +73,21 @@ def edit_product(id):
     product = Product.query.get(id)
 
     #todo modify for edit
-    # if 'product_image' not in request.files:
-    #     return {'errors': 'image required'}, 400
-
-    # product_image = request.files['product_image']
-
-
-    # if not allowed_file(product_image.filename):
-    #     return {'errors': 'file type not permitted'}, 400
-
-    # product_image.filename = get_unique_filename(product_image.filename)
-
-    # upload = upload_file_to_s3(product_image)
-
-    # if 'url' not in upload:
-    #     return upload, 400
-
-    # url = upload['url']
 
     if form.validate_on_submit():
+
+        remove_file_from_s3(product.image)
+        url = route_image_helper(request)
+        print(url, 'URL!!!' * 10, product.image)
+
+
         product = Product.query.get(id)
         if product.user_id == current_user.id:
             product.title = form.data['title']
             product.price = form.data['price'] or product.price
             product.description = form.data['description']
             product.glitter_factor = form.data['glitter_factor']
-            product.product_image = form.data['product_image']
+            product.image = url
             product.updated_at = datetime.now()
 
             # db.session.add(product)
@@ -137,8 +106,11 @@ def delete_product(id):
         return {"message": "Nothing exists here"}
 
     if current_product.user_id == current_user.id:
+        title = current_product.title
+
+        remove_file_from_s3(current_product.image)
         db.session.delete(current_product)
         db.session.commit()
-        return {"message": "Product successfully deleted"}
+        return {"message": f"{title} successfully deleted"}
     else:
         return {"message": "You cant to delete other peoples products you silly silly Goose"}

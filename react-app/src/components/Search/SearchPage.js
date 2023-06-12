@@ -56,7 +56,7 @@ function SearchPage() {
         return (
           <div className="mapped-results-container" >
             <NavLink className="product-nav-link" to={`/products/${product?.id}`}>
-              <img className="mapped-result-img" src={product?.product_image} alt={product?.title}/>
+              <img className="mapped-result-img" src={product?.image} alt={product?.title}/>
             </NavLink>
               <div className="mapped-result-title-price-container">
 

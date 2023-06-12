@@ -1,15 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 import datetime
 
-
-# cart_items = db.Table(
-#     'cart_items',
-#     db.Model.metadata,
-#     db.Column('cart_id',db.Integer, db.ForeignKey(add_prefix_for_prod("carts.id")), primary_key=True),
-#     db.Column('product_id',db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), primary_key=True),
-
-# )
-
 class Product(db.Model):
     __tablename__ = 'products'
 
@@ -22,7 +13,7 @@ class Product(db.Model):
     price = db.Column(db.Float(), nullable=False)
     description = db.Column(db.String(1000), nullable = False)
     glitter_factor = db.Column(db.String(600), nullable = False)
-    product_image = db.Column(db.String, nullable = True)
+    image = db.Column(db.String, nullable = False)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
 
@@ -45,7 +36,7 @@ class Product(db.Model):
             # change rating key to helper in future
             'description': self.description,
             'glitter_factor': self.glitter_factor,
-            'product_image':self.product_image,
+            'image':self.image,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
             'user': {
@@ -63,5 +54,5 @@ class Product(db.Model):
             'title':self.title,
             'price':self.price,
             # change rating key to helper in future
-            'product_image':self.product_image,
+            'image':self.image,
         }

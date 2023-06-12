@@ -17,6 +17,7 @@ def post_image():
     form = ImageForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
+        
         if 'image' not in request.files:
             return {'errors': 'Please upload an image.'}, 400
 

@@ -21,7 +21,7 @@ function PostProductForm() {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [glitter_factor, setGlitterFactor] = useState("");
-  const [product_image, setProductImage] = useState("https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/bbCover.png");
+  const [image, setProductImage] = useState("https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/bbCover.png");
 
 
   //*updates
@@ -34,7 +34,7 @@ function PostProductForm() {
 
   //   let isImage = [".png", ".jpg", ".jpeg", ".gif", ".bmp", ".tif", ".tiff"];
 
-  //   if (payload.product_image !== "") {
+  //   if (payload.image !== "") {
   //     let i = 0;
 
 
@@ -48,7 +48,7 @@ function PostProductForm() {
       price,
       description,
       glitter_factor,
-      product_image,
+      image,
     };
 
     let errs = [];
@@ -155,7 +155,7 @@ function PostProductForm() {
           // type="file"
           // multiple="false"
           // accept="image/*"
-          value={product_image}
+          value={image}
           onChange={updateProductImage}
           placeholder="Image Url"
         />
