@@ -44,8 +44,9 @@ def post_product():
     if form.validate_on_submit():
 
     #todo add aws code, turn image part into helper func
+        print(request.files['image'], 'REQ!!!' * 5)
         url = route_image_helper(request)
-        # print(url, 'URL!!!' * 10)
+        print(url, 'URL!!!' * 10)
 
         product = Product(
            user_id=current_user.id,
@@ -78,7 +79,7 @@ def edit_product(id):
 
         remove_file_from_s3(product.image)
         url = route_image_helper(request)
-        print(url, 'URL!!!' * 10, product.image)
+        # print(url, 'URL!!!' * 10, product.image)
 
 
         product = Product.query.get(id)

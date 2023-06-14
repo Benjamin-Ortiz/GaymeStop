@@ -63,7 +63,7 @@ def route_image_helper(route_request):
             return {'errors': 'Please upload an image.'}, 400
 
     image = route_request.files['image']
-        # print(image.filename," IMAGE FILE" * 10, type(image.filename))
+    # print(image.filename," IMAGE FILE" * 10, type(image.filename))
     if (image.filename.rsplit(".", 1)[1].lower()) not in ALLOWED_EXTENSIONS:
         return {'errors': 'File type is not supported. Please upload a file of one of these file types: PDF, PNG, JPG, JPEG, GIF'}
 

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as productActions from "../../../store/product";
 import { Redirect, useHistory } from "react-router-dom";
 import "./PostProductForm.css";
-// import UploadPicture from "../../AwsComponents/UploadImage";
+import UploadPicture from "../../AwsComponents/UploadPicture";
 
 function PostProductForm() {
   const dispatch = useDispatch();
@@ -11,6 +11,9 @@ function PostProductForm() {
 
   const user = useSelector((state) => state.session?.user);
   const allProducts = useSelector((state) => Object.values(state.products));
+  const allowedImgFiles = ["pdf", "png", "jpg", "jpeg", "gif"]
+
+
 
 
   //* states
@@ -21,7 +24,7 @@ function PostProductForm() {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [glitter_factor, setGlitterFactor] = useState("");
-  const [image, setProductImage] = useState("https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/bbCover.png");
+  const [image, setProductImage] = useState("");
 
 
   //*updates
@@ -51,7 +54,19 @@ function PostProductForm() {
       image,
     };
 
+    const pathSplit = payload.image.split("\\")
+    payload.image = pathSplit[pathSplit.length - 1];
+
     let errs = [];
+
+    const fileSplit = payload.image.split('.')
+    if (!allowedImgFiles.includes(fileSplit[fileSplit.length -1].toLowerCase()) ) {
+      errs.push ('File type is not supported. Please upload a file of one of these file types: PDF, PNG, JPG, JPEG, GIF')
+    }
+
+    if(!payload.image) {
+      errs.push("Please add an image file");
+    }
 
     if (allProducts.find(product => product.title === payload.title)) {
       errs.push("This Title already exists");
@@ -62,7 +77,7 @@ function PostProductForm() {
     }
 
     if (payload.description.length < 5) {
-      errs.push("Thats not description, write a little more :) ")
+      errs.push("Thats not description, write a little more")
     }
 
     if (payload.glitter_factor.length < 5) {
@@ -87,6 +102,7 @@ function PostProductForm() {
 
 
       <ul className="errors">
+        <br></br>
         {errors && errors.map((error, id) => <li key={id}> {error} </li>)}
       </ul>
 
@@ -148,16 +164,15 @@ function PostProductForm() {
         Upload Cover Photo
         {/* <UploadPicture /> */}
         {/* todo put upload aws component into onchange */}
+
         <input
 
-          type="text"
+          type="file"
+          accept="image/*"
           size={80}
-          // type="file"
-          // multiple="false"
-          // accept="image/*"
           value={image}
           onChange={updateProductImage}
-          placeholder="Image Url"
+          placeholder="Image File"
         />
       </label>
 

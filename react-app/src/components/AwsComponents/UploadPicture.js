@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addImage, getTheImages } from "../../store/images";
+import { postTheProduct } from "../../store/product";
 
 import "./UploadPicture.css";
 
@@ -28,10 +28,10 @@ function UploadPicture() {
     // aws uploads can be a bit slow—displaying
     // some sort of loading message is a good idea
     setImageLoading(true);
-    let res = await dispatch(addImage(formData));
+    let res = await dispatch(postTheProduct(formData));
     if (res.ok) {
       setImageLoading(false);
-      return history.push(`/images/`);
+      return history.push('/');
     } else {
       setImageLoading(false);
       // res returns an errors stirng, display it
