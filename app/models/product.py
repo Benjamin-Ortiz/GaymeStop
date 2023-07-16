@@ -1,6 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 import datetime
 
+
 class Product(db.Model):
     __tablename__ = 'products'
 
@@ -13,18 +14,14 @@ class Product(db.Model):
     price = db.Column(db.Float(), nullable=False)
     description = db.Column(db.String(1000), nullable = False)
     glitter_factor = db.Column(db.String(600), nullable = False)
-    image = db.Column(db.String, nullable = False)
+    product_image = db.Column(db.String(300), nullable = True)
     created_at = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
     updated_at = db.Column(db.DateTime, default=datetime.datetime.now, nullable=False)
-
-
-    #* related data
+#* related data
     user = db.relationship("User", back_populates="products")
 
     # cart = db.relationship("Cart", secondary=cart_products, back_populates="products")
     carts = db.relationship("CartItem", back_populates='product', cascade='all, delete-orphan')
-
-
 # add logic for avg review rating
 
     def to_dict(self):
@@ -36,7 +33,7 @@ class Product(db.Model):
             # change rating key to helper in future
             'description': self.description,
             'glitter_factor': self.glitter_factor,
-            'image':self.image,
+            'product_image':self.product_image,
             'created_at': self.created_at,
             'updated_at': self.updated_at,
             'user': {
@@ -54,5 +51,5 @@ class Product(db.Model):
             'title':self.title,
             'price':self.price,
             # change rating key to helper in future
-            'image':self.image,
+            'product_image':self.product_image,
         }

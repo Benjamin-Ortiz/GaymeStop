@@ -18,7 +18,7 @@ function EditProductModal() {
   const [price, setPrice] = useState(curr_product.price);
   const [description, setDescription] = useState(curr_product.description);
   const [glitter_factor, setGlitterFactor] = useState(curr_product.glitter_factor);
-  const [image, setProductImage] = useState(curr_product.image);
+  const [product_image, setProductImage] = useState(curr_product.product_image);
 
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [errors, setErrors] = useState([]);
@@ -49,7 +49,7 @@ function EditProductModal() {
       price,
       description,
       glitter_factor,
-      image,
+      product_image,
     };
 
     dispatch(productActions.putTheProduct(payload, currProductId));
@@ -117,7 +117,7 @@ function EditProductModal() {
           className="edit-product-imageUrl"
           type="file"
           accept="image/*"
-          value={image}
+          value={product_image}
           onChange={updateProductImage}
           placeholder="Image Url"
         />

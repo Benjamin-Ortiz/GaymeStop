@@ -16,6 +16,9 @@ SCHEMA = os.environ.get("SCHEMA")
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
 
     if environment == "production":
+        op.execute(f"ALTER TABLE images SET SCHEMA {SCHEMA};")
+
+    if environment == "production":
         op.execute(f"ALTER TABLE products SET SCHEMA {SCHEMA};")
 
 

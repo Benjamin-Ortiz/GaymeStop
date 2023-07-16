@@ -1,43 +1,39 @@
-from flask import Blueprint, request, render_template, redirect, jsonify
+from flask import Blueprint, request
 from app.models import db, Image
-from app.forms import ImageForm
 from flask_login import current_user, login_required
-from app.aws_helpers import (upload_file_to_s3, get_unique_filename, ALLOWED_EXTENSIONS)
+from app.aws_helpers import ( upload_file_to_s3, allowed_file, get_unique_filename)
+image_routes = Blueprint("images", __name__)
 
-image_routes = Blueprint('images', __name__)
 
-
-@image_routes.route('/upload', methods=['POST'])
+@image_routes.route("")
 @login_required
-def post_image():
-    '''
-    Image post route. Check the image filenames, and upload to AWS.
-    If succeed, return a url to render the picture.
-    '''
-    form = ImageForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
-        
-        if 'image' not in request.files:
-            return {'errors': 'Please upload an image.'}, 400
+def get_all_images():
+    images = Image.query.order_by(Image.id.desc()).all()
+    return {"images": [image.to_dict() for image in images]}
 
-        image = request.files['image']
-        # print(image.filename," IMAGE FILE" * 10, type(image.filename))
-        if (image.filename.rsplit(".", 1)[1].lower()) not in ALLOWED_EXTENSIONS:
-            return {'errors': 'File type is not supported. Please upload a file of one of these file types: PDF, PNG, JPG, JPEG, GIF'}
+@image_routes.route("", methods=["POST"])
+@login_required
+def upload_image():
+    if 'image' not in request.files:
+        return {'errors':'image required'}, 400
 
-        image.filename = get_unique_filename(image.filename)
-        upload = upload_file_to_s3(image)
+    image = request.files['image']
 
-        if 'url' not in upload:
-            return upload, 400
+    if not allowed_file(image.filename):
+       return {"errors": "file type not permitted"}, 400
 
-        url = upload['url']
-        new_image = Image(user_id=current_user.id,
-                          image=url,
-                          )
-        db.session.add(new_image)
-        db.session.commit()
-        return new_image.to_dict()
-    else:
-        return {'errors': 'missing data'}
+    image.filename = get_unique_filename(image.filename)
+    upload = upload_file_to_s3(image)
+
+    if 'url' not in upload:
+        # if the dictionary doesn't have a filename key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload, 400
+
+    url = upload["url"]
+    # we can use the
+    new_image = Image(user = current_user, url=url)
+    db.session.add(new_image)
+    db.session.commit()
+    return {'url':url}

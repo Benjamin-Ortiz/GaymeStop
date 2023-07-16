@@ -29,7 +29,7 @@ function ProductsIndex() {
             <div className="mapped-game-container" >
 
               <NavLink className="product-nav-link" to={`/products/${product?.id}`}>
-              <img className="mapped-product-img" src={product?.image} alt={product?.title}/>
+              <img className="mapped-product-img" src={product?.product_image} alt={product?.title}/>
            </NavLink>
               <div className="mapped-title-price-container">
 

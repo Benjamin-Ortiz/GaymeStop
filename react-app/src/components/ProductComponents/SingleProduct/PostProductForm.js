@@ -5,6 +5,7 @@ import { Redirect, useHistory } from "react-router-dom";
 import "./PostProductForm.css";
 import UploadPicture from "../../AwsComponents/UploadPicture";
 
+
 function PostProductForm() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -24,7 +25,7 @@ function PostProductForm() {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [glitter_factor, setGlitterFactor] = useState("");
-  const [image, setProductImage] = useState("");
+  const [product_image, setProductImage] = useState("");
 
 
   //*updates
@@ -51,20 +52,20 @@ function PostProductForm() {
       price,
       description,
       glitter_factor,
-      image,
+      product_image,
     };
 
-    const pathSplit = payload.image.split("\\")
-    payload.image = pathSplit[pathSplit.length - 1];
+    const pathSplit = payload.product_image.split("\\")
+    payload.product_image = pathSplit[pathSplit.length - 1];
 
     let errs = [];
 
-    const fileSplit = payload.image.split('.')
+    const fileSplit = payload.product_image.split('.')
     if (!allowedImgFiles.includes(fileSplit[fileSplit.length -1].toLowerCase()) ) {
       errs.push ('File type is not supported. Please upload a file of one of these file types: PDF, PNG, JPG, JPEG, GIF')
     }
 
-    if(!payload.image) {
+    if(!payload.product_image) {
       errs.push("Please add an image file");
     }
 
@@ -94,7 +95,7 @@ function PostProductForm() {
 
   return user ?  (
     <>
-    <form className="product-form" onSubmit={handleSubmit}>
+    <form className="product-form">
       <div className="name-tag">
       <h1 className="header">HELLO</h1>
       <h2> MY <span className="line-through">NAME</span> PRODUCT IS</h2>
@@ -160,10 +161,10 @@ function PostProductForm() {
         ></textarea>
       </label>
 
-      <label className="new-product-imageUrl">
+      {/* <label className="new-product-imageUrl">
         Upload Cover Photo
-        {/* <UploadPicture /> */}
-        {/* todo put upload aws component into onchange */}
+        <UploadPicture />
+        todo put upload aws component into onchange
 
         <input
 
@@ -174,12 +175,16 @@ function PostProductForm() {
           onChange={updateProductImage}
           placeholder="Image File"
         />
-      </label>
+      </label> */}
 
-      <button type="submit">Create</button>
     </form>
+    <UploadPicture setImgDetail={setProductImage} />
+    <button type="submit"
+    onClick={handleSubmit}
+    >Create</button>
     </>
-  ) : (
+  ) :
+  (
     <>
         <div className="not-logged-in-cart">
       <div className="not-logged-in-words">

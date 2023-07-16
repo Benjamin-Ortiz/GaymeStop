@@ -85,7 +85,7 @@ export const getTheProduct = (id) => async (dispatch) => {
 
 // * OLD POST
 export const postTheProduct = (productData) => async (dispatch) => {
-    const {title, price, description, glitter_factor, image} = productData
+    const {title, price, description, glitter_factor, product_image} = productData
     console.log(productData,"POST THUNK PAYLOAD");
 
     const response = await fetch("/api/products/new_product", {
@@ -98,7 +98,7 @@ export const postTheProduct = (productData) => async (dispatch) => {
             price,
             description,
             glitter_factor,
-            image,
+            product_image,
         })
     })
     if (response.ok) {
