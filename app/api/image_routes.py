@@ -17,7 +17,12 @@ def upload_image():
     if 'image' not in request.files:
         return {'errors':'image required'}, 400
 
+    print("ROUTE REQ", request)
+
+
     image = request.files['image']
+
+    print("ROUTE IMAGE filename", image.filename)
 
     if not allowed_file(image.filename):
        return {"errors": "file type not permitted"}, 400

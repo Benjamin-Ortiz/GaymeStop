@@ -178,6 +178,7 @@ function PostProductForm() {
       </label> */}
 
     </form>
+
     <UploadPicture setImgDetail={setProductImage} />
     <button type="submit"
     onClick={handleSubmit}

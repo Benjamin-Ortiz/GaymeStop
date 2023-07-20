@@ -43,6 +43,7 @@ function App() {
 
           <Route path="/products/new_product">
             <PostProductForm />
+            
           </Route>
 
           <Route path="/images/upload">

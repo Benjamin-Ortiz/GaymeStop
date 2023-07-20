@@ -27,7 +27,7 @@ export const getTheImages = () => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
 
-    dispatch(getTheImages(data))
+    dispatch(getImages(data))
     return data
   }
 }
@@ -58,7 +58,7 @@ const imagesReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case POST_IMAGE: {
-      
+
       const newState = {
 
         [action.payload]: action.payload.url //Get Id and get this out
