@@ -4,7 +4,7 @@
 
 .single-game-container {
   /* display: flex; */
-  background-color: rgb(204, 185, 222);
+  /* background-color: rgb(204, 185, 222); */
   display: flex;
   /* width: 900px; */
   /* height: 500px; */
@@ -12,8 +12,8 @@
   /* justify-content: space-between; */
   /* align-items: flex-start; */
   /* margin: 30px; */
-  background-image: url("https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/backgrounds/vector-background.jpg");
-  background-size: contain;
+  /* background-image: url("https://onlyjamsbucket.s3.amazonaws.com/gaymeStop/gayStop-images/backgrounds/vector-background.jpg");
+  background-size: contain; */
   /* z-index: 1; */
 
 }
