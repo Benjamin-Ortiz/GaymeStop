@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import ProfileButton from "./ProfileButton";
 import * as productActions from "../../store/product";
@@ -38,6 +38,7 @@ function Navigation({ isLoaded }) {
 
   useEffect(() => {
     dispatch(productActions.getTheProducts());
+    console.log('NAV COMPONENT');
   }, [dispatch]);
 
   return sessionUser ? (

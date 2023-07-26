@@ -11,6 +11,8 @@ function ProductsIndex() {
 
   useEffect(() => {
     dispatch(productActions.getTheProducts());
+    console.log('HOME COMPONENT');
+
   }, [dispatch]);
 
 

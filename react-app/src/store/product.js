@@ -155,7 +155,8 @@ const productsReducer = (state = initialState, action) => {
         case GET_PRODUCTS:{
             let newState = {...state};
 
-            action.payload.products.forEach((product) => { //* returns products indexed by its pk
+            action.payload.products.forEach((product, i) => { //* returns products indexed by its pk
+                // console.log("INDEX", i, "length", action.payload.products.length -1);
                     newState[product.id] = product;
                   });
                   return newState;
@@ -179,7 +180,8 @@ const productsReducer = (state = initialState, action) => {
           case POST_PRODUCT : {
             const newState = {
                 ...state,
-                [action.payload.product.id]: action.payload //Get Id and get this out
+                //Get Id and get this out
+                // [action.payload.product?.id]: action.payload
             }
             return newState;
           }

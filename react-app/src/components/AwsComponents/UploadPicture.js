@@ -3,6 +3,8 @@ import './UploadPicture.css'
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux'
+import "../ProductComponents/SingleProduct/PostProductForm.css";
+
 
 const UploadPicture = ({setImgDetail}) => {
 const user = useSelector(state => state.session.user)
@@ -43,18 +45,18 @@ const updateImage = (e) =>{
 
   return (
 <div className="product-file-upload-div">
-    <form onSubmit={handleSubmit}>
+    <form     className='new-product-imageUrl'
+    onSubmit={handleSubmit}>
 
     <input
     type='file'
     accept="image/*"
-    // id='product-upload'
     onChange={updateImage}
-    // hidden
+    hidden
     />
 
     {image? (
-      <div className="image-container">
+      <div className="image-prev-container">
         <center>
 
         <img
@@ -66,7 +68,17 @@ const updateImage = (e) =>{
         />
         {imageLoading && <p className="loading-image">...Loading</p>}
         </center>
-          <button className='product-image-submit' type='submit'>Upload</button>
+        <center>
+
+        {uploadedImg? (
+          <>
+        <button className='product-image-submit-success' type='button' >Success!</button>
+
+          </>
+        ) :
+        <button className='product-image-submit' type='submit'>Confirm Cover</button>
+        }
+        </center>
       </div>
     ): <>
 

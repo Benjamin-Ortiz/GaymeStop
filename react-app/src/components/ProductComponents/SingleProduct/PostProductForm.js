@@ -4,6 +4,7 @@ import * as productActions from "../../../store/product";
 import { Redirect, useHistory } from "react-router-dom";
 import "./PostProductForm.css";
 import UploadPicture from "../../AwsComponents/UploadPicture";
+import { logout } from "../../../store/session";
 
 
 function PostProductForm() {
@@ -55,19 +56,19 @@ function PostProductForm() {
       product_image,
     };
 
-    const pathSplit = payload.product_image.split("\\")
-    payload.product_image = pathSplit[pathSplit.length - 1];
+    // const pathSplit = payload.product_image.split("\\")
+    // payload.product_image = pathSplit[pathSplit.length - 1];
 
     let errs = [];
 
-    const fileSplit = payload.product_image.split('.')
-    if (!allowedImgFiles.includes(fileSplit[fileSplit.length -1].toLowerCase()) ) {
-      errs.push ('File type is not supported. Please upload a file of one of these file types: PDF, PNG, JPG, JPEG, GIF')
-    }
+    // const fileSplit = payload.product_image.split('.')
+    // if (!allowedImgFiles.includes(fileSplit[fileSplit.length -1].toLowerCase()) ) {
+    //   errs.push ('File type is not supported. Please upload a file of one of these file types: PDF, PNG, JPG, JPEG, GIF')
+    // }
 
-    if(!payload.product_image) {
-      errs.push("Please add an image file");
-    }
+    // if(!payload.product_image) {
+    //   errs.push("Please add an image file");
+    // }
 
     if (allProducts.find(product => product.title === payload.title)) {
       errs.push("This Title already exists");
@@ -89,13 +90,18 @@ function PostProductForm() {
     setErrors([...new Set(errs)]);
     if (errs.length === 0) {
       dispatch(productActions.postTheProduct(payload));
+      //todo return JSX success screen + setTimeout redirect to home
+      console.log("id",payload.id,"title:",title,
+        " price:",price,
+        "product_image:",product_image,);
       history.push('/');
     }
   };
 
   return user ?  (
     <>
-    <form className="product-form">
+    <div  className="product-form">
+    <form>
       <div className="name-tag">
       <h1 className="header">HELLO</h1>
       <h2> MY <span className="line-through">NAME</span> PRODUCT IS</h2>
@@ -180,9 +186,11 @@ function PostProductForm() {
     </form>
 
     <UploadPicture setImgDetail={setProductImage} />
+
     <button type="submit"
     onClick={handleSubmit}
     >Create</button>
+    </div>
     </>
   ) :
   (
