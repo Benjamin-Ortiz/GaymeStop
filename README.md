@@ -128,17 +128,18 @@ A logged in user can:
 
 - All users can search for products
 
+## Amazon Web Services Simple Storage Service (AWS S3)
+   -Users will upgrade from providing URL links for Product Images to:
+   - Uploading an image file from their local device
+   - Storing image data to the Amazon cloud
+
+
 # Future Features
 
 ## This clone is a work in progress, these features will be available in the future...
 - ## Ratings
     -Users will be able to:
      - write reviews for products and rate them out of 5 stars
-
-- ## Amazon Web Services Simple Storage Service (AWS S3)
-   -Users will upgrade from providing URL links for Product Images to:
-   - Uploading an image file from their local device
-   - Storing image data to the Amazon cloud
 
 - ## User Public Page/Private Settings
    -Users will be able to view/edit their private information, and choose to have an optional public page and what information to display
